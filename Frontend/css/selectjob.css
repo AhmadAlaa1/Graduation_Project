@@ -1,0 +1,45 @@
+
+/* ================== RESET ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background) !important;
+    color: var(--text-color);
+}
+
+select#jobField,
+select#experienceLevel {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    outline: none;
+    transition: 0.3s;
+}
+
+select#jobField:focus,
+select#experienceLevel:focus {
+    box-shadow: 0 0 5px rgba(var(--primary-rgb),0.5);
+    border: 1px solid var(--primary);
+}
+
+/* ================== RESPONSIVE ================== */
+@media(max-width: 768px){
+    .job-card {
+        flex-direction: column;
+    }
+    .job-card img,
+    .job-card-content {
+        width: 100%;
+    }
+    .job-card img {
+        height: 300px;
+    }
+}

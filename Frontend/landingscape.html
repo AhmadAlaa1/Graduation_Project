@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview App Landing Page</title>
+   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/selectjob.css">
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/CustomBootstrap.css">
+  <link rel="stylesheet" href="css/landingscape.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+ <!-- HEADER -->
+<header class="fixed-top">
+  <div class="main-header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="HomePage.html">
+          <h1 class="logo">Speak2hire</h1>
+        </a>
+
+        <!-- Main Links (center) -->
+        <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+          <ul class="navbar-nav align-items-center gap-5 main-links">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="HomePage.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" id="interviewLink"><i class="fa-brands fa-rocketchat"></i> Mock Interview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" id="analysisLink"><i class="fa-solid fa-chart-line"></i> Analysis</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Dark Mode + Auth Links -->
+        <div class="d-flex align-items-center gap-3">
+         
+
+          <!-- Auth Links -->
+          <ul class="navbar-nav align-items-center gap-2" id="links">
+            <li class="nav-item">
+              <a href="login.html" class="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="register.html" class="register">Register</a>
+            </li>
+          </ul>
+
+          <!-- User Info (hidden by default) -->
+          <ul id="user-info" class="navbar-nav align-items-center gap-3" style="display:none;">
+            <li><a href="profile.html" id="user"></a></li>
+            <li><a href="#" id="LogOut">Log Out</a></li>
+          </ul>
+        </div>
+         
+         <!-- Dark Mode Toggle -->
+          <div id="darkModeToggle" class="ms-3">
+            <i class="fa-solid fa-moon dark text-white" style="cursor:pointer; font-size: 1.5rem;"></i>
+          </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <!-------------------------------- Hero Section -------------------------------->
+  <!-- <div class="container section">
+    <div class="row align-items-center h-100">
+      
+      <div class="col-md-6 d-flex flex-column justify-content-center fade-in left-section">
+        <h1 class="typewriter" id="typewriter-title">AI Interview Assistant</h1>
+        <p>
+          Prepare smarter interviews with AI-powered analysis.
+          Choose how you want your interview to be generated.
+        </p>
+        <button class="start-btn" id="startBtn">Start Interview</button>
+      </div>
+
+      <div class="col-md-6 fade-in right-section position-relative">
+        <div class="rig-img">
+          <video autoplay muted loop class="video-content">
+            <source src="videos/Text to video 丨 Create a short, smooth 5–7 second hero video for an AI interview.mp4"
+              type="video/mp4">
+          </video>
+          <div class="video-overlay"></div>
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+
+  <!-------------------------------- Interview Choice Section -------------------------------->
+  <div class="container choice-section d-none mt-5" id="choiceSection">
+
+    <!-- Progress Indicator -->
+    <div class="progress-steps mt-5">
+      <span class="active">1. Choose Type</span>
+      <span>2. Setup</span>
+      <span>3. Interview</span>
+    </div>
+
+    <h2 class="text-center mb-5">Choose Interview Type</h2>
+
+    <div class="row g-4">
+
+      <!-- CV Based -->
+      <div class="col-md-6">
+        <div class="choice-card special-bg">
+          <div class="card-header-icon">
+            <i class="fa-solid fa-file-lines"></i>
+            <i class="fa-solid fa-circle-info info-icon"
+               data-bs-toggle="tooltip"
+               data-bs-title="Questions are generated from your CV skills and experience."></i>
+          </div>
+
+          <h3>Interview Based on CV</h3>
+          <p>
+            The AI analyzes your CV and generates personalized questions.
+          </p>
+          <ul>
+            <li>Personalized questions</li>
+            <li>Best for fresh grads</li>
+            <li>Experience-focused</li>
+          </ul>
+          <button onclick="chooseType('cv')">Start CV Interview</button>
+        </div>
+      </div>
+
+      <!-- Job Field Based -->
+      <div class="col-md-6">
+        <div class="choice-card special-bg">
+          <div class="card-header-icon">
+            <i class="fa-solid fa-briefcase"></i>
+            <i class="fa-solid fa-circle-info info-icon"
+               data-bs-toggle="tooltip"
+               data-bs-title="Questions follow industry standards for the selected job role."></i>
+          </div>
+
+          <h3>Interview Based on Job Field</h3>
+          <p>
+            Questions are generated based on role and industry standards.
+          </p>
+          <ul>
+            <li>Role-based questions</li>
+            <li>Perfect for career switch</li>
+            <li>No CV required</li>
+          </ul>
+          <button onclick="chooseType('job')">Start Job Interview</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Trust Message
+    <p class="trust-text">
+      <i class="fa-solid fa-lock"></i>
+      Your data is private and used only for interview generation.
+    </p> -->
+
+  </div>
+ 
+ <script src="js/feature-templete.js"></script>
+<script src="js/user.js"></script>
+<script src="js/script.js"></script>
+ <script src="js/landscape.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

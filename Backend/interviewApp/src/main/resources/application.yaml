@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: interviewapp
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/interview_app
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 6060
+jwt:
+  secret: yourSecretKeyForJWTMustBeAtLeast32Chars!
+  expirationMs: 86400000

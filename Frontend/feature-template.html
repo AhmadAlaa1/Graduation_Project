@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Page</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/CustomBootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landingscape.css">
+  <link rel="stylesheet" href="css/feature-templete.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+</head>
+<body style="color: var(--text-color) !important;">
+ <!-- HEADER -->
+<header class="fixed-top">
+  <div class="main-header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="HomePage.html">
+          <h1 class="logo">Speak2hire</h1>
+        </a>
+
+        <!-- Main Links (center) -->
+        <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+          <ul class="navbar-nav align-items-center gap-5 main-links">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="HomePage.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" id="interviewLink"><i class="fa-brands fa-rocketchat"></i> Mock Interview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#" id="analysisLink"><i class="fa-solid fa-chart-line"></i> Analysis</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Side: Dark Mode + Auth Links -->
+        <div class="d-flex align-items-center gap-3">
+         
+
+          <!-- Auth Links -->
+          <ul class="navbar-nav align-items-center gap-2" id="links">
+            <li class="nav-item">
+              <a href="login.html" class="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="register.html" class="register">Register</a>
+            </li>
+          </ul>
+
+          <!-- User Info (hidden by default) -->
+          <ul id="user-info" class="navbar-nav align-items-center gap-3" style="display:none;">
+            <li><a href="profile.html" id="user"></a></li>
+            <li><a href="#" id="LogOut">Log Out</a></li>
+          </ul>
+        </div>
+         
+         <!-- Dark Mode Toggle -->
+          <div id="darkModeToggle" class="ms-3">
+            <i class="fa-solid fa-moon dark text-white" style="cursor:pointer; font-size: 1.5rem;"></i>
+          </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="py-6">
+    <div class="container mt-5 p-3 rounded-4 shadow special-bg">
+        <div class="text-center">
+            <h1 id="feature-title" class="display-4"></h1>
+            <p id="feature-description" class="fs-5 mt-3"></p>
+        </div>
+        <div id="feature-content" class="row justify-content-center align-items-center g-4 mt-3"></div>
+    </div>
+</main>
+
+
+<script src="js/feature-templete.js"></script>
+<script src="js/user.js"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
