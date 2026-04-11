@@ -1,16 +1,15 @@
-package com.example.interviewapp.Models.Entities;
+package com.example.interviewapp.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "cv_experience")
+@Table(name = "cv_projects")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CvExperience {
+public class CvProject {
 
     @Id
     @GeneratedValue
@@ -20,9 +19,8 @@ public class CvExperience {
     @JoinColumn(name = "cv_id")
     private CvAnalysis cv;
 
-    private String company;
-    private String title;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String name;
     private String description;
+    private String techStack;
+
 }

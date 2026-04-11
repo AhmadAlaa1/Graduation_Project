@@ -1,4 +1,4 @@
-package com.example.interviewapp.Models.Dtos;
+package com.example.interviewapp.Dtos;
 
 import lombok.Data;
 

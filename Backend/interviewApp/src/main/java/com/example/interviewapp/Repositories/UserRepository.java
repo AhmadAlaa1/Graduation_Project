@@ -1,6 +1,6 @@
 package com.example.interviewapp.Repositories;
 
-import com.example.interviewapp.Models.Entities.User;
+import com.example.interviewapp.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

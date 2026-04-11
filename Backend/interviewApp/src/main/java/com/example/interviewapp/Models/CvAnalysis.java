@@ -1,4 +1,4 @@
-package com.example.interviewapp.Models.Entities;
+package com.example.interviewapp.Models;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,6 @@
-package com.example.interviewapp.Services;
+package com.example.interviewapp.Services.Impl;
 
-import com.example.interviewapp.Models.Entities.User;
+import com.example.interviewapp.Models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JWTService {
+public class JWTServiceImpl {
 
     @Value("${jwt.secret}")
     private String secretKey;

@@ -1,12 +1,9 @@
-package com.example.interviewapp.Models.Dtos;
+package com.example.interviewapp.Dtos;
 
 
-import com.example.interviewapp.Models.Entities.User;
-import jakarta.persistence.Column;
+import com.example.interviewapp.Models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

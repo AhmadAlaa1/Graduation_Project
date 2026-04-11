@@ -1,4 +1,4 @@
-package com.example.interviewapp.Services;
+package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

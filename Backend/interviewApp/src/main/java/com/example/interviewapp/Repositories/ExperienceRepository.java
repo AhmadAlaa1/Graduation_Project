@@ -1,6 +1,6 @@
 package com.example.interviewapp.Repositories;
 
-import com.example.interviewapp.Models.Entities.CvExperience;
+import com.example.interviewapp.Models.CvExperience;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.example.interviewapp.Components;
 
-import com.example.interviewapp.Services.JWTService;
+import com.example.interviewapp.Services.Impl.JWTServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,12 +25,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthFilter.class);
 
-    private final JWTService jwtService;
+    private final JWTServiceImpl jwtService;
 
     @Lazy
     private final UserDetailsService userDetailsService;
 
-    public JwtAuthFilter(JWTService jwtService, @Lazy UserDetailsService userDetailsService) {
+    public JwtAuthFilter(JWTServiceImpl jwtService, @Lazy UserDetailsService userDetailsService) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
     }
@@ -44,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String requestPath = request.getServletPath();
 
         if (requestPath.startsWith("/api/auth/")||
-        requestPath.startsWith("api/SADADRecord/**")) {
+        requestPath.startsWith("/mock-ai/**")) {
             filterChain.doFilter(request, response);
             return;
         }
