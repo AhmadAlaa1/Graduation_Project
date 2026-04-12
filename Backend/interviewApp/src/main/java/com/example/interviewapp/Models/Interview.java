@@ -24,10 +24,10 @@ public class Interview {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "interview")
+    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InterviewQuestion> questions;
 
-    @OneToOne(mappedBy = "interview")
+    @OneToOne(mappedBy = "interview",cascade = CascadeType.ALL, orphanRemoval = true)
     private InterviewFeedback feedback;
 }
 

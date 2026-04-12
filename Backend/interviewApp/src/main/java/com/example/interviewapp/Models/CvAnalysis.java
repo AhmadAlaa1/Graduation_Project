@@ -29,9 +29,9 @@ public class CvAnalysis {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvExperience> experiences;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvProject> projects;
 }

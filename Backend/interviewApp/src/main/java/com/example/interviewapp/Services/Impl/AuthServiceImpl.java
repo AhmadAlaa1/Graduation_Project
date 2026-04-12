@@ -64,7 +64,6 @@ public class AuthServiceImpl implements AuthService {
     private String saveCv(MultipartFile file) {
 
         try {
-
             String uploadDir = "uploads/cv/";
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 

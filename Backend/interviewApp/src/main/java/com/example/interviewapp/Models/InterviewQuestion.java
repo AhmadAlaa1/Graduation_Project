@@ -26,7 +26,7 @@ public class InterviewQuestion {
 
     private Integer orderNumber;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
 }
 

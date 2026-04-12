@@ -35,6 +35,8 @@ public class AuthController {
 
         return ResponseEntity.ok(result);
     }
+
+
     @PostMapping("/signin")
     public ResponseEntity<AuthResponseDto> signIp(@RequestBody LoginDto loginDto){
         System.out.println("Incoming register data: " + loginDto);

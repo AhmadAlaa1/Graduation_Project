@@ -34,14 +34,14 @@ public class User implements UserDetails {
     private String cvFile;
 
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "user")
-    private List<Interview> interviews;
-
-    @OneToMany(mappedBy = "user")
-    private List<CvAnalysis> cvAnalysis;
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Interview> interviews;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CvAnalysis> cvAnalysis;
 
 
     @Override
