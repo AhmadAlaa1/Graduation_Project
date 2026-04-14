@@ -58,6 +58,7 @@ public class AuthServiceImpl implements AuthService {
                 user.getNationality(),
                 user.getCity(),
                 user.getCvFile());
+        cvService.sendCvToAnalysis(user);
         return new AuthResponseDto("success", userDto,token);
 
     }
@@ -97,7 +98,6 @@ public class AuthServiceImpl implements AuthService {
                 user.getNationality(),
                 user.getCity(),
                 user.getCvFile());
-        cvService.sendCvToAnalysis(user);
         return new AuthResponseDto("success", userDto, token);
 
     }

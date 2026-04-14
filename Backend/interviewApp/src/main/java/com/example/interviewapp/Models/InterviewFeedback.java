@@ -18,15 +18,15 @@ public class InterviewFeedback {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "interview_id")
-    private Interview interview;
+    @JoinColumn(name = "question_id")
+    private InterviewQuestion interviewQuestion;
 
     private Float score;
 
     private String strengths;
     private String gaps;
     private String betterAnswer;
-    private String newColumnFollowupQuestion;
+    private String FollowupQuestion;
     private String feedback;
 
     private LocalDateTime createdAt;

@@ -1,11 +1,8 @@
 package com.example.interviewapp.Controllers;
 
-import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
-import com.example.interviewapp.Dtos.ExperienceDto;
-import com.example.interviewapp.Dtos.ProjectDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.interviewapp.Dtos.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -19,8 +16,8 @@ public class MockAiController {
         CvAnalysisResponseDto dto = new CvAnalysisResponseDto();
 
         // ===== Basic Info =====
-        dto.setName("Ahmed Mohamed");
-        dto.setTitle("Backend Developer");
+        dto.setName("Aya Ahmed");
+        dto.setTitle("Frontend Developer");
         dto.setSummary("Backend developer with strong experience in Java, Spring Boot, and REST APIs. Passionate about scalable systems and clean architecture.");
 
         dto.setSkills("Java, Spring Boot, Hibernate, MySQL, REST APIs, Docker");
@@ -58,5 +55,32 @@ public class MockAiController {
         dto.getExperience().add(e2);
 
         return dto;
+    }
+
+    @PostMapping("/interview/questions")
+    public InterviewQuestionsResponseDto getQuestions(@RequestParam("file") MultipartFile file) {
+
+        InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
+
+        QuestionDto q1 = new QuestionDto();
+        q1.setQuestionText("Tell me about yourself");
+        q1.setQuestionAudio("audio1.mp3");
+        q1.setOrderNumber(1);
+
+        QuestionDto q2 = new QuestionDto();
+        q2.setQuestionText("What is OOP?");
+        q2.setQuestionAudio("audio2.mp3");
+        q2.setOrderNumber(2);
+
+        QuestionDto q3 = new QuestionDto();
+        q3.setQuestionText("Explain REST API");
+        q3.setQuestionAudio("audio3.mp3");
+        q3.setOrderNumber(3);
+
+        response.getQuestions().add(q1);
+        response.getQuestions().add(q2);
+        response.getQuestions().add(q3);
+
+        return response;
     }
 }

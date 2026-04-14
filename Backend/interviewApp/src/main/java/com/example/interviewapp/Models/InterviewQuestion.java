@@ -28,5 +28,9 @@ public class InterviewQuestion {
 
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
+
+
+    @OneToOne(mappedBy = "interviewQuestion",cascade = CascadeType.ALL, orphanRemoval = true)
+    private InterviewFeedback feedback;
 }
 

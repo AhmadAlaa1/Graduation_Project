@@ -1,7 +1,9 @@
 package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Dtos.AuthResponseDto;
+import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
 import com.example.interviewapp.Dtos.UserDto;
+import com.example.interviewapp.External.Ai.Impl.CvAnalysisClientImpl;
 import com.example.interviewapp.Models.User;
 import com.example.interviewapp.Repositories.UserRepository;
 import com.example.interviewapp.Services.UserService;
@@ -21,6 +23,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final CvServiceImpl cvService;
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -66,7 +69,6 @@ public class UserServiceImpl implements UserService {
                 Files.write(path, cvFile.getBytes());
 
                 user.setCvFile(path.toString());
-
             } catch (IOException e) {
                 throw new RuntimeException("Failed to upload CV");
             }
@@ -80,6 +82,7 @@ public class UserServiceImpl implements UserService {
                 user.getNationality(),
                 user.getCity(),
                 user.getCvFile());
+        cvService.sendCvToAnalysis(user);
         return userDto;
     }
 
@@ -87,5 +90,23 @@ public class UserServiceImpl implements UserService {
     public void deleteMyAccount() {
         User user = getCurrentUser();
         userRepository.delete(user);
+    }
+    @Override
+    public UserDto userInfo(){
+        User currentUser = getCurrentUser();
+        User user = userRepository.findByEmail(currentUser.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        UserDto dto = new UserDto();
+
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setPhone(user.getPhone());
+        dto.setAge(user.getAge());
+        dto.setNationality(user.getNationality());
+        dto.setCity(user.getCity());
+        dto.setCvFile(user.getCvFile());
+
+        return dto;
     }
 }

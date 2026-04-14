@@ -31,24 +31,24 @@ public class CvAnalysisClientImpl implements CvAnalysisClient {
     // post the cv as a pdf file
     @Override
     public void analyzeCvAsPdf(String filePath) {
-
-        File file = new File(filePath);
-
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", new FileSystemResource(file));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        HttpEntity<MultiValueMap<String, Object>> request =
-                new HttpEntity<>(body, headers);
-
-
-        restTemplate.postForEntity(
-                "http://httpbin.org/post",
-                request,
-                void.class
-        );
+//
+//        File file = new File(filePath);
+//
+//        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+//        body.add("file", new FileSystemResource(file));
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//
+//        HttpEntity<MultiValueMap<String, Object>> request =
+//                new HttpEntity<>(body, headers);
+//
+//
+//        restTemplate.postForEntity(
+//                "http://httpbin.org/post",
+//                request,
+//                void.class
+//        );
     }
 
     @Override

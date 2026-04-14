@@ -8,4 +8,5 @@ public interface UserService {
     UserDto updateUser(UserDto dto, MultipartFile cvFile);
 
     void deleteMyAccount();
+    UserDto userInfo();
 }

@@ -20,20 +20,20 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser( @RequestPart("data") String requestJson,
                                             @RequestPart(value = "cv", required = false) MultipartFile cvFile
     ) throws JsonProcessingException {
-
         UserDto request = new ObjectMapper().readValue(requestJson, UserDto.class);
-
         UserDto result = this.userService.updateUser(request, cvFile);
-
         return ResponseEntity.ok(result);
     }
-
-
 
     @DeleteMapping("/delete-account")
     public ResponseEntity<String> deleteMyAccount() {
         userService.deleteMyAccount();
         return ResponseEntity.ok("Account deleted successfully");
+    }
+
+    @GetMapping("/my-info")
+    public ResponseEntity<UserDto> userInfo(){
+        return ResponseEntity.ok(userService.userInfo());
     }
 
 }
