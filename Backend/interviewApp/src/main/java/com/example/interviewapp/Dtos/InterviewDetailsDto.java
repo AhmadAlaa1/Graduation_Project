@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class InterviewQuestionsResponseDto {
-    private UUID interviewId;
-    private List<QuestionDto> questions = new ArrayList<>();
+public class InterviewDetailsDto {
 
+    private UUID interviewId;
+    private List<QuestionDetailsDto> questions = new ArrayList<>();
 }

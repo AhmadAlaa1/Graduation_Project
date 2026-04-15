@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mock-ai")
@@ -68,18 +69,56 @@ public class MockAiController {
         q1.setOrderNumber(1);
 
         QuestionDto q2 = new QuestionDto();
-        q2.setQuestionText("What is OOP?");
+        q2.setQuestionText("What's your name?");
         q2.setQuestionAudio("audio2.mp3");
         q2.setOrderNumber(2);
 
         QuestionDto q3 = new QuestionDto();
-        q3.setQuestionText("Explain REST API");
+        q3.setQuestionText("How are you?");
         q3.setQuestionAudio("audio3.mp3");
         q3.setOrderNumber(3);
 
         response.getQuestions().add(q1);
         response.getQuestions().add(q2);
         response.getQuestions().add(q3);
+
+        return response;
+    }
+
+    @PostMapping("/evaluate-batch")
+    public EvaluationResponseDto evaluate(@RequestBody EvaluationRequestDto request) {
+
+        EvaluationResponseDto response = new EvaluationResponseDto();
+
+        request.getItems().forEach(item -> {
+
+            EvaluationDto eval = new EvaluationDto();
+
+            eval.setScore(2.4F);
+
+            eval.setStrengths(List.of(
+                    "Clear explanation",
+                    "Relevant answer"
+            ));
+
+            eval.setGaps(List.of(
+                    "Needs more depth"
+            ));
+
+            eval.setBetterAnswer(
+                    "A stronger answer would include technical example and deeper explanation."
+            );
+
+            eval.setFollowupQuestion(
+                    "Can you provide a real-world example?"
+            );
+
+            eval.setFeedback(
+                    "Good answer overall but needs more technical depth."
+            );
+
+            response.getEvaluations().add(eval);
+        });
 
         return response;
     }

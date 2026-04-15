@@ -1,6 +1,6 @@
 package com.example.interviewapp.Controllers;
 
-import com.example.interviewapp.Dtos.InterviewDto;
+import com.example.interviewapp.Dtos.EvaluationResponseDto;
 import com.example.interviewapp.Dtos.InterviewQuestionsResponseDto;
 import com.example.interviewapp.Dtos.SubmitAnswersDto;
 import com.example.interviewapp.Models.Interview;
@@ -33,11 +33,13 @@ public class InterviewController {
         return interviewService.generateInterviewQuestions();
     }
 
-    @PostMapping(value = "/{id}/answers", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void submitAnswers(
+    @PostMapping(value = "/{id}/finish", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public EvaluationResponseDto submitAnswers(
             @PathVariable UUID id,
             @ModelAttribute SubmitAnswersDto dto) {
 
         interviewService.submitAnswers(id, dto);
+        return interviewService.finishInterview(id);
     }
+
 }

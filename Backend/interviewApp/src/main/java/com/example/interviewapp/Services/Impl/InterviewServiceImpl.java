@@ -2,14 +2,8 @@ package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Dtos.*;
 import com.example.interviewapp.External.Ai.Impl.InterviewClientImpl;
-import com.example.interviewapp.Models.Answer;
-import com.example.interviewapp.Models.Interview;
-import com.example.interviewapp.Models.InterviewQuestion;
-import com.example.interviewapp.Models.User;
-import com.example.interviewapp.Repositories.AnswerRepository;
-import com.example.interviewapp.Repositories.InterviewQuestionRepository;
-import com.example.interviewapp.Repositories.InterviewRepository;
-import com.example.interviewapp.Repositories.UserRepository;
+import com.example.interviewapp.Models.*;
+import com.example.interviewapp.Repositories.*;
 import com.example.interviewapp.Services.InterviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -32,6 +26,7 @@ public class InterviewServiceImpl implements InterviewService {
     private final InterviewQuestionRepository interviewQuestionRepository;
     private final InterviewClientImpl interviewClient;
     private final AnswerRepository answerRepository;
+    private final InterviewFeedbackRepository interviewFeedbackRepository;
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -71,7 +66,7 @@ public class InterviewServiceImpl implements InterviewService {
                 interviewClient.getInterviewQuestionsWithoutpdf();
 
         InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
-
+        response.setInterviewId(interview.getId());
         aiResponse.getQuestions().forEach(q -> {
 
             InterviewQuestion question = new InterviewQuestion();
@@ -148,6 +143,133 @@ public class InterviewServiceImpl implements InterviewService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload audio");
         }
+    }
+
+    @Override
+    public EvaluationResponseDto finishInterview(UUID interviewId) {
+
+        Interview interview = interviewRepository.findById(interviewId)
+                .orElseThrow(() -> new RuntimeException("Interview not found"));
+
+        List<InterviewQuestion> questions =
+                interviewQuestionRepository.findByInterview(interview);
+
+        EvaluationRequestDto request = new EvaluationRequestDto();
+
+        for (InterviewQuestion q : questions) {
+
+            Optional<Answer> answerOpt =
+                    answerRepository.findFirstByQuestion(q);
+
+            if (answerOpt.isEmpty()) continue;
+
+            Answer answer = answerOpt.get();
+
+            EvaluationItemDto item = new EvaluationItemDto();
+            item.setQuestion(q.getQuestionText());
+
+            if (answer.getAnswerText() != null) {
+                item.setAnswerText(answer.getAnswerText());
+            } else {
+                item.setAnswerText("Audio answer");
+            }
+
+            request.getItems().add(item);
+        }
+
+        // call AI
+        EvaluationResponseDto response = interviewClient.evaluate(request);
+
+        // save feedback
+        for (int i = 0; i < response.getEvaluations().size(); i++) {
+
+            InterviewQuestion question = questions.get(i);
+            EvaluationDto eval = response.getEvaluations().get(i);
+            if (question.getFeedback() != null) {
+                interviewFeedbackRepository.delete(question.getFeedback());
+            }
+            InterviewFeedback feedback = new InterviewFeedback();
+            feedback.setInterviewQuestion(question);
+            feedback.setScore(eval.getScore());
+
+            feedback.setStrengths(String.join(", ", eval.getStrengths()));
+            feedback.setGaps(String.join(", ", eval.getGaps()));
+
+            feedback.setBetterAnswer(eval.getBetterAnswer());
+            feedback.setFollowupQuestion(eval.getFollowupQuestion());
+            feedback.setFeedback(eval.getFeedback());
+
+            feedback.setCreatedAt(LocalDateTime.now());
+
+            interviewFeedbackRepository.save(feedback);
+        }
+
+        return response;
+    }
+
+    @Override
+    public InterviewDetailsDto getInterviewDetails(UUID interviewId) {
+
+        Interview interview = interviewRepository.findById(interviewId)
+                .orElseThrow(() -> new RuntimeException("Interview not found"));
+
+        InterviewDetailsDto response = new InterviewDetailsDto();
+        response.setInterviewId(interviewId);
+
+        List<InterviewQuestion> questions =
+                interviewQuestionRepository.findByInterview(interview);
+
+        for (InterviewQuestion q : questions) {
+
+            QuestionDetailsDto dto = new QuestionDetailsDto();
+
+            dto.setQuestionId(q.getId());
+            dto.setQuestionText(q.getQuestionText());
+            dto.setQuestionAudio(q.getQuestionAudio());
+
+            // answer
+            Optional<Answer> answerOpt =
+                    answerRepository.findFirstByQuestion(q);
+
+            if (answerOpt.isPresent()) {
+
+                Answer answer = answerOpt.get();
+
+                dto.setAnswerText(answer.getAnswerText());
+                dto.setAnswerAudio(answer.getAnswerAudio());
+            }
+
+            // feedback
+            if (q.getFeedback() != null) {
+
+                InterviewFeedback f = q.getFeedback();
+                EvaluationDto evaluationDto = new EvaluationDto();
+
+                evaluationDto.setScore(f.getScore());
+
+                evaluationDto.setStrengths(
+                        f.getStrengths() != null
+                                ? Arrays.asList(f.getStrengths().split("\\s*,\\s*"))
+                                : new ArrayList<>()
+                );
+
+                evaluationDto.setGaps(
+                        f.getGaps() != null
+                                ? Arrays.asList(f.getGaps().split("\\s*,\\s*"))
+                                : new ArrayList<>()
+                );
+
+                evaluationDto.setBetterAnswer(f.getBetterAnswer());
+                evaluationDto.setFollowupQuestion(f.getFollowupQuestion());
+                evaluationDto.setFeedback(f.getFeedback());
+
+                dto.setEvaluationDto(evaluationDto);
+            }
+
+            response.getQuestions().add(dto);
+        }
+
+        return response;
     }
 }
 

@@ -2,9 +2,14 @@ package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Dtos.AuthResponseDto;
 import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
+import com.example.interviewapp.Dtos.InterviewListDto;
 import com.example.interviewapp.Dtos.UserDto;
 import com.example.interviewapp.External.Ai.Impl.CvAnalysisClientImpl;
+import com.example.interviewapp.Models.Interview;
+import com.example.interviewapp.Models.InterviewQuestion;
 import com.example.interviewapp.Models.User;
+import com.example.interviewapp.Repositories.InterviewQuestionRepository;
+import com.example.interviewapp.Repositories.InterviewRepository;
 import com.example.interviewapp.Repositories.UserRepository;
 import com.example.interviewapp.Services.UserService;
 import lombok.AllArgsConstructor;
@@ -17,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,6 +30,8 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CvServiceImpl cvService;
+    private final InterviewQuestionRepository interviewQuestionRepository;
+    private final InterviewRepository interviewRepository;
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -108,5 +116,28 @@ public class UserServiceImpl implements UserService {
         dto.setCvFile(user.getCvFile());
 
         return dto;
+    }
+
+    @Override
+    public List<InterviewListDto> getUserInterviews() {
+
+        User user = getCurrentUser();
+
+        List<Interview> interviews = interviewRepository.findByUser(user);
+
+        return interviews.stream().map(i -> {
+
+            InterviewListDto dto = new InterviewListDto();
+            dto.setId(i.getId());
+            dto.setCreatedAt(i.getCreatedAt());
+
+            List<InterviewQuestion> questions =
+                    interviewQuestionRepository.findByInterview(i);
+
+            dto.setQuestionsCount(questions.size());
+
+            return dto;
+
+        }).toList();
     }
 }

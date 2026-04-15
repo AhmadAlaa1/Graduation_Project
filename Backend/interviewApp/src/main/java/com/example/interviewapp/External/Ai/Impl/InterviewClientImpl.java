@@ -1,5 +1,7 @@
 package com.example.interviewapp.External.Ai.Impl;
 
+import com.example.interviewapp.Dtos.EvaluationRequestDto;
+import com.example.interviewapp.Dtos.EvaluationResponseDto;
 import com.example.interviewapp.Dtos.InterviewQuestionsResponseDto;
 import com.example.interviewapp.External.Ai.InterviewClient;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ import java.io.File;
 @RequiredArgsConstructor
 public class InterviewClientImpl implements InterviewClient {
     private final RestTemplate restTemplate;
-
+    @Override
     public InterviewQuestionsResponseDto getInterviewQuestions(String filePath) {
 
         File file = new File(filePath);
@@ -43,6 +45,7 @@ public class InterviewClientImpl implements InterviewClient {
 
         return response.getBody();
     }
+    @Override
     public InterviewQuestionsResponseDto getInterviewQuestionsWithoutpdf() {
 
         String url = "http://localhost:6060/mock-ai/interview/questions";
@@ -55,4 +58,17 @@ public class InterviewClientImpl implements InterviewClient {
 
         return response.getBody();
     }
+    @Override
+    public EvaluationResponseDto evaluate(EvaluationRequestDto request) {
+
+        ResponseEntity<EvaluationResponseDto> response =
+                restTemplate.postForEntity(
+                        "http://localhost:6060/mock-ai/evaluate-batch",
+                        request,
+                        EvaluationResponseDto.class
+                );
+
+        return response.getBody();
+    }
+
 }
