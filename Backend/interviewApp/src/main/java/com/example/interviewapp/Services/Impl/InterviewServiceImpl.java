@@ -44,26 +44,31 @@ public class InterviewServiceImpl implements InterviewService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+//    @Override
+//    public InterviewDto startInterview() {
+//        User currentUser = getCurrentUser();
+//        Interview interview = new Interview();
+//        interview.setUser(currentUser);
+//        interview.setCreatedAt(LocalDateTime.now());
+//        interviewRepository.save(interview);
+//        InterviewDto interviewDto = new InterviewDto(interview.getId());
+//        return interviewDto;
+//    }
+
     @Override
-    public InterviewDto startInterview() {
+    public InterviewQuestionsResponseDto generateInterviewQuestions() {
         User currentUser = getCurrentUser();
         Interview interview = new Interview();
         interview.setUser(currentUser);
         interview.setCreatedAt(LocalDateTime.now());
         interviewRepository.save(interview);
-        InterviewDto interviewDto = new InterviewDto(interview.getId());
-        return interviewDto;
-    }
-
-    @Override
-    public InterviewQuestionsResponseDto generateInterviewQuestions(UUID interID) {
-
-        Interview interview = interviewRepository.getReferenceById(interID);
         User user = interview.getUser();
         String cvPath = user.getCvFile();
 
+//        InterviewQuestionsResponseDto aiResponse =
+//                interviewClient.getInterviewQuestions(cvPath);
         InterviewQuestionsResponseDto aiResponse =
-                interviewClient.getInterviewQuestions(cvPath);
+                interviewClient.getInterviewQuestionsWithoutpdf();
 
         InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
 
@@ -89,6 +94,7 @@ public class InterviewServiceImpl implements InterviewService {
 
         return response;
     }
+
     @Override
     public void submitAnswers(UUID interviewId, SubmitAnswersDto dto) {
 

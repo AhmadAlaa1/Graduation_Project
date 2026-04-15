@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface InterviewService {
-    InterviewDto startInterview();
+//    InterviewDto startInterview();
 
-    InterviewQuestionsResponseDto generateInterviewQuestions(UUID interID);
+    InterviewQuestionsResponseDto generateInterviewQuestions();
 
     void submitAnswers(UUID interviewId, SubmitAnswersDto dto);
 }

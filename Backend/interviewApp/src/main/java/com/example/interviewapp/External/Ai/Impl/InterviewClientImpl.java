@@ -43,4 +43,16 @@ public class InterviewClientImpl implements InterviewClient {
 
         return response.getBody();
     }
+    public InterviewQuestionsResponseDto getInterviewQuestionsWithoutpdf() {
+
+        String url = "http://localhost:6060/mock-ai/interview/questions";
+
+        ResponseEntity<InterviewQuestionsResponseDto> response =
+                restTemplate.getForEntity(
+                        url,
+                        InterviewQuestionsResponseDto.class
+                );
+
+        return response.getBody();
+    }
 }

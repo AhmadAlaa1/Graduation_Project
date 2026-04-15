@@ -57,8 +57,8 @@ public class MockAiController {
         return dto;
     }
 
-    @PostMapping("/interview/questions")
-    public InterviewQuestionsResponseDto getQuestions(@RequestParam("file") MultipartFile file) {
+    @GetMapping("/interview/questions")
+    public InterviewQuestionsResponseDto getQuestions() {
 
         InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
 

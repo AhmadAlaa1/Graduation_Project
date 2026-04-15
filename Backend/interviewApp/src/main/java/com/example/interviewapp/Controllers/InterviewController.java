@@ -22,15 +22,15 @@ public class InterviewController {
     private final InterviewService interviewService;
 
 
-    @PostMapping("/start")
-    public ResponseEntity<InterviewDto> startInterview(){
+//    @PostMapping("/start")
+//    public ResponseEntity<InterviewDto> startInterview(){
+//
+//        return ResponseEntity.ok(interviewService.startInterview());
+//    }
+    @GetMapping("/start")
+    public InterviewQuestionsResponseDto generate() {
 
-        return ResponseEntity.ok(interviewService.startInterview());
-    }
-    @PostMapping("/{id}/generate")
-    public InterviewQuestionsResponseDto generate(@PathVariable UUID id) {
-
-        return interviewService.generateInterviewQuestions(id);
+        return interviewService.generateInterviewQuestions();
     }
 
     @PostMapping(value = "/{id}/answers", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
