@@ -1,0 +1,59 @@
+.faq-section {
+    padding: 60px 0;
+}
+
+.faq-section .section-title {
+    /* font-family: 'Poppins', sans-serif; */
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: var(--g2);
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section .section-subtitle {
+    color: var(--muted);
+}
+
+.faq-section .accordion-button {
+    color: var(--text-color);
+    background-color: var(--light);
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    padding: 18px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
+}
+
+.faq-section .accordion-button:hover {
+    background: var(--gradient);
+    color: #fff;
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.faq-section .accordion-button:focus {
+    box-shadow: none;
+    /* background: var(--gradient);
+    color: #fff; */
+}
+.faq-section .accordion-button.opened {
+    background: var(--gradient);
+    color: #fff;
+}
+
+.faq-section .accordion-body {
+    background-color: var(--teal-light);
+    border-left: 5px solid var(--g1);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    padding: 18px 20px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.faq-section .accordion-item {
+    border: none !important;
+}
