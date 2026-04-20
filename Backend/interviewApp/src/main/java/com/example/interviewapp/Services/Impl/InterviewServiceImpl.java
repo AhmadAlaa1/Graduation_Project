@@ -27,6 +27,7 @@ public class InterviewServiceImpl implements InterviewService {
     private final InterviewClientImpl interviewClient;
     private final AnswerRepository answerRepository;
     private final InterviewFeedbackRepository interviewFeedbackRepository;
+    private final CvAnalysisRepository cvAnalysisRepository;
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -39,57 +40,49 @@ public class InterviewServiceImpl implements InterviewService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-//    @Override
-//    public InterviewDto startInterview() {
-//        User currentUser = getCurrentUser();
-//        Interview interview = new Interview();
-//        interview.setUser(currentUser);
-//        interview.setCreatedAt(LocalDateTime.now());
-//        interviewRepository.save(interview);
-//        InterviewDto interviewDto = new InterviewDto(interview.getId());
-//        return interviewDto;
-//    }
 
     @Override
     public InterviewQuestionsResponseDto generateInterviewQuestions() {
         User currentUser = getCurrentUser();
+
+        CvAnalysis cvAnalysis = cvAnalysisRepository.findByUser(currentUser)
+                .orElseThrow(() -> new RuntimeException("CV analysis not found. Please upload your CV first."));
+
+        // Create interview
         Interview interview = new Interview();
         interview.setUser(currentUser);
         interview.setCreatedAt(LocalDateTime.now());
         interviewRepository.save(interview);
-        User user = interview.getUser();
-        String cvPath = user.getCvFile();
 
-//        InterviewQuestionsResponseDto aiResponse =
-//                interviewClient.getInterviewQuestions(cvPath);
         InterviewQuestionsResponseDto aiResponse =
-                interviewClient.getInterviewQuestionsWithoutpdf();
+                interviewClient.getInterviewQuestions(cvAnalysis);
 
         InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
         response.setInterviewId(interview.getId());
-        aiResponse.getQuestions().forEach(q -> {
 
+        List<String> questionTexts = aiResponse.getQuestions();
+
+        for (int i = 0; i < questionTexts.size(); i++) {
             InterviewQuestion question = new InterviewQuestion();
             question.setInterview(interview);
-            question.setQuestionText(q.getQuestionText());
-            question.setQuestionAudio(q.getQuestionAudio());
-            question.setOrderNumber(q.getOrderNumber());
+            question.setQuestionText(questionTexts.get(i));
+            question.setOrderNumber(i + 1);
+
+            question.setQuestionAudio(null);
 
             InterviewQuestion saved = interviewQuestionRepository.save(question);
 
-            // map to dto with id
             QuestionDto dto = new QuestionDto();
             dto.setQuestionID(saved.getId());
             dto.setQuestionText(saved.getQuestionText());
             dto.setQuestionAudio(saved.getQuestionAudio());
             dto.setOrderNumber(saved.getOrderNumber());
 
-            response.getQuestions().add(dto);
-        });
+            response.getMappedQuestions().add(dto);
+        }
 
         return response;
     }
-
     @Override
     public void submitAnswers(UUID interviewId, SubmitAnswersDto dto) {
 
@@ -156,49 +149,53 @@ public class InterviewServiceImpl implements InterviewService {
 
         EvaluationRequestDto request = new EvaluationRequestDto();
 
+        // ← فلتري بس الأسئلة اللي عندها إجابة
+        List<InterviewQuestion> answeredQuestions = new ArrayList<>();
+
         for (InterviewQuestion q : questions) {
-
-            Optional<Answer> answerOpt =
-                    answerRepository.findFirstByQuestion(q);
-
+            Optional<Answer> answerOpt = answerRepository.findFirstByQuestion(q);
             if (answerOpt.isEmpty()) continue;
 
             Answer answer = answerOpt.get();
 
             EvaluationItemDto item = new EvaluationItemDto();
             item.setQuestion(q.getQuestionText());
-
-            if (answer.getAnswerText() != null) {
-                item.setAnswerText(answer.getAnswerText());
-            } else {
-                item.setAnswerText("Audio answer");
-            }
+            item.setAnswer_text(
+                    answer.getAnswerText() != null ? answer.getAnswerText() : "Audio answer"
+            );
 
             request.getItems().add(item);
+            answeredQuestions.add(q);  // ← نحتفظ بالأسئلة المرتبطة بالـ items
         }
 
         // call AI
         EvaluationResponseDto response = interviewClient.evaluate(request);
 
-        // save feedback
+        // save feedback — بنستخدم answeredQuestions مش questions كلها
         for (int i = 0; i < response.getEvaluations().size(); i++) {
 
-            InterviewQuestion question = questions.get(i);
+            // تأكدي إن الـ index مش هيتجاوز الـ list
+            if (i >= answeredQuestions.size()) break;
+
+            InterviewQuestion question = answeredQuestions.get(i);
             EvaluationDto eval = response.getEvaluations().get(i);
-            if (question.getFeedback() != null) {
-                interviewFeedbackRepository.delete(question.getFeedback());
-            }
+
+            // ← الحل الرئيسي للـ duplicate: امسح القديم لو موجود
+            interviewFeedbackRepository.findByInterviewQuestion(question)
+                    .ifPresent(interviewFeedbackRepository::delete);
+
             InterviewFeedback feedback = new InterviewFeedback();
             feedback.setInterviewQuestion(question);
             feedback.setScore(eval.getScore());
-
-            feedback.setStrengths(String.join(", ", eval.getStrengths()));
-            feedback.setGaps(String.join(", ", eval.getGaps()));
-
+            feedback.setStrengths(
+                    eval.getStrengths() != null ? String.join(", ", eval.getStrengths()) : ""
+            );
+            feedback.setGaps(
+                    eval.getGaps() != null ? String.join(", ", eval.getGaps()) : ""
+            );
             feedback.setBetterAnswer(eval.getBetterAnswer());
             feedback.setFollowupQuestion(eval.getFollowupQuestion());
             feedback.setFeedback(eval.getFeedback());
-
             feedback.setCreatedAt(LocalDateTime.now());
 
             interviewFeedbackRepository.save(feedback);

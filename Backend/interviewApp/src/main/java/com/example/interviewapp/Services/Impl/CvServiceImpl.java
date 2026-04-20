@@ -1,17 +1,9 @@
 package com.example.interviewapp.Services.Impl;
 
-import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
-import com.example.interviewapp.Dtos.ExperienceDto;
-import com.example.interviewapp.Dtos.ProjectDto;
+import com.example.interviewapp.Dtos.*;
 import com.example.interviewapp.External.Ai.Impl.CvAnalysisClientImpl;
-import com.example.interviewapp.Models.CvAnalysis;
-import com.example.interviewapp.Models.CvExperience;
-import com.example.interviewapp.Models.CvProject;
-import com.example.interviewapp.Models.User;
-import com.example.interviewapp.Repositories.CvAnalysisRepository;
-import com.example.interviewapp.Repositories.ExperienceRepository;
-import com.example.interviewapp.Repositories.ProjectRepository;
-import com.example.interviewapp.Repositories.UserRepository;
+import com.example.interviewapp.Models.*;
+import com.example.interviewapp.Repositories.*;
 import com.example.interviewapp.Services.CvService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -25,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,6 +31,7 @@ public class CvServiceImpl implements CvService {
     private final CvAnalysisRepository cvAnalysisRepository;
     private final ProjectRepository projectRepository;
     private final ExperienceRepository experienceRepository;
+    private final EducationRepository educationRepository;
     private final JWTServiceImpl jwtService;
 
 
@@ -55,46 +50,104 @@ public class CvServiceImpl implements CvService {
     public void sendCvToAnalysis(User dto) {
         var user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Delete old analysis
         Optional<CvAnalysis> existing = cvAnalysisRepository.findByUser(user);
         existing.ifPresent(oldCv -> {
+            projectRepository.deleteAll(oldCv.getProjects());
+            experienceRepository.deleteAll(oldCv.getExperiences());
+            educationRepository.deleteAll(oldCv.getEducation());
             cvAnalysisRepository.delete(oldCv);
         });
-        CvAnalysis cv = new CvAnalysis();
 
         String cvPath = user.getCvFile();
-        cvAnalysisClientImpl.analyzeCvAsPdf(cvPath);
-        CvAnalysisResponseDto response = cvAnalysisClientImpl.analysisResult();
+        CvAnalysisResponseDto response = cvAnalysisClientImpl.analyzeCvAsPdf(cvPath);
+
+        CvAnalysis cv = new CvAnalysis();
         cv.setUser(user);
+        cv.setCreatedAt(LocalDateTime.now());
+
+        // Basic Info
         cv.setName(response.getName());
         cv.setTitle(response.getTitle());
         cv.setSummary(response.getSummary());
-        cv.setCreatedAt(LocalDateTime.now());
+        cv.setLocation(response.getLocation());
 
-        cv.setSkills(response.getSkills());
+        // Contact
+        if (response.getContact() != null) {
+            cv.setEmail(response.getContact().getEmail());
+            cv.setPhone(response.getContact().getPhone());
+            cv.setLinkedin(response.getContact().getLinkedin());
+            cv.setGithub(response.getContact().getGithub());
+        }
+
+        // Skills
+        cv.setSkills(response.getSkills() != null
+                ? response.getSkills().toCommaSeparated()
+                : "");
+
+        // ATS Score
+        if (response.getAts_score() != null) {
+            cv.setAtsScore(response.getAts_score().getPercent());
+            cv.setAtsPassed(response.getAts_score().isPassed());
+            cv.setMatchedSkills(String.join(", ", response.getAts_score().getMatched_skills()));
+            cv.setMissingSkills(String.join(", ", response.getAts_score().getMissing_skills()));
+        }
+
+        // Suggested Questions
+        if (response.getSuggested_interview_questions() != null) {
+            cv.setSuggestedQuestions(
+                    String.join("||", response.getSuggested_interview_questions())
+            );
+        }
 
         cvAnalysisRepository.save(cv);
-        response.getProjects().forEach(p -> {
-            CvProject project = new CvProject();
 
-            project.setCv(cv);
-            project.setName(p.getName());
-            project.setDescription(p.getDescription());
-            project.setTechStack(p.getTechStack());
+        // Projects
+        if (response.getProjects() != null) {
+            response.getProjects().forEach(p -> {
+                CvProject project = new CvProject();
+                project.setCv(cv);
+                project.setName(p.getName() != null ? p.getName() : "");
+                project.setRole(p.getRole() != null ? p.getRole() : "");
+                project.setYear(p.getYear() != null ? p.getYear() : "");
+                project.setDescription(
+                        p.getHighlights() != null
+                                ? String.join(". ", p.getHighlights())
+                                : ""
+                );
+                projectRepository.save(project);
+            });
+        }
 
-            projectRepository.save(project);
-        });
+        // Experience
+        if (response.getExperience() != null) {
+            response.getExperience().forEach(exp -> {
+                CvExperience experience = new CvExperience();
+                experience.setCv(cv);
+                experience.setTitle(exp.getRole() != null ? exp.getRole() : "");
+                experience.setCompany(exp.getLocation() != null ? exp.getLocation() : "");
+                experience.setDates(exp.getDates() != null ? exp.getDates() : "");
+                experience.setDescription(
+                        exp.getHighlights() != null
+                                ? String.join(". ", exp.getHighlights())
+                                : ""
+                );
+                experienceRepository.save(experience);
+            });
+        }
 
-        response.getExperience().forEach(exp -> {
-
-            CvExperience experience = new CvExperience();
-
-            experience.setCv(cv);
-            experience.setCompany(exp.getCompany());
-            experience.setTitle(exp.getTitle());
-            experience.setDescription(exp.getDescription());
-
-            experienceRepository.save(experience);
-        });
+        // Education
+        if (response.getEducation() != null) {
+            response.getEducation().forEach(edu -> {
+                CvEducation education = new CvEducation();
+                education.setCv(cv);
+                education.setDegree(edu.getDegree() != null ? edu.getDegree() : "");
+                education.setInstitution(edu.getInstitution() != null ? edu.getInstitution() : "");
+                education.setStatus(edu.getStatus() != null ? edu.getStatus() : "");
+                educationRepository.save(education);
+            });
+        }
     }
     @Override
     public CvAnalysisResponseDto returnCvAnalysis() {
@@ -106,36 +159,99 @@ public class CvServiceImpl implements CvService {
 
         CvAnalysisResponseDto response = new CvAnalysisResponseDto();
 
+        // Basic Info
         response.setName(cv.getName());
         response.setTitle(cv.getTitle());
         response.setSummary(cv.getSummary());
-        response.setSkills(cv.getSkills());
+        response.setLocation(cv.getLocation());
 
-        // projects
-        cv.getProjects().forEach(p -> {
-            ProjectDto project = new ProjectDto();
-            project.setName(p.getName());
-            project.setDescription(p.getDescription());
-            project.setTechStack(p.getTechStack());
+        // Contact
+        ContactDto contact = new ContactDto();
+        contact.setEmail(cv.getEmail());
+        contact.setPhone(cv.getPhone());
+        contact.setLinkedin(cv.getLinkedin());
+        contact.setGithub(cv.getGithub());
+        response.setContact(contact);
 
-            response.getProjects().add(project);
-        });
+        // Skills
+        SkillsDto skillsDto = new SkillsDto();
+        skillsDto.setBackend(
+                cv.getSkills() != null && !cv.getSkills().isEmpty()
+                        ? List.of(cv.getSkills().split(", "))
+                        : new ArrayList<>()
+        );
+        response.setSkills(skillsDto);
 
-        // experience
-        cv.getExperiences().forEach(exp -> {
-            ExperienceDto e = new ExperienceDto();
-            e.setCompany(exp.getCompany());
-            e.setTitle(exp.getTitle());
-            e.setStartDate(exp.getStartDate());
-            e.setEndDate(exp.getEndDate());
-            e.setDescription(exp.getDescription());
+        // ATS Score
+        AtsScoreDto atsScore = new AtsScoreDto();
+        atsScore.setPercent(cv.getAtsScore() != null ? cv.getAtsScore() : 0);
+        atsScore.setPassed(cv.getAtsPassed() != null ? cv.getAtsPassed() : false);
+        atsScore.setMatched_skills(
+                cv.getMatchedSkills() != null && !cv.getMatchedSkills().isEmpty()
+                        ? List.of(cv.getMatchedSkills().split(", "))
+                        : new ArrayList<>()
+        );
+        atsScore.setMissing_skills(
+                cv.getMissingSkills() != null && !cv.getMissingSkills().isEmpty()
+                        ? List.of(cv.getMissingSkills().split(", "))
+                        : new ArrayList<>()
+        );
+        response.setAts_score(atsScore);
 
-            response.getExperience().add(e);
-        });
+        // Suggested Questions
+        if (cv.getSuggestedQuestions() != null && !cv.getSuggestedQuestions().isEmpty()) {
+            response.setSuggested_interview_questions(
+                    List.of(cv.getSuggestedQuestions().split("\\|\\|"))
+            );
+        }
+
+        // Projects
+        if (cv.getProjects() != null) {
+            cv.getProjects().forEach(p -> {
+                ProjectDto project = new ProjectDto();
+                project.setName(p.getName());
+                project.setRole(p.getRole());
+                project.setYear(p.getYear());
+                project.setHighlights(
+                        p.getDescription() != null && !p.getDescription().isEmpty()
+                                ? List.of(p.getDescription().split("\\. "))
+                                : new ArrayList<>()
+                );
+                response.getProjects().add(project);
+            });
+        }
+
+        // Experience
+        if (cv.getExperiences() != null) {
+            cv.getExperiences().forEach(exp -> {
+                ExperienceDto e = new ExperienceDto();
+                e.setRole(exp.getTitle());
+                e.setLocation(exp.getCompany());
+                e.setDates(exp.getDates());
+                e.setHighlights(
+                        exp.getDescription() != null && !exp.getDescription().isEmpty()
+                                ? List.of(exp.getDescription().split("\\. "))
+                                : new ArrayList<>()
+                );
+                response.getExperience().add(e);
+            });
+        }
+
+        // Education
+        if (cv.getEducation() != null) {
+            cv.getEducation().forEach(edu -> {
+                EducationDto education = new EducationDto();
+                education.setDegree(edu.getDegree());
+                education.setInstitution(edu.getInstitution());
+                education.setStatus(edu.getStatus());
+                response.getEducation().add(education);
+            });
+        }
 
         return response;
-
     }
+
+
     @Override
     public CvAnalysisResponseDto reUploadCv(MultipartFile file) {
 
@@ -160,8 +276,7 @@ public class CvServiceImpl implements CvService {
         });
 
         // 4. call AI
-        cvAnalysisClientImpl.analyzeCvAsPdf(filePath);
-        CvAnalysisResponseDto response = cvAnalysisClientImpl.analysisResult();
+        CvAnalysisResponseDto response = cvAnalysisClientImpl.analyzeCvAsPdf(filePath);
 
         // 5. save new analysis
         CvAnalysis cv = new CvAnalysis();
@@ -169,29 +284,73 @@ public class CvServiceImpl implements CvService {
         cv.setName(response.getName());
         cv.setTitle(response.getTitle());
         cv.setSummary(response.getSummary());
+        cv.setLocation(response.getLocation());
         cv.setCreatedAt(LocalDateTime.now());
-        cv.setSkills(response.getSkills());
+
+        // Contact
+        if (response.getContact() != null) {
+            cv.setEmail(response.getContact().getEmail());
+            cv.setPhone(response.getContact().getPhone());
+            cv.setLinkedin(response.getContact().getLinkedin());
+            cv.setGithub(response.getContact().getGithub());
+        }
+
+        // Skills
+        cv.setSkills(response.getSkills() != null
+                ? response.getSkills().toCommaSeparated()
+                : "");
+
+        // ATS Score
+        if (response.getAts_score() != null) {
+            cv.setAtsScore(response.getAts_score().getPercent());
+            cv.setAtsPassed(response.getAts_score().isPassed());
+            cv.setMatchedSkills(String.join(", ", response.getAts_score().getMatched_skills()));
+            cv.setMissingSkills(String.join(", ", response.getAts_score().getMissing_skills()));
+        }
+
+        // Suggested Questions
+        if (response.getSuggested_interview_questions() != null) {
+            cv.setSuggestedQuestions(
+                    String.join("||", response.getSuggested_interview_questions())
+            );
+        }
 
         cvAnalysisRepository.save(cv);
 
-        // projects
+        // Projects
         response.getProjects().forEach(p -> {
             CvProject project = new CvProject();
             project.setCv(cv);
             project.setName(p.getName());
-            project.setDescription(p.getDescription());
-            project.setTechStack(p.getTechStack());
+            project.setRole(p.getRole());
+            project.setYear(p.getYear());
+            project.setDescription(
+                    p.getHighlights() != null ? String.join(". ", p.getHighlights()) : ""
+            );
             projectRepository.save(project);
         });
 
-        // experience
+        // Experience
         response.getExperience().forEach(exp -> {
             CvExperience experience = new CvExperience();
             experience.setCv(cv);
-            experience.setCompany(exp.getCompany());
-            experience.setTitle(exp.getTitle());
-            experience.setDescription(exp.getDescription());
+            experience.setTitle(exp.getRole());
+            experience.setCompany(exp.getLocation());
+            experience.setDates(exp.getDates());
+            experience.setDescription(
+                    exp.getHighlights() != null ? String.join(". ", exp.getHighlights()) : ""
+            );
             experienceRepository.save(experience);
+        });
+
+        // Education
+        response.getEducation().forEach(edu -> {
+            CvEducation education = new CvEducation();
+            education.setCv(cv);
+            education.setDegree(edu.getDegree());
+            education.setInstitution(edu.getInstitution());
+            education.setStatus(edu.getStatus());
+            educationRepository.save(education);
         });
 
         // 6. return fresh result

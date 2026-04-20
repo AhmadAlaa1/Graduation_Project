@@ -2,8 +2,10 @@ package com.example.interviewapp.External.Ai.Impl;
 
 import com.example.interviewapp.Dtos.EvaluationRequestDto;
 import com.example.interviewapp.Dtos.EvaluationResponseDto;
+import com.example.interviewapp.Dtos.InterviewPlanRequestDto;
 import com.example.interviewapp.Dtos.InterviewQuestionsResponseDto;
 import com.example.interviewapp.External.Ai.InterviewClient;
+import com.example.interviewapp.Models.CvAnalysis;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
@@ -17,42 +19,39 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class InterviewClientImpl implements InterviewClient {
     private final RestTemplate restTemplate;
     @Override
-    public InterviewQuestionsResponseDto getInterviewQuestions(String filePath) {
+    public InterviewQuestionsResponseDto getInterviewQuestions(CvAnalysis cvAnalysis) {
 
-        File file = new File(filePath);
+        // Build request body
+        InterviewPlanRequestDto requestBody = new InterviewPlanRequestDto();
+        requestBody.setRole(cvAnalysis.getTitle() != null ? cvAnalysis.getTitle() : "Software Engineering");
+        requestBody.setLevel("junior");
+        requestBody.setTotal_q(5);
+        requestBody.setSession_seed(0);
 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", new FileSystemResource(file));
+        Map<String, Object> cvData = new HashMap<>();
+        cvData.put("name", cvAnalysis.getName());
+        cvData.put("title", cvAnalysis.getTitle());
+        cvData.put("summary", cvAnalysis.getSummary());
+        cvData.put("skills", cvAnalysis.getSkills());
+        requestBody.setCv_analysis(cvData);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<MultiValueMap<String, Object>> request =
-                new HttpEntity<>(body, headers);
+        HttpEntity<InterviewPlanRequestDto> request = new HttpEntity<>(requestBody, headers);
 
         ResponseEntity<InterviewQuestionsResponseDto> response =
                 restTemplate.postForEntity(
-                        "http://localhost:6060/mock-ai/interview/questions",
+                        "https://ahmadalaa1-speech-llm-api.hf.space/api/cv-interview-plan",
                         request,
-                        InterviewQuestionsResponseDto.class
-                );
-
-        return response.getBody();
-    }
-    @Override
-    public InterviewQuestionsResponseDto getInterviewQuestionsWithoutpdf() {
-
-        String url = "http://localhost:6060/mock-ai/interview/questions";
-
-        ResponseEntity<InterviewQuestionsResponseDto> response =
-                restTemplate.getForEntity(
-                        url,
                         InterviewQuestionsResponseDto.class
                 );
 
@@ -63,7 +62,7 @@ public class InterviewClientImpl implements InterviewClient {
 
         ResponseEntity<EvaluationResponseDto> response =
                 restTemplate.postForEntity(
-                        "http://localhost:6060/mock-ai/evaluate-batch",
+                        "https://ahmadalaa1-speech-llm-api.hf.space/api/evaluate-batch",
                         request,
                         EvaluationResponseDto.class
                 );

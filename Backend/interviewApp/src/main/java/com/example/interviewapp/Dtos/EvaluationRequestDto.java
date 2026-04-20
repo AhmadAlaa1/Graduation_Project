@@ -8,4 +8,5 @@ import java.util.List;
 @Data
 public class EvaluationRequestDto {
     private List<EvaluationItemDto> items = new ArrayList<>();
+    private String level = "junior";
 }

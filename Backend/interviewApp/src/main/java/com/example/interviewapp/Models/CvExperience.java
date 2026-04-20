@@ -20,9 +20,10 @@ public class CvExperience {
     @JoinColumn(name = "cv_id")
     private CvAnalysis cv;
 
-    private String company;
     private String title;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String company;
+    private String dates;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 }

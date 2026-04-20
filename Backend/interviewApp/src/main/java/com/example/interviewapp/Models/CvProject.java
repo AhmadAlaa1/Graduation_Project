@@ -20,7 +20,11 @@ public class CvProject {
     private CvAnalysis cv;
 
     private String name;
-    private String description;
-    private String techStack;
+    private String role;
+    private String year;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    private String techStack;
 }

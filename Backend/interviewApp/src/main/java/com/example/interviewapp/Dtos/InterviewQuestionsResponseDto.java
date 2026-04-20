@@ -9,6 +9,7 @@ import java.util.UUID;
 @Data
 public class InterviewQuestionsResponseDto {
     private UUID interviewId;
-    private List<QuestionDto> questions = new ArrayList<>();
+    private List<String> questions = new ArrayList<>();
+    private List<QuestionDto> mappedQuestions = new ArrayList<>();
 
 }

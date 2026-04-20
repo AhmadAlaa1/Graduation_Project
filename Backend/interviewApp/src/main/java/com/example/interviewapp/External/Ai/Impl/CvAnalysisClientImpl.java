@@ -30,38 +30,27 @@ public class CvAnalysisClientImpl implements CvAnalysisClient {
 
     // post the cv as a pdf file
     @Override
-    public void analyzeCvAsPdf(String filePath) {
-//
-//        File file = new File(filePath);
-//
-//        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-//        body.add("file", new FileSystemResource(file));
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//
-//        HttpEntity<MultiValueMap<String, Object>> request =
-//                new HttpEntity<>(body, headers);
-//
-//
-//        restTemplate.postForEntity(
-//                "http://httpbin.org/post",
-//                request,
-//                void.class
-//        );
-    }
+    public CvAnalysisResponseDto analyzeCvAsPdf(String filePath) {
+        String url = "https://ahmadalaa1-speech-llm-api.hf.space/api/cv-analysis";
+        File file = new File(filePath);
 
-    @Override
-    public CvAnalysisResponseDto analysisResult() {
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("file", new FileSystemResource(file));
 
-        String url = "http://localhost:6060/mock-ai/cv-analysis/default";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> request =
+                new HttpEntity<>(body, headers);
 
         ResponseEntity<CvAnalysisResponseDto> response =
-                restTemplate.getForEntity(
+                restTemplate.postForEntity(
                         url,
+                        request,
                         CvAnalysisResponseDto.class
                 );
         return response.getBody();
     }
+
 
 }

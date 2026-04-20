@@ -23,10 +23,19 @@ public class InterviewFeedback {
 
     private Float score;
 
+    @Column(columnDefinition = "TEXT")
     private String strengths;
+
+    @Column(columnDefinition = "TEXT")
     private String gaps;
+
+    @Column(columnDefinition = "TEXT")
     private String betterAnswer;
-    private String FollowupQuestion;
+
+    @Column(columnDefinition = "TEXT")
+    private String followupQuestion;
+
+    @Column(columnDefinition = "TEXT")
     private String feedback;
 
     private LocalDateTime createdAt;

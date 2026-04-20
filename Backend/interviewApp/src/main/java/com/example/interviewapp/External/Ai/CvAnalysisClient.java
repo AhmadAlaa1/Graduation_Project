@@ -5,6 +5,5 @@ import com.example.interviewapp.Models.User;
 import org.springframework.security.core.Authentication;
 
 public interface CvAnalysisClient {
-     void analyzeCvAsPdf(String filePath);
-     CvAnalysisResponseDto analysisResult();
+     CvAnalysisResponseDto analyzeCvAsPdf(String filePath);
 }

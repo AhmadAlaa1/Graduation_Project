@@ -22,11 +22,6 @@ public class InterviewController {
     private final InterviewService interviewService;
 
 
-//    @PostMapping("/start")
-//    public ResponseEntity<InterviewDto> startInterview(){
-//
-//        return ResponseEntity.ok(interviewService.startInterview());
-//    }
     @GetMapping("/start")
     public InterviewQuestionsResponseDto generate() {
 

@@ -11,10 +11,17 @@ public class CvAnalysisResponseDto {
         private String name;
         private String title;
         private String summary;
+        private String location;
 
-        private String skills;
+        private ContactDto contact;
+        private SkillsDto skills;
 
-        private List<ProjectDto> projects=new ArrayList<>();
-        private List<ExperienceDto> experience=new ArrayList<>();
+        private List<ProjectDto> projects = new ArrayList<>();
+        private List<ExperienceDto> experience = new ArrayList<>();
+
+        private List<EducationDto> education = new ArrayList<>();
+        private AtsScoreDto ats_score;
+
+        private List<String> suggested_interview_questions = new ArrayList<>();
 
 }
