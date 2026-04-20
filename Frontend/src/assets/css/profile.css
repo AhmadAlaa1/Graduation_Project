@@ -1,0 +1,86 @@
+/* مسافة عشان الـ Navbar الثابت (Fixed Top) */
+.profile-page-wrapper {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  background-color: #fafbfc; /* لون خلفية مريح جداً للعين */
+  min-height: 100vh;
+  /* width: 100%; */
+}
+
+/* حاوية الصورة */
+.profile-img-container {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.profile-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.profile-img-container:hover img {
+  transform: scale(1.02);
+}
+
+/* زرار تغيير الصورة الدائري */
+.btn-change-photo {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #1a9e8f;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(26, 158, 143, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-change-photo:hover {
+  background-color: #148074;
+  transform: scale(1.1);
+  color: white;
+}
+
+/* تنسيق الـ Inputs */
+.form-control-custom {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+}
+
+.form-control-custom:focus {
+  border-color: #1a9e8f;
+  box-shadow: 0 0 0 0.25rem rgba(26, 158, 143, 0.15);
+}
+
+/* الحقول غير القابلة للتعديل (زي الإيميل) */
+.form-control-custom:read-only {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* شريط التقدم */
+.progress-custom {
+  height: 10px;
+  border-radius: 50px;
+  background-color: rgba(26, 158, 143, 0.1);
+}
+
+.progress-bar-custom {
+  background-color: #1a9e8f;
+  border-radius: 50px;
+}

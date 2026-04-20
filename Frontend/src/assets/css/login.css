@@ -1,0 +1,132 @@
+/* ================== PAGE ================== */
+.loginDivsec {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px  ;
+  background: linear-gradient(135deg, #f5f0ff 0%, #bcffee 100%);
+}
+
+/* ================== CARD ================== */
+.login-card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(99, 255, 182, 0.15);
+  background: #ffffff;
+  margin: 0 auto;
+}
+
+/* ================== FORM SIDE ================== */
+.form-side {
+  padding: 48px 40px;
+}
+
+.typewriter-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  border-right: 2px solid #2E8B73;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 2.2rem;
+  margin-bottom: 28px;
+  display: inline-block;
+}
+
+.form-side .form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.form-side .form-control {
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.form-side .form-control:focus {
+  border-color: #2E8B73;
+  box-shadow: 0 0 0 3px rgba(99, 255, 195, 0.1);
+}
+
+/* Remember Me */
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remember-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2E8B73;
+  cursor: pointer;
+}
+
+.remember-row label {
+  font-size: 0.875rem;
+  color: #555;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Login Button */
+.btn-login {
+  width: 100%;
+  padding: 13px;
+  background: #2E8B73;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 4px;
+}
+
+.btn-login:hover {
+  background: #3ec4a2;
+}
+
+.btn-login:active {
+  transform: scale(0.98);
+}
+
+/* Register link */
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.register-link a {
+  color: #2E8B73;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .form-side {
+    padding: 36px 24px;
+  }
+
+  .typewriter-title {
+    font-size: 1.4rem;
+  }
+}

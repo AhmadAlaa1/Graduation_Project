@@ -1,0 +1,50 @@
+:root {
+  --primary: #2E8B73;       
+  --secondary: #A3D2CA;      
+  --background: #F7F4EF;   
+  --text-color: #1C1C1C;    
+  --accent: #F7B267;         
+  --primary-subtle: #9acfc2;
+  --border-color:#EDE8E1;
+  --primary-light: color-mix(in srgb, var(--primary) 80%, white);
+  --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+  --bs-primary-bg-subtle: #9acfc2 !important;
+  --primary-rgb: 46,139,115;
+  --primary-light: color-mix(in srgb, var(--primary) 80%, white);
+  --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+  --white-text: #FFF;
+  --light-black:#8b857b;
+    scroll-padding-top: 90px;
+    scroll-behavior: smooth;
+}
+.nav-pills .nav-link.active {
+    background-color:var(--primary)!important;
+}
+/* العنصر العادي */
+.special-bg {
+  background-color: var(--white-text); /* الخلفية أبيض دايمًا */
+  color: var(--text-color);            /* اللون العادي للنص */
+}
+
+/* لما الدارك مود يشتغل */
+body.dark-mode .special-bg {
+  color: black; /* النص يبقى أسود بس في الدارك مود */
+}
+
+body.dark-mode {
+  --primary: #2E8B73;        
+  --secondary: #A3D2CA;      
+  --background: #1C1C1C;     
+  --text-color: #ECEFF1;      
+  --accent: #F7B267;          
+  --primary-subtle: #9acfc2;  
+  --border-color:#444444;      
+  --primary-light: color-mix(in srgb, var(--primary) 80%, white);
+  --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+  --bs-primary-bg-subtle: #9acfc2 !important;
+  --white-text: #FFF;
+  --light-black:#B0A79F;
+}
+/* .accordion-button:not(.collapsed) {
+  color: #000 !important;
+} */
