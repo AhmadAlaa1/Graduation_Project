@@ -8,6 +8,7 @@ export const uploadCvApi = (formData) => {
   });
 };
 
-export const getCvAnalysisApi = () => {
-  return axiosInstance.get("/cv/my-cv-analysis");
+export const getCvAnalysisApi = async () => {
+  const response = await axiosInstance.get("/cv/my-cv-analysis");
+  return response.data;
 };

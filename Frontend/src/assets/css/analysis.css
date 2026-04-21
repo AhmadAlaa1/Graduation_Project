@@ -1,0 +1,360 @@
+:root {
+  --g1: #3dbf8a;
+  --g2: #1a9e8f;
+  --gradient: linear-gradient(135deg, #3dbf8a 0%, #1a9e8f 100%);
+  --back-gradient: linear-gradient(135deg, #f5f0ff 0%, #bcffee 100%);
+  --an-text: #111827;
+  --an-muted: #6b7280;
+  --an-light: #f0faf6;
+  --an-white: #ffffff;
+  --an-border: #e5e7eb;
+  --an-teal-light: #e0f5f0;
+}
+
+/* ===== PAGE ===== */
+.an-page {
+  padding-top: 100px;
+  padding-bottom: 60px;
+}
+
+.an-loading,
+.an-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--an-muted);
+}
+
+/* ===== CARD ===== */
+.an-card {
+  background: var(--an-white);
+  border-radius: 16px;
+  border: 1px solid var(--an-border);
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.an-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--an-text);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.an-card-title i {
+  color: var(--g1);
+}
+
+/* ===== SUMMARY ===== */
+.an-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--g2);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.an-location {
+  font-size: 0.88rem;
+  color: var(--an-muted);
+  margin-bottom: 12px;
+}
+
+.an-summary {
+  font-size: 0.92rem;
+  color: var(--an-text);
+  line-height: 1.7;
+}
+
+/* ===== CONTACT ===== */
+.an-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.an-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.an-contact-icon {
+  color: var(--g1);
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.an-contact-link {
+  color: var(--g2);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: color 0.2s;
+  word-break: break-all;
+}
+
+.an-contact-link:hover {
+  color: var(--g1);
+  text-decoration: underline;
+}
+
+/* ===== ATS SCORE ===== */
+.an-ats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.an-ats-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.an-progress-track {
+  height: 28px;
+  background: var(--an-light);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.an-progress-fill {
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  transition: width 0.1s linear, background-color 0.3s;
+  min-width: 36px;
+}
+
+/* ===== SKILLS ===== */
+.an-skills-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.an-skills-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  min-width: 90px;
+  padding-top: 4px;
+  text-transform: capitalize;
+}
+
+.an-green { color: var(--g1); }
+.an-red   { color: #e05c5c; }
+.an-muted { color: var(--an-muted); }
+
+.an-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.an-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.an-badge-matched {
+  background: var(--an-teal-light);
+  color: var(--g2);
+}
+
+.an-badge-missing {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+.an-badge-default {
+  background: var(--an-light);
+  color: var(--an-text);
+}
+
+/* ===== TIMELINE ===== */
+.an-timeline {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 8px;
+}
+
+.an-timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient);
+  border-radius: 2px;
+}
+
+.an-timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.an-timeline-dot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--g1);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--g1);
+}
+
+.an-timeline-content {
+  background: var(--an-light);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.an-timeline-role {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--an-text);
+  margin-bottom: 4px;
+}
+
+.an-timeline-meta {
+  font-size: 0.82rem;
+  color: var(--an-muted);
+}
+
+.an-timeline-highlights {
+  margin-top: 8px;
+  padding-left: 16px;
+  font-size: 0.85rem;
+  color: var(--an-text);
+  line-height: 1.6;
+}
+
+.an-edu-status {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  background: var(--an-teal-light);
+  color: var(--g2);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+/* ===== QUESTIONS ===== */
+.an-questions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.an-question-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--an-light);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: var(--an-text);
+  line-height: 1.5;
+}
+
+.an-q-num {
+  background: var(--gradient);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ===== CTA ===== */
+.an-cta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.an-btn-primary,
+.an-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  text-decoration: none;
+}
+
+.an-btn-primary {
+  background: var(--gradient);
+  color: #fff;
+}
+
+.an-btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.an-btn-secondary {
+  background: transparent;
+  color: var(--g1);
+  border: 1.5px solid var(--g1);
+}
+
+.an-btn-secondary:hover {
+  background: var(--an-teal-light);
+}
+
+/* Dark mode */
+body.dark-mode .an-card {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .an-timeline-content,
+body.dark-mode .an-question-item {
+  background: #222;
+}
+
+@media (max-width: 768px) {
+  .an-page { padding-top: 80px; }
+  .an-cta { flex-direction: column; align-items: center; }
+}

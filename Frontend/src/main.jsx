@@ -13,6 +13,9 @@ import './assets/css/faqsection.css';
 import './assets/css/cvexamples.css';
 import './assets/css/team.css';
 import './assets/css/profile.css';
+import './assets/css/interview.css';
+import './assets/css/interview-results.css'
+import './assets/css/analysis.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

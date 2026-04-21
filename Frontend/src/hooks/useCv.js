@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { uploadCv, fetchCvAnalysis, clearCvState } from "../store/slices/cvSlice";
+import { uploadCv, getCvAnalysis, clearCvState } from "../store/slices/cvSlice";
 
 export const useCv = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ export const useCv = () => {
   return {
     ...cvState,
     uploadCv: (file) => dispatch(uploadCv(file)),
-    fetchCvAnalysis: () => dispatch(fetchCvAnalysis()),
+    getCvAnalysis: () => dispatch(getCvAnalysis()),
     clearCvState: () => dispatch(clearCvState()),
   };
 };

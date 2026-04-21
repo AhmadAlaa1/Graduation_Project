@@ -10,7 +10,7 @@ const Hero = () => {
           giving you real insights to land your dream job.
         </p>
         <div className="hero-btns">
-          <a className="btn btn-grad" href="#">
+          <a className="btn btn-grad" href="/interview">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="white" stroke="none">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>

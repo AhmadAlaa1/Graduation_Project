@@ -6,8 +6,9 @@ import Register from "./pages/Register";
 import Home from "./pages/HomePage";
 import Features from "./pages/FeaturePage";
 import ProfilePage from "./pages/ProfilePage";
+import InterviewPage from "./pages/InterviewPage";
+import AnalysisPage from "./pages/AnalysisPage";
 import { Toaster } from "react-hot-toast";
-
 function App() {
   return (
     <BrowserRouter>
@@ -23,7 +24,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/feature" element={<Features />} />
         <Route path="/profile" element={<ProfilePage />} />
-        {/* <Route path="/analysis-cv" element={<AnalysisCv />} /> */}
+        <Route path="/interview" element={<InterviewPage />} />
+        <Route path="/analysis" element={<AnalysisPage />} />
+        <Route path="/analysis-cv" element={<AnalysisPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,6 +10,7 @@
   --g1: #3dbf8a;
   --g2: #1a9e8f;
   --gradient: linear-gradient(135deg, #3dbf8a 0%, #1a9e8f 100%);
+  --back-gradient: linear-gradient(135deg, #f5f0ff 0%, #bcffee 100%);
   --text: #111827;
   --muted: #6b7280;
   --light: #f0faf6;
