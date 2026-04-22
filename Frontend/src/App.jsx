@@ -8,6 +8,7 @@ import Features from "./pages/FeaturePage";
 import ProfilePage from "./pages/ProfilePage";
 import InterviewPage from "./pages/InterviewPage";
 import AnalysisPage from "./pages/AnalysisPage";
+import MyInterviewsPage from "./pages/MyInterviewsPage";
 import { Toaster } from "react-hot-toast";
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/interview" element={<InterviewPage />} />
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/analysis-cv" element={<AnalysisPage />} />
+        <Route path="/my-interviews" element={<MyInterviewsPage />} />
       </Routes>
     </BrowserRouter>
   );

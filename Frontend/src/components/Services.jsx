@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Services = () => {
   return (
     <section className="services-band">
@@ -6,7 +8,9 @@ const Services = () => {
           <div className="tag">Our Services</div>
           <h2>We Will Help You Get Hired &amp; Growing</h2>
         </div>
-        <div className="service-card">
+
+        {/* Card 1: Voice Interview */}
+        <Link to="/interview" className="service-card">
           <div className="svc-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
@@ -16,8 +20,10 @@ const Services = () => {
           </div>
           <h3>Voice Interview</h3>
           <p>Record your answers via microphone. Our AI captures your voice and analyzes tone, confidence, and clarity in real time.</p>
-        </div>
-        <div className="service-card">
+        </Link>
+
+        {/* Card 2: CV Analysis */}
+        <Link to="/analysis-cv" className="service-card">
           <div className="svc-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -28,16 +34,19 @@ const Services = () => {
           </div>
           <h3>CV Analysis</h3>
           <p>Upload your CV and get instant AI-powered feedback matching your experience to job requirements.</p>
-        </div>
-        <div className="service-card">
+        </Link>
+
+        {/* Card 3: My Interview Reports */}
+        <Link to="/my-interviews" className="service-card">
           <div className="svc-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
           </div>
-          <h3>Performance Report</h3>
-          <p>Detailed analysis covering communication skills, answer quality, and improvement tips after every session.</p>
-        </div>
+          <h3>My Interview Reports</h3>
+          <p>Review your past interview sessions, check your performance scores, and see detailed AI evaluations for each one.</p>
+        </Link>
+
       </div>
     </section>
   );

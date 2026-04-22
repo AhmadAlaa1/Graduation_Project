@@ -1,15 +1,21 @@
 export default function InterviewResults({ quizData, evaluations, onRestart }) {
   const evalList = Array.isArray(evaluations) ? evaluations : [];
 
+  // تقسيم الألوان لـ 5 مستويات دقيقة
   const getScoreColor = (score) => {
-    if (score >= 4) return "#2E8B73";
-    if (score >= 2.5) return "#F7B267";
-    return "#e05c5c";
+    if (score >= 9) return "#2E8B73";   // Dark Green
+    if (score >= 7.5) return "#4CAF50"; // Light Green
+    if (score >= 6) return "#F4D03F";   // Yellow/Gold
+    if (score >= 4) return "#F28C28";   // Orange
+    return "#e05c5c";                   // Red
   };
 
+  // تقسيم التسميات لـ 5 مستويات
   const getScoreLabel = (score) => {
-    if (score >= 4) return "Excellent";
-    if (score >= 2.5) return "Good";
+    if (score >= 9) return "Excellent";
+    if (score >= 7.5) return "Very Good";
+    if (score >= 6) return "Good";
+    if (score >= 4) return "Fair";
     return "Needs Improvement";
   };
 
@@ -30,7 +36,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
           <div className="quiz-res-overall" style={{ borderColor: getScoreColor(avgScore) }}>
             <span className="quiz-res-overall-label">Overall Score</span>
             <span className="quiz-res-overall-score" style={{ color: getScoreColor(avgScore) }}>
-              {avgScore} / 5
+              {avgScore} / 10
             </span>
             <span className="quiz-res-overall-tag" style={{ background: getScoreColor(avgScore) }}>
               {getScoreLabel(avgScore)}
@@ -64,7 +70,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                       border: `1px solid ${getScoreColor(score)}40`,
                     }}
                   >
-                    {score} / 5
+                    {score} / 10
                   </div>
                 )}
               </div>
@@ -114,7 +120,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
 
                   </div>
 
-                  {/* Better Answer - snake_case ✅ */}
+                  {/* Better Answer */}
                   {evalItem.better_answer && (
                     <div className="quiz-res-block quiz-res-block-better">
                       <div className="quiz-res-block-title quiz-res-blue">
@@ -124,7 +130,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                     </div>
                   )}
 
-                  {/* Follow-up Question - snake_case ✅ */}
+                  {/* Follow-up Question */}
                   {evalItem.followup_question && (
                     <div className="quiz-res-block quiz-res-block-followup">
                       <div className="quiz-res-block-title quiz-res-purple">

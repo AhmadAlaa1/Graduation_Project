@@ -16,6 +16,7 @@ import './assets/css/profile.css';
 import './assets/css/interview.css';
 import './assets/css/interview-results.css'
 import './assets/css/analysis.css';
+import './assets/css/my-interviews.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

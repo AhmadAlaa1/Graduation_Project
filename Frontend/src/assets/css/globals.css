@@ -481,6 +481,9 @@ h1 em {
   padding: 38px 26px;
   border-left: 1px solid var(--border);
   transition: background .2s;
+  text-decoration: none; 
+  display: block; 
+  color: inherit;
 }
 
 .service-card:hover {

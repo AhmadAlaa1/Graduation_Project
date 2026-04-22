@@ -15,6 +15,7 @@
 .an-page {
   padding-top: 100px;
   padding-bottom: 60px;
+  background: var(--back-gradient);
 }
 
 .an-loading,
@@ -334,7 +335,7 @@
 }
 
 .an-btn-secondary {
-  background: transparent;
+  background: #fff;
   color: var(--g1);
   border: 1.5px solid var(--g1);
 }
