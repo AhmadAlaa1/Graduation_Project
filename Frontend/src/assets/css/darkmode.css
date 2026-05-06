@@ -1,0 +1,185 @@
+[data-theme="dark"] .service-card {
+  background-color: var(--background);
+  filter: blur(.24);
+}
+
+[data-theme="dark"] .features-main {
+  background: var(--white-color);
+}
+
+[data-theme="dark"] .feature-content {
+  background: var(--light);
+}
+
+[data-theme="dark"] .profile-page-container{
+  background-color: var(--light);
+}
+
+[data-theme="dark"] .service-card:hover {
+  background-color: var(--dark-surface-deep);
+}
+
+
+[data-theme="dark"] .feat-card {
+  background-color: var(--dark-surface-deep);
+}
+
+[data-theme="dark"] .accordion-item {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .btn-profile {
+  background-color: transparent;
+  border: 2px solid var(--g2) !important;
+  color: var(--text-white-color);
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .btn-status {
+  background-color: var(--g2) !important;
+  color: var(--white-color);
+  border: 0 !important;
+}
+
+
+[data-theme="dark"] .cv-card {
+  background-color: var(--dark-surface-deep);
+}
+
+
+[data-theme="dark"] .btn-download,
+[data-theme="dark"] .btn-preview {
+  background-color: var(--primary);
+}
+
+
+[data-theme="dark"] .cv-thumb::after {
+  background: rgba(30, 30, 30, 0.4);
+}
+
+[data-theme="dark"] .voice-area {
+  background-color: var(--white-color) !important;
+  color: var(--text-white-color) !important;
+  border: 0 !important;
+}
+
+[data-theme="dark"] .btn-feature-ai {
+  color: var(--text-white-color);
+}
+
+[data-theme="dark"] .personality-box {
+  background-color: var(--light) !important;
+}
+
+
+[data-theme="dark"] .register-right {
+  box-shadow: 0 0px 20px rgba(99, 255, 182, 0.15);
+  background: var(--white-color);
+  color: var(--text-white-color);
+}
+
+[data-theme="dark"] .form-group input {
+  color: var(--text-white-color);
+}
+
+[data-theme="dark"] .login-card {
+  box-shadow: 0 0px 20px rgba(99, 255, 182, 0.15);
+  background: var(--white-color);
+}
+
+
+[data-theme="dark"] .services-grid {
+  border: 1px solid var(--g2);
+}
+
+[data-theme="dark"] .service-card {
+  border-left: 1px solid var(--g2);
+}
+
+
+[data-theme="dark"] .svc-icon {
+  border: 1.5px solid var(--g2);
+  background-color: var(--g2);
+}
+
+
+[data-theme="dark"] .svc-icon svg {
+  stroke: var(--dark-surface);
+}
+
+[data-theme="dark"] .step-badge:hover {
+  color: var(--text-white-color);
+}
+
+[data-theme="dark"] .feat-card {
+  background-color: var(--light) !important;
+}
+
+[data-theme="dark"] .feat-icon {
+  background-color: var(--g2);
+}
+
+[data-theme="dark"] .feat-icon i {
+  color: var(--text-white-color);
+}
+
+
+[data-theme="dark"] .an-card {
+  background-color: var(--light);
+}
+
+[data-theme="dark"] .an-page {
+  background: var(--white-color) !important;
+}
+
+[data-theme="dark"] .an-card {
+  border: transparent !important;
+}
+
+[data-theme="dark"] .quiz-intro-wrapper,
+[data-theme="dark"] .quiz-int-wrapper,
+[data-theme="dark"] .quiz-res-wrapper {
+  background-color: var(--light);
+}
+
+
+
+[data-theme="dark"] .inter-background {
+  background-color: var(--light);
+  border: 0;
+}
+
+[data-theme="dark"] .myi-card {
+  background-color: var(--light);
+  border: 3px solid var(--border);
+
+}
+
+
+[data-theme="dark"] .myi-card:hover {
+  filter: brightness(1.5);
+}
+
+
+[data-theme="dark"] .quiz-int-textarea {
+  border: 1px solid var(--border);
+  color: var(--text-white-color);
+  background: var(--light) !important;
+  filter: brightness(1.5);
+}
+[data-theme="dark"] .login-card {
+  background: var(--light);
+  box-shadow: 0 0 0 ;
+}
+[data-theme="dark"] .register-right {
+  background: var(--light);
+  box-shadow: 0 0 0 ;
+}
+
+[data-theme="dark"] .form-side .form-control {
+ background-color: var(--back-gradient);
+ color: var(--text-white-color);
+}
+[data-theme="dark"] .form-side .form-control::placeholder {
+  color: #757575;
+}

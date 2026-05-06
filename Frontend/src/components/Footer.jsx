@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer>
-      <div className="footer-grid">
+      <div className="footer-grid" id="footer">
         <div className="footer-brand">
           <a
             className="logo"
@@ -37,7 +37,7 @@ const Footer = () => {
           <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Our Services</a></li>
-            <li><a href="#">Our Team</a></li>
+            <li><a href="/our-team">Our Team</a></li>
             <li><a href="#">Case Study</a></li>
             <li><a href="#">Blog</a></li>
             <li><a href="#">Testimonials</a></li>

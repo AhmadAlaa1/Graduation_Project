@@ -34,7 +34,7 @@ export default function PersonalityInsightsContent() {
             </li>
           </ul>
 
-          <div className="p-3 bg-light rounded-3 border border-light animate__animated animate__fadeInUp animate__delay-2s">
+          <div className="p-3 personality-box bg-light rounded-3 border border-light animate__animated animate__fadeInUp animate__delay-2s">
             <p className="mb-0 text-secondary lh-base">
               <i className="fa-solid fa-lightbulb me-2" style={{ color: "#1a9e8f" }}></i>
               Each session gives personalized tips so you can improve gradually and track your progress over time.

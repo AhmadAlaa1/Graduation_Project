@@ -1,8 +1,4 @@
 import { useState, useRef } from "react";
-import "../assets/css/style.css";
-import "../assets/css/all.css";
-import "../assets/css/CustomBootstrap.css";
-import "../assets/css/homepage.css";
 
 const howSteps = [
   { key: "cvAnalysis", icon: "fas fa-upload", title: "Upload CV", text: "Easily upload your CV to get started with AI analysis.", modal: true },

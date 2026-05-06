@@ -5,7 +5,8 @@ import SkillMatchingContent from "../components/features/SkillMatchingContent";
 import ProgressTrackingContent from "../components/features/ProgressTrackingContent";
 import VoicePracticeContent from "../components/features/VoicePracticeContent";
 import PersonalityInsightsContent from "../components/features/PersonalityInsightsContent";
-import LearningResourcesContent from "../components/features/LearningResourcesContent";
+// import LearningResourcesContent from "../components/features/LearningResourcesContent";
+// import LearningResourcesContent from "../components/features/LearningResourcesContent";
 import QuickRecommendationsContent from "../components/features/QuickRecommendationsContent";
 
 const featuresData = {
@@ -22,6 +23,11 @@ const featuresData = {
       "Upload your CV and get instant AI insights to make it perfect.",
     bgClass: "bg-cv",
     content: <CVAnalysisContent />,
+  },
+  cvBuilder: {
+    title: "CV Builder",
+    description: "Create a professional CV using customizable templates tailored to your career field.",
+    // content: <CVBuilderContent />,
   },
   skillMatching: {
     title: "Skill Matching",
@@ -47,11 +53,6 @@ const featuresData = {
     description:
       "AI evaluates your tone, presence, and personality for interview improvement.",
     content: <PersonalityInsightsContent />,
-  },
-  learningResources: {
-    title: "Learning Resources",
-    description: "Access guides and tips tailored to your job field.",
-    content: <LearningResourcesContent />,
   },
   quickRecommendations: {
     title: "Quick Recommendations",

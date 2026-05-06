@@ -137,14 +137,14 @@ export default function ProfilePage() {
           <div className="row justify-content-center">
             <div className="col-lg-12">
 
-              <div className="bg-white shadow-sm rounded-4 p-4 p-lg-5 border border-light">
+              <div className="profile-page-container shadow-sm rounded-4 p-4 p-lg-5 border border-light">
 
                 <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-4 pb-3 border-bottom gap-3">
-                  <h3 className="fw-bold mb-0 text-dark">Your Profile</h3>
+                  <h3 className="fw-bold mb-0 ">Your Profile</h3>
 
                   <button
                     type="button"
-                    className="btn btn-outline-danger rounded-pill px-4 fw-semibold shadow-sm d-inline-flex align-items-center justify-content-center gap-2"
+                    className="delete-account-btn btn btn-outline-danger rounded-pill px-4 fw-semibold shadow-sm d-inline-flex align-items-center justify-content-center gap-2"
                     onClick={handleDeleteAccount}
                   >
                     <i className="fa-solid fa-user-xmark"></i>

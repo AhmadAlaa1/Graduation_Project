@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import InterviewPage from "./pages/InterviewPage";
 import AnalysisPage from "./pages/AnalysisPage";
 import MyInterviewsPage from "./pages/MyInterviewsPage";
+import TeamPage from "./pages/TeamPage";
 import { Toaster } from "react-hot-toast";
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/analysis-cv" element={<AnalysisPage />} />
         <Route path="/my-interviews" element={<MyInterviewsPage />} />
+        <Route path="/our-team" element={<TeamPage />} />
       </Routes>
     </BrowserRouter>
   );

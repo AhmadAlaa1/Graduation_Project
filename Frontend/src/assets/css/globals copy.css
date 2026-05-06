@@ -20,10 +20,6 @@
   margin-left: 50px;
 }
 
-.light-mode {
-  color: var(--g2);
-}
-
 :root {
   /* Brand Colors */
   --g1: #3dbf8a;
@@ -44,8 +40,6 @@
   --footer-bg: #0f1923;
   --dark-surface: #121212;
   --dark-surface-deep: #0a0a0a;
-  --myi-card-bg: #f0faf6;
-
 
   /* Text */
   --text: #111827;
@@ -110,47 +104,46 @@
 
 [data-theme="dark"] {
   /* Brand Colors */
-  --g1: #3dbf8a;
+  --g1: #1d845b;
   --g2: #1a9e8f;
-  --primary: #2E8B73;
-  --primary-dark: #148074;
-  --primary-alt: #3a8b73;
+  --primary: #186c5a;
+  --primary-dark: #0c493c;
+  --primary-alt: #2a9e82;
   --accent: #e8955a;
 
   /* Gradients */
   --gradient: linear-gradient(135deg, #2da876 0%, #178a7e 100%);
-  --back-gradient: #121212;
+  --back-gradient: linear-gradient(135deg, #181f1c 0%, #0e1e1a 100%);
 
   /* Backgrounds */
-  --background: #1e1e1e;
-  --white-color: #121212;
-  --light: #1e1e1e;
+  --background: #111c17cd;
+  --white-color: #1a2e26;
+  --light: #162820;
   --footer-bg: #020e09;
-  --dark-surface: #121212;
-  --dark-surface-deep: #121212;
-  --myi-card-bg: #1e1e1e;
-  
+  --dark-surface: #0c1f17;
+  --dark-surface-deep: #111c17;
+
   /* Text */
   --text: #f0faf5;
   --text-color: #daf0e6;
   --text-white-color: #ffffff;
   --muted: #ffffff;
   --light-black: #7aa090;
-  --white-text: #121212;
+  --white-text: #ffffff;
 
   /* Borders */
-  --border: #1a9e8f;
+  --border: #1e3d30;
   --border-color: #1e3d30;
   --dark-border: #2a5040;
 
   /* Accents / Tints */
-  --teal-light: #1e1e1e;
-  --blob-teal-start: rgba(30, 30, 30, 0.15);
-  --blob-teal-end: rgba(26, 158, 143, 0.27);
-  --how-blob-start: rgba(30, 30, 30, 0.15);
-  --how-blob-end: rgba(26, 158, 143, 0.27);
-  --hero-blob-start: rgba(30, 30, 30, 0.15);
-  --hero-blob-end: rgba(26, 158, 143, 0.27);
+  --teal-light: #0d2a1e;
+  --blob-teal-start: rgba(45, 168, 118, 0.15);
+  --blob-teal-end: rgba(23, 138, 126, 0.06);
+  --how-blob-start: rgba(45, 168, 118, 0.10);
+  --how-blob-end: rgba(23, 138, 126, 0.05);
+  --hero-blob-start: rgba(45, 168, 118, 0.15);
+  --hero-blob-end: rgba(23, 138, 126, 0.05);
   --feature-bg: #0f2e20;
   --feature-bg-end: #0c2819;
 
@@ -176,7 +169,6 @@
   --shadow-feat: 0 16px 40px rgba(0, 0, 0, 0.35);
   --shadow-feature-content: 0 4px 32px rgba(0, 0, 0, 0.35);
 }
-
 h1,
 h2,
 h3 {
@@ -261,7 +253,7 @@ nav.active {
 }
 
 .navbar a i {
-  color: var(--text-white-color) !important;
+  color: var(--white-text) !important;
 }
 
 nav ul {
@@ -329,9 +321,7 @@ nav ul a.active {
 .navbar .hi-user-text {
   color: var(--text-color);
 }
- .navbar-expand-lg .navbar-collapse {
-  flex: inherit ;
-}       
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -362,7 +352,7 @@ nav ul a.active {
 .btn-outline {
   background: transparent;
   color: var(--g2);
-  border: 2px solid var(--g2);
+  border: 2px solid var(--g1);
 }
 
 .btn-outline:hover {
@@ -414,7 +404,7 @@ nav ul a.active {
 
   .btn {
     gap: 4px;
-    padding: 8px 5px;
+    padding: 8px 5px ;
     font-size: 12px;
   }
 }
@@ -499,7 +489,7 @@ nav ul a.active {
   content: '';
   width: 6px;
   height: 6px;
-  background: var(--g2);
+  background: var(--g1);
   border-radius: 50%;
 }
 
@@ -570,7 +560,7 @@ h1 em {
 .ds-circ-g {
   width: 58px;
   height: 58px;
-  border: 3.5px solid var(--g2);
+  border: 3.5px solid var(--g1);
   border-radius: 50%;
   top: 18px;
   right: 18px;
@@ -691,7 +681,7 @@ h1 em {
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  border: 1.5px solid var(--g2);
+  border: 1.5px solid var(--g1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -757,7 +747,7 @@ h1 em {
   position: absolute;
   width: 70px;
   height: 70px;
-  border: 3px solid var(--g2);
+  border: 3px solid var(--g1);
   border-radius: 50%;
   top: 0;
   right: 20px;
@@ -777,7 +767,7 @@ h1 em {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--g2);
+  color: var(--g1);
   font-weight: 700;
   margin-bottom: 14px;
 }
@@ -812,7 +802,7 @@ h1 em {
 .step-badge {
   font-size: 20px;
   font-weight: 800;
-  color: var(--g2);
+  color: var(--g1);
   background: var(--white-color);
   border: 2px solid var(--border);
   width: 52px;
@@ -1115,7 +1105,7 @@ h1 em {
 }
 
 .stars {
-  color: var(--g2);
+  color: var(--g1);
   font-size: 15px;
   margin-bottom: 18px;
   letter-spacing: 2px;
@@ -1144,7 +1134,7 @@ h1 em {
 }
 
 .logo-item:hover {
-  color: var(--g2);
+  color: var(--g1);
 }
 
 /* CTA */
@@ -1280,7 +1270,7 @@ footer {
 }
 
 .footer-col ul a:hover {
-  color: var(--g2);
+  color: var(--g1);
 }
 
 .footer-bottom {

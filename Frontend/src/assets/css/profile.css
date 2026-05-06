@@ -1,13 +1,13 @@
-/* مسافة عشان الـ Navbar الثابت (Fixed Top) */
+
 .profile-page-wrapper {
   padding-top: 100px;
   padding-bottom: 50px;
-  background-color: #fafbfc; /* لون خلفية مريح جداً للعين */
   min-height: 100vh;
-  /* width: 100%; */
+  background: var(--back-gradient) !important;
 }
-
-/* حاوية الصورة */
+.profile-page-container{
+  background-color: var(--white-color);
+}
 .profile-img-container {
   width: 160px;
   height: 160px;
@@ -20,7 +20,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid #ffffff;
+  border: 4px solid var(--white-color);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease;
 }
@@ -29,13 +29,12 @@
   transform: scale(1.02);
 }
 
-/* زرار تغيير الصورة الدائري */
 .btn-change-photo {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  background-color: #1a9e8f;
-  color: white;
+  background-color: var(--g2);
+  color: var(--white-color);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -48,32 +47,30 @@
 }
 
 .btn-change-photo:hover {
-  background-color: #148074;
+  background-color: var(--primary-dark);
   transform: scale(1.1);
-  color: white;
+  color: var(--white-color);
 }
 
-/* تنسيق الـ Inputs */
 .form-control-custom {
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
-  border: 1px solid #e0e0e0;
-  background-color: #ffffff;
+  border: 1px solid var(--border);
+  background-color: var(--white-color);
+  color: var(--text-color);
 }
 
 .form-control-custom:focus {
-  border-color: #1a9e8f;
+  border-color: var(--g2);
   box-shadow: 0 0 0 0.25rem rgba(26, 158, 143, 0.15);
 }
 
-/* الحقول غير القابلة للتعديل (زي الإيميل) */
 .form-control-custom:read-only {
-  background-color: #f8f9fa;
-  color: #6c757d;
+  background-color: var(--background);
+  color: var(--muted);
   cursor: not-allowed;
 }
 
-/* شريط التقدم */
 .progress-custom {
   height: 10px;
   border-radius: 50px;
@@ -81,6 +78,41 @@
 }
 
 .progress-bar-custom {
-  background-color: #1a9e8f;
+  background-color: var(--g2);
   border-radius: 50px;
+}
+.delete-account-btn{
+  border: 1px solid #dc3545;
+} 
+/* input file */
+.profile-page-wrapper .file-input {
+  display: none;
+}
+
+.profile-page-wrapper .file-upload {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-page-wrapper .file-btn {
+  border: 1px solid var(--primary-alt);
+  color: var(--text-white-color);
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  transition: 0.3s ease;
+  font-weight: 500;
+  background-color: var(--g2) !important;
+}
+
+.profile-page-wrapper .file-btn:hover {
+  background-color: var(--primary-dark ) !important;
+  /* color: var(--white-color); */
+}
+
+.profile-page-wrapper .file-name {
+  color: var(--muted);
+  font-size: 14px;
 }

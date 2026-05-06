@@ -47,7 +47,7 @@
 
 .quiz-res-overall-tag {
   font-size: 0.8rem;
-  color: #fff;
+  color: var(--white-color);
   padding: 4px 14px;
   border-radius: 20px;
   font-weight: 600;
@@ -61,7 +61,7 @@
 }
 
 .quiz-res-card {
-  background: #fff;
+  background: var(--white-color);
   border-radius: 16px;
   border: 1px solid var(--border-color);
   overflow: hidden;
@@ -88,7 +88,7 @@
 
 .quiz-res-q-num {
   background: var(--primary);
-  color: #fff;
+  color: var(--white-color);
   font-size: 0.78rem;
   font-weight: 700;
   padding: 3px 10px;
@@ -136,16 +136,16 @@
 /* ===== BLOCKS ===== */
 .quiz-res-block {
   background: var(--background);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 14px 16px;
   border-left: 3px solid transparent;
 }
 
 .quiz-res-block-feedback  { border-left-color: var(--primary); }
-.quiz-res-block-strengths { border-left-color: #2E8B73; }
-.quiz-res-block-gaps      { border-left-color: #F7B267; }
-.quiz-res-block-better    { border-left-color: #4a90d9; }
-.quiz-res-block-followup  { border-left-color: #9b59b6; }
+.quiz-res-block-strengths { border-left-color: var(--g1); }
+.quiz-res-block-gaps      { border-left-color: var(--accent); }
+.quiz-res-block-better    { border-left-color: var(--shape-blue); }
+.quiz-res-block-followup  { border-left-color: var(--color-purple); }
 
 .quiz-res-block-title {
   display: flex;
@@ -159,10 +159,10 @@
   color: var(--text-color);
 }
 
-.quiz-res-green  { color: #2E8B73 !important; }
+.quiz-res-green  { color: var(--primary) !important; }
 .quiz-res-orange { color: #e07b2a !important; }
-.quiz-res-blue   { color: #4a90d9 !important; }
-.quiz-res-purple { color: #9b59b6 !important; }
+.quiz-res-blue   { color: var(--shape-blue) !important; }
+.quiz-res-purple { color: var(--color-purple) !important; }
 
 .quiz-res-block p,
 .quiz-res-block ul {
@@ -201,7 +201,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -211,13 +211,13 @@
 
 .quiz-res-btn-primary {
   background: var(--primary);
-  color: #fff;
+  color: var(--white-color);
   border: none;
 }
 
 .quiz-res-btn-primary:hover {
   background: var(--primary-dark);
-  color: #fff;
+  color: var(--white-color);
 }
 
 .quiz-res-btn-secondary {
@@ -232,14 +232,14 @@
 
 /* Dark mode */
 body.dark-mode .quiz-res-card {
-  background: #2a2a2a;
-  border-color: #444;
+  background: var(--dark-surface);
+  border-color: var(--dark-border);
 }
 
 body.dark-mode .quiz-res-card-header {
-  background: #222;
+  background: var(--dark-surface-deep);
 }
 
 body.dark-mode .quiz-res-block {
-  background: #222;
+  background: var(--dark-surface-deep);
 }

@@ -94,7 +94,7 @@ export default function VoicePracticeContent() {
             </li>
           </ul>
 
-          <div className="p-3 bg-light rounded-3 border border-light">
+          <div className="voice-area p-3 bg-light rounded-3 border border-light">
             <div className="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
               <button 
                 className={`btn rounded-pill d-inline-flex align-items-center gap-2 fw-semibold shadow-sm ${isRecording ? 'btn-danger' : 'btn-feature-ai'}`} 
@@ -105,8 +105,8 @@ export default function VoicePracticeContent() {
               </button>
               
               <div className="text-end">
-                <div className={`fw-bold fs-5 ${isRecording ? 'text-danger' : 'text-dark'}`}>{timer}</div>
-                <small className="text-muted">{status}</small>
+                <div className={`fw-bold fs-5 ${isRecording ? 'text-danger' : ''}`}>{timer}</div>
+                <small className="">{status}</small>
               </div>
             </div>
 

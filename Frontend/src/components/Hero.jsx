@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       <div className="blob-bg"></div>
       <div className="hero-text">
         <div className="eyebrow">AI-Powered Interview Platform</div>

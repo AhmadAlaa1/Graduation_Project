@@ -1,8 +1,4 @@
 import { useState } from "react";
-import "../assets/css/style.css";
-import "../assets/css/all.css";
-import "../assets/css/CustomBootstrap.css";
-import "../assets/css/homepage.css";
 
 const faqs = [
   { q: "How does the AI analyze my CV?", a: "Our AI scans your CV for skills, experience, and achievements, then provides personalized suggestions for improvement." },

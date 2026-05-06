@@ -14,7 +14,7 @@ const getSessionTitle = (createdAt, index, allDates) => {
     .slice(0, index + 1)
     .filter(d => new Date(d).toDateString() === date.toDateString());
 
-  return `${dateStr} · Session ${sameDay.length}`;
+  return `${dateStr} - Session ${sameDay.length}`;
 };
 
 const calcAvgScore = (details) => {
@@ -133,7 +133,7 @@ export default function MyInterviewsPage() {
                         <div className="myi-card-left">
                           <div className="myi-card-num">{i + 1}</div>
 
-                          <div>
+                          <div className="" style={{ marginLeft: 20 }}>
                             <div className="myi-card-title">{title}</div>
                             <div className="myi-card-meta">
                               <i className="fa-solid fa-circle-question me-1"></i>

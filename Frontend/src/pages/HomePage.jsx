@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import HowItWorks from "../components/HowItWorks";
 import Features from "../components/Features";
 import Services from "../components/Services";
-import NavPillsSection from "../components/NavPillsSection";
+// import NavPillsSection from "../components/NavPillsSection";
 import FaqSection from "../components/FaqSection";
 import ExampleCVSection from "../components/ExampleCVSection";
 import TeamSection from "../components/TeamSection";
@@ -17,10 +17,8 @@ export default function HomePage() {
       <Services />
       <HowItWorks />
       <Features />
-      <NavPillsSection />
       <FaqSection />
       <ExampleCVSection />
-      <TeamSection />
       <Footer />
     </>
   );

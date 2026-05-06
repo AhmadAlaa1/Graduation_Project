@@ -1,6 +1,6 @@
 const HowItWorks = () => {
   return (
-    <section className="how">
+    <section className="how" id="how">
       <div className="how-img">
         <div className="how-blob">
           <svg viewBox="0 0 200 280" fill="none" width="180">

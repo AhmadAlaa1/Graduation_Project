@@ -52,7 +52,7 @@ export default function AIInterviewContent() {
 
           <div className="mt-2">
             <a
-              href="landingscape.html"
+              href="/interview"
               className="btn w-100 w-lg-auto py-2 px-4 rounded-pill d-inline-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold btn-feature-ai"
             >
               Start Interview

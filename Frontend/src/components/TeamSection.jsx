@@ -1,9 +1,3 @@
-
-import "../assets/css/style.css";
-import "../assets/css/all.css";
-import "../assets/css/CustomBootstrap.css";
-import "../assets/css/homepage.css";
-
 const team = [
   { img: "/images/ahmed.jpg", name: "Ahmed Alaa", role: "AI / Machine Learning Engineer", linkedin: "http://www.linkedin.com/in/ahmad-alaa" },
   { img: "/images/youssef.jpg", name: "Youssef Yasser", role: "DevOps Engineer", linkedin: "https://www.linkedin.com/in/youssefyasser116" },

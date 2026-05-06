@@ -1,5 +1,5 @@
 .example-cv-section {
-  background: #fff;
+  background: var(--background);
   padding: 70px 0;
   background-color: var(--light);
 }

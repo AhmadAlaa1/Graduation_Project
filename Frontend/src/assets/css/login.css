@@ -4,18 +4,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 50px  ;
-  background: linear-gradient(135deg, #f5f0ff 0%, #bcffee 100%);
+  padding-top: 50px;
+  background: var(--back-gradient);
 }
 
 /* ================== CARD ================== */
 .login-card {
   width: 100%;
   max-width: 500px;
-  border-radius: 20px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(99, 255, 182, 0.15);
-  background: #ffffff;
+  background: var(--white-color);
   margin: 0 auto;
 }
 
@@ -27,8 +27,8 @@
 .typewriter-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1a1a2e;
-  border-right: 2px solid #2E8B73;
+  color: var(--text-color);
+  border-right: 2px solid var(--primary);
   white-space: nowrap;
   overflow: hidden;
   min-height: 2.2rem;
@@ -39,14 +39,14 @@
 .form-side .form-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #444;
+  color: var(--light-black);
   margin-bottom: 6px;
 }
 
 .form-side .form-control {
   padding: 12px 14px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
   font-size: 0.95rem;
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
@@ -54,7 +54,7 @@
 }
 
 .form-side .form-control:focus {
-  border-color: #2E8B73;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(99, 255, 195, 0.1);
 }
 
@@ -68,13 +68,13 @@
 .remember-row input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #2E8B73;
+  accent-color: var(--primary);
   cursor: pointer;
 }
 
 .remember-row label {
   font-size: 0.875rem;
-  color: #555;
+  color: var(--muted);
   cursor: pointer;
   margin: 0;
 }
@@ -83,10 +83,10 @@
 .btn-login {
   width: 100%;
   padding: 13px;
-  background: #2E8B73;
-  color: #fff;
+  background: var(--primary);
+  color: var(--white-color);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -95,7 +95,7 @@
 }
 
 .btn-login:hover {
-  background: #3ec4a2;
+  background: var(--g1);
 }
 
 .btn-login:active {
@@ -107,11 +107,11 @@
   text-align: center;
   margin-top: 20px;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--muted);
 }
 
 .register-link a {
-  color: #2E8B73;
+  color: var(--primary);
   font-weight: 600;
   text-decoration: none;
 }

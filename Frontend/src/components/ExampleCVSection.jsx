@@ -1,8 +1,4 @@
 import { useState } from "react";
-import "../assets/css/style.css";
-import "../assets/css/all.css";
-import "../assets/css/CustomBootstrap.css";
-import "../assets/css/homepage.css";
 
 const cvData = [
   { img: "/images/marketing.png", title: "Marketing — Professional CV", desc: "Clean and minimal layout suitable for marketing and content roles.", pdf: "/cv example/Black and Grey Minimalist Professional CV Resume.pdf" },

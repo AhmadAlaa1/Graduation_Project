@@ -17,6 +17,8 @@ import './assets/css/interview.css';
 import './assets/css/interview-results.css'
 import './assets/css/analysis.css';
 import './assets/css/my-interviews.css'
+import './assets/css/darkmode.css'
+import "./assets/css/cv-modal.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
