@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const HowItWorks = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="how" id="how">
       <div className="how-img">
@@ -12,32 +16,31 @@ const HowItWorks = () => {
         <div className="how-dc2"></div>
       </div>
       <div>
-        <div className="section-tag">About Our Company</div>
-        <h2 className="section-heading">Our interview process road</h2>
+        <div className="section-tag">{t('how_it_works.section_tag')}</div>
+        <h2 className="section-heading">{t('how_it_works.heading')}</h2>
         <p className="section-desc">
-          Three simple steps to go from applicant to hired. Speak2hire handles the heavy lifting —
-          you focus on showing your best self.
+          {t('how_it_works.desc')}
         </p>
         <div className="steps-list">
           <div className="step-item">
-            <div className="step-badge">01</div>
+            <div className="step-badge">{t('how_it_works.steps.step1.num')}</div>
             <div>
-              <h3>Upload Your CV</h3>
-              <p>Drop your CV into our platform. Our AI reads it instantly and builds a personalized interview tailored to your background and target role.</p>
+              <h3>{t('how_it_works.steps.step1.title')}</h3>
+              <p>{t('how_it_works.steps.step1.desc')}</p>
             </div>
           </div>
           <div className="step-item">
-            <div className="step-badge">02</div>
+            <div className="step-badge">{t('how_it_works.steps.step2.num')}</div>
             <div>
-              <h3>Record Your Interview</h3>
-              <p>Answer AI-generated questions using your voice. No scheduling, no pressure — practice as many times as you need.</p>
+              <h3>{t('how_it_works.steps.step2.title')}</h3>
+              <p>{t('how_it_works.steps.step2.desc')}</p>
             </div>
           </div>
           <div className="step-item">
-            <div className="step-badge">03</div>
+            <div className="step-badge">{t('how_it_works.steps.step3.num')}</div>
             <div>
-              <h3>Get Your Analysis</h3>
-              <p>Receive a full performance report with scores, feedback, and actionable tips to improve your answers and land the job.</p>
+              <h3>{t('how_it_works.steps.step3.title')}</h3>
+              <p>{t('how_it_works.steps.step3.desc')}</p>
             </div>
           </div>
         </div>

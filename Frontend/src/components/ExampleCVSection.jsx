@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const cvData = [
-  { img: "/images/marketing.png", title: "Marketing — Professional CV", desc: "Clean and minimal layout suitable for marketing and content roles.", pdf: "/cv example/Black and Grey Minimalist Professional CV Resume.pdf" },
-  { img: "/images/software engineer.png", title: "Software Engineer CV", desc: "List-based structure with skills and projects — ideal for developers.", pdf: "/cv example/White and Black Simple Lined Engineer Resume.pdf" },
-  { img: "/images/graphic designer.png", title: "Creative / Designer CV", desc: "Modern creative layout perfect for designers and portfolio roles.", pdf: "/cv example/White Minimalist Graphic Designer Professional Cv Resume.pdf" },
-  { img: "/images/MBA.png", title: "Business / Management CV", desc: "Professional layout suitable for leadership and business roles.", pdf: "/cv example/White Simple Professional Business Consultant Resume CV.pdf" },
-  { img: "/images/data analysis.png", title: "Data Analyst CV", desc: "Analytics-focused layout with charts & metrics sections.", pdf: "/cv example/Black and White Simple Data Analyst Resume.pdf" },
-  { img: "/images/HR.png", title: "HR / Recruiter CV", desc: "Simple and clean layout suitable for HR specialists.", pdf: "/cv example/White Simple Corporate CV Resume.pdf" },
+  { id: "marketing", img: "/images/marketing.png", pdf: "/cv example/Black and Grey Minimalist Professional CV Resume.pdf" },
+  { id: "software_engineer", img: "/images/software engineer.png", pdf: "/cv example/White and Black Simple Lined Engineer Resume.pdf" },
+  { id: "graphic_designer", img: "/images/graphic designer.png", pdf: "/cv example/White Minimalist Graphic Designer Professional Cv Resume.pdf" },
+  { id: "business", img: "/images/MBA.png", pdf: "/cv example/White Simple Professional Business Consultant Resume CV.pdf" },
+  { id: "data_analyst", img: "/images/data analysis.png", pdf: "/cv example/Black and White Simple Data Analyst Resume.pdf" },
+  { id: "hr", img: "/images/HR.png", pdf: "/cv example/White Simple Corporate CV Resume.pdf" },
 ];
 
 const slides = [];
@@ -17,15 +18,31 @@ for (let i = 0; i < cvData.length; i += 3) {
 export default function ExampleCVSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previewPdf, setPreviewPdf] = useState(null);
+  const { t, i18n } = useTranslation();
 
-  const prev = () => setCurrentSlide((s) => (s - 1 + slides.length) % slides.length);
-  const next = () => setCurrentSlide((s) => (s + 1) % slides.length);
+  const isRtl = i18n.language === 'ar';
+
+  const prev = () => {
+    if (isRtl) {
+      setCurrentSlide((s) => (s + 1) % slides.length);
+    } else {
+      setCurrentSlide((s) => (s - 1 + slides.length) % slides.length);
+    }
+  };
+
+  const next = () => {
+    if (isRtl) {
+      setCurrentSlide((s) => (s - 1 + slides.length) % slides.length);
+    } else {
+      setCurrentSlide((s) => (s + 1) % slides.length);
+    }
+  };
 
   return (
     <section className="example-cv-section py-6" id="example-cv">
       <div className="container">
-        <h2 className="section-title text-center">Example CVs</h2>
-        <p className="section-subtitle text-center">Ready-to-use templates · Organized by popular fields</p>
+        <h2 className="section-title text-center">{t('example_cv.section_title')}</h2>
+        <p className="section-subtitle text-center">{t('example_cv.section_subtitle')}</p>
 
         <div className="cv-carousel">
           <div className="cv-container">
@@ -35,11 +52,11 @@ export default function ExampleCVSection() {
                   <div className="cv-thumb">
                     <img src={cv.img} alt="CV Sample" />
                   </div>
-                  <h5>{cv.title}</h5>
-                  <p>{cv.desc}</p>
+                  <h5>{t(`example_cv.cards.${cv.id}.title`)}</h5>
+                  <p>{t(`example_cv.cards.${cv.id}.desc`)}</p>
                   <div className="btn-box d-flex justify-content-around mt-auto">
-                    <button className="btn btn-preview" onClick={() => setPreviewPdf(cv.pdf)}>Preview</button>
-                    <a href={cv.pdf} download className="btn btn-download">Download</a>
+                    <button className="btn btn-preview" onClick={() => setPreviewPdf(cv.pdf)}>{t('example_cv.preview_btn')}</button>
+                    <a href={cv.pdf} download className="btn btn-download">{t('example_cv.download_btn')}</a>
                   </div>
                 </div>
               </div>
@@ -47,8 +64,8 @@ export default function ExampleCVSection() {
           </div>
 
           <div className="carousel-controls">
-            <button onClick={prev} className="carousel-btn"><i class="fa-solid fa-angle-left"></i></button>
-            <button onClick={next} className="carousel-btn"><i class="fa-solid fa-angle-right"></i></button>
+            <button onClick={prev} className="carousel-btn"><i className={`fa-solid ${isRtl ? 'fa-angle-right' : 'fa-angle-left'}`}></i></button>
+            <button onClick={next} className="carousel-btn"><i className={`fa-solid ${isRtl ? 'fa-angle-left' : 'fa-angle-right'}`}></i></button>
           </div>
         </div>
       </div>
@@ -58,7 +75,7 @@ export default function ExampleCVSection() {
         <div className="modal-backdrop-custom" onClick={() => setPreviewPdf(null)}>
           <div className="modal-box modal-xl" onClick={(e) => e.stopPropagation()}>
             <div className="modal-box-header">
-              <h5>Preview CV</h5>
+              <h5>{t('example_cv.preview_modal_title')}</h5>
               <button onClick={() => setPreviewPdf(null)}>&times;</button>
             </div>
             <div className="modal-box-body">

@@ -4,6 +4,7 @@ import com.example.interviewapp.Dtos.AuthResponseDto;
 import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
 import com.example.interviewapp.Dtos.InterviewListDto;
 import com.example.interviewapp.Dtos.UserDto;
+import com.example.interviewapp.Exceptions.ResourceNotFoundException;
 import com.example.interviewapp.External.Ai.Impl.CvAnalysisClientImpl;
 import com.example.interviewapp.Models.Interview;
 import com.example.interviewapp.Models.InterviewQuestion;
@@ -11,6 +12,7 @@ import com.example.interviewapp.Models.User;
 import com.example.interviewapp.Repositories.InterviewQuestionRepository;
 import com.example.interviewapp.Repositories.InterviewRepository;
 import com.example.interviewapp.Repositories.UserRepository;
+import com.example.interviewapp.Services.CvService;
 import com.example.interviewapp.Services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -29,9 +31,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final CvServiceImpl cvService;
+    private final CvService cvService;
     private final InterviewQuestionRepository interviewQuestionRepository;
     private final InterviewRepository interviewRepository;
+    private final FileStorageService fileStorageService;
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -41,7 +44,7 @@ public class UserServiceImpl implements UserService {
         String email = authentication.getName();
 
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override
@@ -66,30 +69,11 @@ public class UserServiceImpl implements UserService {
 
         if (dto.getCity() != null)
             user.setCity(dto.getCity());
-        if (cvFile != null && !cvFile.isEmpty())
-            try {
-                String uploadDir = "uploads/cv/";
-                String fileName = UUID.randomUUID() + "_" + cvFile.getOriginalFilename();
-
-                Path path = Paths.get(uploadDir + fileName);
-
-                Files.createDirectories(path.getParent());
-                Files.write(path, cvFile.getBytes());
-
-                user.setCvFile(path.toString());
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to upload CV");
-            }
+        if (cvFile != null && !cvFile.isEmpty()) {
+            user.setCvFile(fileStorageService.saveCv(cvFile));
+        }
         userRepository.save(user);
-        UserDto userDto = new UserDto(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getAge(),
-                user.getNationality(),
-                user.getCity(),
-                user.getCvFile());
+        UserDto userDto = UserDto.from(user);
         cvService.sendCvToAnalysis(user);
         return userDto;
     }
@@ -101,9 +85,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserDto userInfo(){
-        User currentUser = getCurrentUser();
-        User user = userRepository.findByEmail(currentUser.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = getCurrentUser();
         UserDto dto = new UserDto();
 
         dto.setFirstName(user.getFirstName());
@@ -123,21 +105,14 @@ public class UserServiceImpl implements UserService {
 
         User user = getCurrentUser();
 
-        List<Interview> interviews = interviewRepository.findByUser(user);
+        List<Interview> interviews = interviewRepository.findByUserWithQuestions(user);
 
         return interviews.stream().map(i -> {
-
             InterviewListDto dto = new InterviewListDto();
             dto.setId(i.getId());
             dto.setCreatedAt(i.getCreatedAt());
-
-            List<InterviewQuestion> questions =
-                    interviewQuestionRepository.findByInterview(i);
-
-            dto.setQuestionsCount(questions.size());
-
+            dto.setQuestionsCount(i.getQuestions().size());
             return dto;
-
         }).toList();
     }
 }

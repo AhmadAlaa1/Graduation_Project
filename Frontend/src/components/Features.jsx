@@ -1,21 +1,29 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const featuresCards = [
-  { key: "aiInterview",          icon: "fas fa-robot",        title: "AI Interview Prep",       desc: "Practice interviews with real AI feedback." },
-  { key: "cvAnalysis",           icon: "fas fa-file-alt",     title: "Smart CV Analysis",       desc: "Optimize your CV with instant AI insights." },
-  { key: "cvBuilder",    icon: "fas fa-graduation-cap",title: "CV Builder",     desc: "Create a professional CV using customizable templates tailored to your career field." },
-  { key: "skillMatching",        icon: "fas fa-brain",        title: "Skill Matching",          desc: "Match your skills with the right jobs." },
-  { key: "progressTracking",     icon: "fas fa-chart-line",   title: "Progress Tracking",       desc: "Track your improvement over time." },
-  { key: "voicePractice",        icon: "fas fa-microphone",   title: "Voice Practice",          desc: "Improve your speaking confidence with AI voice analysis." },
-  { key: "personalityInsights",  icon: "fas fa-user-friends", title: "Personality Insights",    desc: "AI evaluates tone & presence to boost your performance." },
-  { key: "quickRecommendations", icon: "fas fa-bolt",         title: "Quick Recommendations",   desc: "Instant tips to help you improve before interviews." },
+  { key: "aiInterview", icon: "fas fa-robot" },
+  { key: "cvAnalysis", icon: "fas fa-file-alt" },
+  { key: "cvBuilder", icon: "fas fa-graduation-cap" },
+  { key: "skillMatching", icon: "fas fa-brain" },
+  { key: "progressTracking", icon: "fas fa-chart-line" },
+  { key: "voicePractice", icon: "fas fa-microphone" },
+  { key: "personalityInsights", icon: "fas fa-user-friends" },
+  { key: "quickRecommendations", icon: "fas fa-bolt" },
 ];
 
 const Features = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCardClick = (key) => {
     localStorage.setItem("currentFeature", key);
+
+    if (key === "cvBuilder") {
+      navigate("/cv-builder");
+      return;
+    }
+
     navigate("/feature");
   };
 
@@ -23,18 +31,18 @@ const Features = () => {
     <section className="features" id="features">
       <div className="features-header">
         <div className="section-tag" style={{ display: "block", textAlign: "center" }}>
-          What We Offer
+          {t('features.section_tag')}
         </div>
         <h2 className="section-heading" style={{ textAlign: "center" }}>
-          Our recent creative projects
+          {t('features.section_heading')}
         </h2>
         <p style={{ color: "var(--muted)", fontSize: "14px" }}>
-          Everything you need to ace your next interview — powered by AI.
+          {t('features.section_desc')}
         </p>
       </div>
 
       <div className="features-grid">
-        {featuresCards.map(({ key, icon, title, desc }) => (
+        {featuresCards.map(({ key, icon }) => (
           <div
             key={key}
             className="feat-card"
@@ -44,8 +52,8 @@ const Features = () => {
             <div className="feat-icon">
               <i className={icon}></i>
             </div>
-            <h3>{title}</h3>
-            <p>{desc}</p>
+            <h3>{t(`features.cards.${key}.title`)}</h3>
+            <p>{t(`features.cards.${key}.desc`)}</p>
           </div>
         ))}
       </div>

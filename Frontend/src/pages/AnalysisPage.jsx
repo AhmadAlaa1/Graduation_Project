@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { getCvAnalysis } from "../store/slices/cvSlice";
+import { useTranslation } from "react-i18next";
 import CvSummary from "../components/analysis/CvSummary";
 import CvContact from "../components/analysis/CvContact";
 import CvAtsScore from "../components/analysis/CvAtsScore";
@@ -16,6 +17,7 @@ export default function AnalysisPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data, loading, error } = useSelector((state) => state.cv);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(getCvAnalysis());
@@ -26,7 +28,7 @@ export default function AnalysisPage() {
       <Navbar />
       <div className="an-loading">
         <div className="spinner-border" style={{ color: "var(--g1)" }} />
-        <p>Analyzing your CV...</p>
+        <p>{t('analysis.loading_text')}</p>
       </div>
     </>
   );
@@ -36,7 +38,7 @@ export default function AnalysisPage() {
       <Navbar />
       <div className="an-error">
         <p>{error}</p>
-        <button className="btn" onClick={() => dispatch(getCvAnalysis())}>Try Again</button>
+        <button className="btn" onClick={() => dispatch(getCvAnalysis())}>{t('analysis.btn_retry')}</button>
       </div>
     </>
   );
@@ -75,21 +77,20 @@ export default function AnalysisPage() {
           <CvProjects projects={data.projects} />
 
           {/* Interview Questions */}
-          <CvQuestions questions={data.suggested_interview_questions} />
+          {/* <CvQuestions questions={data.suggested_interview_questions} /> */}
 
           {/* CTA */}
           <div className="an-cta">
             <button className="an-btn-primary" onClick={() => navigate("/interview")}>
-              <i className="fa-solid fa-clipboard-question"></i> Start Interview
+              <i className="fa-solid fa-clipboard-question"></i> {t('analysis.btn_start_interview')}
             </button>
             <button className="an-btn-secondary" onClick={() => window.print()}>
-              <i className="fas fa-file-download"></i> Download Report
+              <i className="fas fa-file-download"></i> {t('analysis.btn_download')}
             </button>
           </div>
 
         </div>
       </div>
-
     </>
   );
 }

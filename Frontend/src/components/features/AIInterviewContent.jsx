@@ -1,9 +1,11 @@
 // components/features/AIInterviewContent.jsx
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "./Modal";
 
 export default function AIInterviewContent() {
   const [showModal, setShowModal] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="row align-items-center">
@@ -21,32 +23,25 @@ export default function AIInterviewContent() {
             <div
               className="d-flex align-items-center justify-content-center rounded-circle me-3 feature-icon-wrapper"
               onClick={() => setShowModal(true)}
+              style={{ cursor: 'pointer' }}
             >
               <i className="fa-solid fa-bolt feature-icon" />
             </div>
-            <h3 className="mb-0 fw-bold feature-subtitle">Features</h3>
+            <h3 className="mb-0 fw-bold feature-subtitle">{t('features.section_tag')}</h3>
           </div>
 
           <ul className="list-unstyled d-flex flex-column gap-3 mb-4">
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Behavioral & technical question practice</span>
+              <span className="text-secondary">{t('features_data.aiInterview.description')}</span>
             </li>
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Real-time scoring and feedback</span>
+              <span className="text-secondary">{t('interview_results.subtitle')}</span>
             </li>
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Step-by-step improvement suggestions</span>
-            </li>
-            <li className="d-flex align-items-start">
-              <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Record answers and compare over time</span>
-            </li>
-            <li className="d-flex align-items-start">
-              <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Instant AI tips for improving answers</span>
+              <span className="text-secondary">{t('features_data.quickRecommendations.description')}</span>
             </li>
           </ul>
 
@@ -55,8 +50,8 @@ export default function AIInterviewContent() {
               href="/interview"
               className="btn w-100 w-lg-auto py-2 px-4 rounded-pill d-inline-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold btn-feature-ai"
             >
-              Start Interview
-              <i className="fa-solid fa-arrow-right-long"></i>
+              {t('analysis.btn_start_interview')}
+              {/* <i className="fa-solid fa-arrow-right-long"></i> */}
             </a>
           </div>
 
@@ -67,14 +62,12 @@ export default function AIInterviewContent() {
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
-        title="Interview Tips"
+        title={t('example_cv.preview_modal_title')}
       >
         <ul>
-          <li>Practice common behavioral questions first.</li>
-          <li>Keep answers clear and concise.</li>
-          <li>Show confidence with your tone and body language.</li>
-          <li>Use examples from your past experience.</li>
-          <li>Listen carefully and pause before answering.</li>
+          <li>{t('features_data.quickRecommendations.description')}</li>
+          <li>{t('essay_input.placeholder')}</li>
+          <li>{t('voice_recorder.status_ready')}</li>
         </ul>
       </Modal>
     </div>

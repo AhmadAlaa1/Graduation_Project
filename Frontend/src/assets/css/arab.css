@@ -1,0 +1,125 @@
+/* :root {
+  font-family: 'Cairo', 'Readex Pro', sans-serif;
+}
+
+body {
+  font-family: 'Cairo', 'Readex Pro', sans-serif;
+  text-align: right;
+}
+
+.flex-row-reverse-rtl {
+  flex-direction: row-reverse;
+}
+
+i, svg {
+  margin-left: 8px;
+  margin-right: 0 !important;
+}
+
+.cvb-fade-up {
+  direction: rtl;
+} */
+.btn-box,
+html[lang="ar"] .footer-socials,
+html[lang="ar"] .text-secondary {
+  direction: ltr !important;
+
+}
+html[lang="ar"] .text-secondary {
+  text-align: right;
+}
+html[lang="ar"] .footer-socials {
+  /* margin-left: auto; */
+  justify-content:end;
+}
+
+html[lang="ar"] .accordion-button::after {
+  margin: 0;
+  margin-right: auto;
+}
+
+.navbar-toggler {
+  margin: 0 !important;
+  margin-right: auto;
+}
+
+html[lang="ar"] .nav-link {
+  width: max-content !important;
+  padding: 0 !important;
+  padding-bottom: 5px !important;
+}
+
+@media (max-width: 991.98px) {
+  html[lang="ar"] .mobile-menu-dropdown {
+    right: unset;
+    left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  html[lang="ar"] .mobile-nav-link {
+    padding: 10px !important;
+  }
+}
+
+html[lang="ar"] .btn-profile,
+html[lang="ar"] .btn-status {
+  font-size: 12px;
+  width: max-content !important;
+  padding: 10px 15px !important;
+  border: 0;
+}
+
+@media (max-width: 1400px) {
+  nav ul {
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  html[lang="ar"] .nav-link {
+    padding: 0 5px !important;
+  }
+
+  .btn {
+    gap: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1200px) {
+  nav ul {
+    gap: 0px;
+    font-size: 12px;
+  }
+
+  .nav-btns {
+    gap: 5px !important;
+  }
+
+  .btn {
+    gap: 4px;
+    padding: 8px 5px;
+    font-size: 10px !important;
+  }
+}
+
+html[lang="ar"] .nav-logo-icon{
+  margin: 0 !important;
+  margin-left: 10px !important;
+}
+html[lang="ar"] .brandp2 ,
+html[lang="ar"] .brandp1{
+  margin-right: 5px;
+  display: block;
+}
+html[lang="ar"] .brandp1{
+  margin-right: 10px;
+}
+html[lang="ar"] .section-tag ,
+html[lang="ar"] .service-header .tag{
+  font-size: 14px;
+}
+html[lang="ar"] .cvb-stats-row{
+  direction: ltr;
+}

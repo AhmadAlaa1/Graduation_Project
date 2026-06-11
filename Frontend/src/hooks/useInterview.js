@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   startInterview,
+  startInterviewWithJob,
   finishInterview,
   getMyInterviews,
   getInterviewDetails,
@@ -22,38 +23,39 @@ export function useInterview() {
     isFinished,
   } = useSelector((state) => state.interview);
 
-  // ===== 1. Start =====
+  // ===== 1. Start (CV) =====
   const start = async () => {
     const result = await dispatch(startInterview());
     return startInterview.fulfilled.match(result);
   };
 
-  // ===== 2. Finish =====
+  // ===== 2. Start (Job) =====
+  const startWithJob = async ({ role, level }) => {
+    const result = await dispatch(startInterviewWithJob({ role, level }));
+    return startInterviewWithJob.fulfilled.match(result);
+  };
+
+  // ===== 3. Finish =====
   const finish = async (answers) => {
     if (!interviewId) return false;
 
-    // ✅ بنبعت questionID الصح من الـ questions array
     const formattedAnswers = answers.map((answer, index) => ({
-      questionId: questions[index]?.questionID,
+      questionId: answer.questionId || questions[index]?.questionID,
       type: answer.type,
       data: answer.data,
     }));
 
-    const result = await dispatch(finishInterview({
-      interviewId,
-      answers: formattedAnswers,
-    }));
-
+    const result = await dispatch(finishInterview({ interviewId, answers: formattedAnswers }));
     return finishInterview.fulfilled.match(result);
   };
 
-  // ===== 3. History =====
+  // ===== 4. History =====
   const fetchHistory = () => dispatch(getMyInterviews());
 
-  // ===== 4. Details =====
+  // ===== 5. Details =====
   const fetchDetails = (id) => dispatch(getInterviewDetails(id));
 
-  // ===== 5. Reset =====
+  // ===== 6. Reset =====
   const reset = () => dispatch(resetInterview());
   const clearErr = () => dispatch(clearError());
 
@@ -68,6 +70,7 @@ export function useInterview() {
     isFinished,
     start,
     finish,
+    startWithJob,
     fetchHistory,
     fetchDetails,
     reset,

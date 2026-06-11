@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 export default function InterviewResults({ quizData, evaluations, onRestart }) {
+  const { t } = useTranslation();
   const evalList = Array.isArray(evaluations) ? evaluations : [];
 
-  // تقسيم الألوان لـ 5 مستويات دقيقة
   const getScoreColor = (score) => {
     if (score >= 9) return "#2E8B73";   // Dark Green
     if (score >= 7.5) return "#4CAF50"; // Light Green
@@ -10,13 +12,12 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
     return "#e05c5c";                   // Red
   };
 
-  // تقسيم التسميات لـ 5 مستويات
   const getScoreLabel = (score) => {
-    if (score >= 9) return "Excellent";
-    if (score >= 7.5) return "Very Good";
-    if (score >= 6) return "Good";
-    if (score >= 4) return "Fair";
-    return "Needs Improvement";
+    if (score >= 9) return t('interview_results.score_labels.excellent');
+    if (score >= 7.5) return t('interview_results.score_labels.very_good');
+    if (score >= 6) return t('interview_results.score_labels.good');
+    if (score >= 4) return t('interview_results.score_labels.fair');
+    return t('interview_results.score_labels.needs_improvement');
   };
 
   const avgScore = evalList.length > 0
@@ -28,15 +29,15 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
 
       {/* Header */}
       <div className="quiz-res-top text-center mb-5">
-        <h1 className="quiz-res-title">Interview Results</h1>
-        <p className="quiz-res-subtitle">Here's a detailed breakdown of your performance</p>
+        <h1 className="quiz-res-title">{t('interview_results.title')}</h1>
+        <p className="quiz-res-subtitle">{t('interview_results.subtitle')}</p>
 
         {/* Overall Score */}
         {avgScore && (
           <div className="quiz-res-overall" style={{ borderColor: getScoreColor(avgScore) }}>
-            <span className="quiz-res-overall-label">Overall Score</span>
+            <span className="quiz-res-overall-label">{t('interview_results.overall_score_label')}</span>
             <span className="quiz-res-overall-score" style={{ color: getScoreColor(avgScore) }}>
-              {avgScore} / 10
+              {avgScore} {t('interview_results.score_out_of')}
             </span>
             <span className="quiz-res-overall-tag" style={{ background: getScoreColor(avgScore) }}>
               {getScoreLabel(avgScore)}
@@ -70,7 +71,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                       border: `1px solid ${getScoreColor(score)}40`,
                     }}
                   >
-                    {score} / 10
+                    {score} {t('interview_results.score_out_of')}
                   </div>
                 )}
               </div>
@@ -82,7 +83,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                   {evalItem.feedback && (
                     <div className="quiz-res-block quiz-res-block-feedback">
                       <div className="quiz-res-block-title">
-                        <i className="fa-solid fa-comment-dots"></i> Feedback
+                        <i className="fa-solid fa-comment-dots"></i> {t('interview_results.feedback_title')}
                       </div>
                       <p>{evalItem.feedback}</p>
                     </div>
@@ -94,7 +95,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                     {evalItem.strengths?.length > 0 && (
                       <div className="quiz-res-block quiz-res-block-strengths">
                         <div className="quiz-res-block-title quiz-res-green">
-                          <i className="fa-solid fa-circle-check"></i> Strengths
+                          <i className="fa-solid fa-circle-check"></i> {t('interview_results.strengths_title')}
                         </div>
                         <ul>
                           {evalItem.strengths.map((s, j) => (
@@ -108,7 +109,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                     {evalItem.gaps?.length > 0 && (
                       <div className="quiz-res-block quiz-res-block-gaps">
                         <div className="quiz-res-block-title quiz-res-orange">
-                          <i className="fa-solid fa-triangle-exclamation"></i> Areas to Improve
+                          <i className="fa-solid fa-triangle-exclamation"></i> {t('interview_results.gaps_title')}
                         </div>
                         <ul>
                           {evalItem.gaps.map((g, j) => (
@@ -124,7 +125,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                   {evalItem.better_answer && (
                     <div className="quiz-res-block quiz-res-block-better">
                       <div className="quiz-res-block-title quiz-res-blue">
-                        <i className="fa-solid fa-lightbulb"></i> Better Answer
+                        <i className="fa-solid fa-lightbulb"></i> {t('interview_results.better_answer_title')}
                       </div>
                       <p>{evalItem.better_answer}</p>
                     </div>
@@ -134,7 +135,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
                   {evalItem.followup_question && (
                     <div className="quiz-res-block quiz-res-block-followup">
                       <div className="quiz-res-block-title quiz-res-purple">
-                        <i className="fa-solid fa-rotate-right"></i> Follow-up Question
+                        <i className="fa-solid fa-rotate-right"></i> {t('interview_results.followup_title')}
                       </div>
                       <p>{evalItem.followup_question}</p>
                     </div>
@@ -142,7 +143,7 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
 
                 </div>
               ) : (
-                <div className="quiz-res-no-eval">No evaluation available for this question</div>
+                <div className="quiz-res-no-eval">{t('interview_results.no_eval')}</div>
               )}
 
             </div>
@@ -153,10 +154,10 @@ export default function InterviewResults({ quizData, evaluations, onRestart }) {
       {/* Actions */}
       <div className="quiz-res-actions">
         <button className="quiz-res-btn-secondary" onClick={onRestart}>
-          <i className="fa-solid fa-rotate-left"></i> Try Again
+          <i className="fa-solid fa-rotate-left"></i> {t('interview_results.btn_restart')}
         </button>
         <a href="/" className="quiz-res-btn-primary">
-          <i className="fa-solid fa-house"></i> Back to Home
+          <i className="fa-solid fa-house"></i> {t('interview_results.btn_home')}
         </a>
       </div>
 

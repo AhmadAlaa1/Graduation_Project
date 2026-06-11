@@ -3,9 +3,8 @@ package com.example.interviewapp.Controllers;
 import com.example.interviewapp.Dtos.InterviewDetailsDto;
 import com.example.interviewapp.Dtos.InterviewListDto;
 import com.example.interviewapp.Dtos.UserDto;
-import com.example.interviewapp.Models.User;
-import com.example.interviewapp.Services.Impl.UserServiceImpl;
 import com.example.interviewapp.Services.InterviewService;
+import com.example.interviewapp.Services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("/api/user")
 @AllArgsConstructor
 public class UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final InterviewService interviewService;
 
     @PutMapping("/edit-profile")

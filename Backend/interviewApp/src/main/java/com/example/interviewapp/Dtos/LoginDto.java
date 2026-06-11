@@ -1,7 +1,8 @@
 package com.example.interviewapp.Dtos;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
+@NoArgsConstructor
 
 @AllArgsConstructor
 @Data

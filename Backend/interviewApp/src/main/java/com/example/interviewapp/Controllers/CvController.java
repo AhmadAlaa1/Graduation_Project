@@ -1,13 +1,10 @@
 package com.example.interviewapp.Controllers;
 
 import com.example.interviewapp.Dtos.CvAnalysisResponseDto;
-import com.example.interviewapp.Dtos.UserDto;
-import com.example.interviewapp.Services.Impl.CvServiceImpl;
+import com.example.interviewapp.Services.CvService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/cv")
 @AllArgsConstructor
 public class CvController {
-    private final CvServiceImpl cvService;
+    private final CvService cvService;
 
     @GetMapping("/my-cv-analysis")
     public ResponseEntity<CvAnalysisResponseDto> analyzeCv() {

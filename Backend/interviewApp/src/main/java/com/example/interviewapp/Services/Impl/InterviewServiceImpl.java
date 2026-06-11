@@ -1,7 +1,11 @@
 package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Dtos.*;
+import com.example.interviewapp.Exceptions.DuplicateResourceException;
+import com.example.interviewapp.Exceptions.ResourceNotFoundException;
 import com.example.interviewapp.External.Ai.Impl.InterviewClientImpl;
+import com.example.interviewapp.External.Ai.InterviewClient;
+import com.example.interviewapp.External.Ai.TtsClient;
 import com.example.interviewapp.Models.*;
 import com.example.interviewapp.Repositories.*;
 import com.example.interviewapp.Services.InterviewService;
@@ -24,10 +28,12 @@ public class InterviewServiceImpl implements InterviewService {
     private final UserRepository userRepository;
     private final InterviewRepository interviewRepository;
     private final InterviewQuestionRepository interviewQuestionRepository;
-    private final InterviewClientImpl interviewClient;
+    private final InterviewClient interviewClient;
     private final AnswerRepository answerRepository;
     private final InterviewFeedbackRepository interviewFeedbackRepository;
     private final CvAnalysisRepository cvAnalysisRepository;
+    private final TtsClient ttsClient;private final FileStorageService fileStorageService;
+
 
     private User getCurrentUser() {
         Authentication authentication = SecurityContextHolder
@@ -37,18 +43,17 @@ public class InterviewServiceImpl implements InterviewService {
         String email = authentication.getName();
 
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
 
     @Override
     public InterviewQuestionsResponseDto generateInterviewQuestions() {
+
         User currentUser = getCurrentUser();
 
         CvAnalysis cvAnalysis = cvAnalysisRepository.findByUser(currentUser)
-                .orElseThrow(() -> new RuntimeException("CV analysis not found. Please upload your CV first."));
-
-        // Create interview
+                .orElseThrow(() -> new ResourceNotFoundException("CV analysis not found. Please upload your CV first."));
         Interview interview = new Interview();
         interview.setUser(currentUser);
         interview.setCreatedAt(LocalDateTime.now());
@@ -57,47 +62,24 @@ public class InterviewServiceImpl implements InterviewService {
         InterviewQuestionsResponseDto aiResponse =
                 interviewClient.getInterviewQuestions(cvAnalysis);
 
-        InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
-        response.setInterviewId(interview.getId());
+        return buildInterviewResponse(interview, aiResponse);
 
-        List<String> questionTexts = aiResponse.getQuestions();
-
-        for (int i = 0; i < questionTexts.size(); i++) {
-            InterviewQuestion question = new InterviewQuestion();
-            question.setInterview(interview);
-            question.setQuestionText(questionTexts.get(i));
-            question.setOrderNumber(i + 1);
-
-            question.setQuestionAudio(null);
-
-            InterviewQuestion saved = interviewQuestionRepository.save(question);
-
-            QuestionDto dto = new QuestionDto();
-            dto.setQuestionID(saved.getId());
-            dto.setQuestionText(saved.getQuestionText());
-            dto.setQuestionAudio(saved.getQuestionAudio());
-            dto.setOrderNumber(saved.getOrderNumber());
-
-            response.getMappedQuestions().add(dto);
-        }
-
-        return response;
     }
     @Override
     public void submitAnswers(UUID interviewId, SubmitAnswersDto dto) {
 
         Interview interview = interviewRepository.findById(interviewId)
-                .orElseThrow(() -> new RuntimeException("Interview not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Interview not found"));
 
         List<Answer> answers = new ArrayList<>();
 
         for (AnswerRequestDto a : dto.getAnswers()) {
 
             InterviewQuestion question = interviewQuestionRepository.findById(a.getQuestionId())
-                    .orElseThrow(() -> new RuntimeException("Question not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Question not found"));
 
             if (answerRepository.existsByQuestion(question)) {
-                throw new RuntimeException("Already answered");
+                throw new DuplicateResourceException("Already answered");
             }
 
             Answer answer = new Answer();
@@ -108,9 +90,15 @@ public class InterviewServiceImpl implements InterviewService {
                 answer.setAnswerText(a.getAnswerText());
             }
 
-            if (a.getAnswerAudio() != null && !a.getAnswerAudio().isEmpty()) {
-                String path = saveAudio(a.getAnswerAudio());
-                answer.setAnswerAudio(path);
+            else if (a.getAnswerAudio() != null && !a.getAnswerAudio().isEmpty()) {
+
+                String audioPath = fileStorageService.saveAudio(a.getAnswerAudio());
+                answer.setAnswerAudio(audioPath);
+
+                String recognizedText =
+                        ttsClient.speechToText(audioPath);
+
+                answer.setAnswerText(recognizedText);
             }
 
             answers.add(answer);
@@ -119,37 +107,19 @@ public class InterviewServiceImpl implements InterviewService {
         answerRepository.saveAll(answers);
     }
 
-    private String saveAudio(MultipartFile file) {
 
-        try {
-
-            String uploadDir = "uploads/answers/";
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-
-            Path path = Paths.get(uploadDir + fileName);
-
-            Files.createDirectories(path.getParent());
-            Files.write(path, file.getBytes());
-
-            return path.toString();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to upload audio");
-        }
-    }
 
     @Override
     public EvaluationResponseDto finishInterview(UUID interviewId) {
 
         Interview interview = interviewRepository.findById(interviewId)
-                .orElseThrow(() -> new RuntimeException("Interview not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Interview not found"));
 
         List<InterviewQuestion> questions =
                 interviewQuestionRepository.findByInterview(interview);
 
         EvaluationRequestDto request = new EvaluationRequestDto();
 
-        // ← فلتري بس الأسئلة اللي عندها إجابة
         List<InterviewQuestion> answeredQuestions = new ArrayList<>();
 
         for (InterviewQuestion q : questions) {
@@ -165,22 +135,19 @@ public class InterviewServiceImpl implements InterviewService {
             );
 
             request.getItems().add(item);
-            answeredQuestions.add(q);  // ← نحتفظ بالأسئلة المرتبطة بالـ items
+            answeredQuestions.add(q);
         }
 
         // call AI
         EvaluationResponseDto response = interviewClient.evaluate(request);
 
-        // save feedback — بنستخدم answeredQuestions مش questions كلها
         for (int i = 0; i < response.getEvaluations().size(); i++) {
 
-            // تأكدي إن الـ index مش هيتجاوز الـ list
             if (i >= answeredQuestions.size()) break;
 
             InterviewQuestion question = answeredQuestions.get(i);
             EvaluationDto eval = response.getEvaluations().get(i);
 
-            // ← الحل الرئيسي للـ duplicate: امسح القديم لو موجود
             interviewFeedbackRepository.findByInterviewQuestion(question)
                     .ifPresent(interviewFeedbackRepository::delete);
 
@@ -208,7 +175,7 @@ public class InterviewServiceImpl implements InterviewService {
     public InterviewDetailsDto getInterviewDetails(UUID interviewId) {
 
         Interview interview = interviewRepository.findById(interviewId)
-                .orElseThrow(() -> new RuntimeException("Interview not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Interview not found"));
 
         InterviewDetailsDto response = new InterviewDetailsDto();
         response.setInterviewId(interviewId);
@@ -266,6 +233,54 @@ public class InterviewServiceImpl implements InterviewService {
             response.getQuestions().add(dto);
         }
 
+        return response;
+    }
+
+    @Override
+    public InterviewQuestionsResponseDto generateInterviewJobQuestions(StartInterviewDto startInterviewDto) {
+        User currentUser = getCurrentUser();
+
+        CvAnalysis cvAnalysis = cvAnalysisRepository.findByUser(currentUser)
+                .orElseThrow(() -> new ResourceNotFoundException("CV analysis not found. Please upload your CV first."));
+
+        // Create interview
+        Interview interview = new Interview();
+        interview.setUser(currentUser);
+        interview.setCreatedAt(LocalDateTime.now());
+        interviewRepository.save(interview);
+
+        InterviewQuestionsResponseDto aiResponse =
+                interviewClient.getInterviewJobQuestions(startInterviewDto);
+
+        return buildInterviewResponse(interview, aiResponse);
+    }
+
+    private InterviewQuestionsResponseDto buildInterviewResponse(
+            Interview interview,
+            InterviewQuestionsResponseDto aiResponse) {
+
+        InterviewQuestionsResponseDto response = new InterviewQuestionsResponseDto();
+        response.setInterviewId(interview.getId());
+        List<String> questionTexts = aiResponse.getQuestions();
+
+        for (int i = 0; i < questionTexts.size(); i++) {
+            String questionText = questionTexts.get(i);
+
+            InterviewQuestion question = new InterviewQuestion();
+            question.setInterview(interview);
+            question.setQuestionText(questionText);
+            question.setOrderNumber(i + 1);
+            question.setQuestionAudio(ttsClient.generateAudio(questionText));
+
+            InterviewQuestion saved = interviewQuestionRepository.save(question);
+
+            QuestionDto dto = new QuestionDto();
+            dto.setQuestionID(saved.getId());
+            dto.setQuestionText(saved.getQuestionText());
+            dto.setQuestionAudio(saved.getQuestionAudio());
+            dto.setOrderNumber(saved.getOrderNumber());
+            response.getMappedQuestions().add(dto);
+        }
         return response;
     }
 }

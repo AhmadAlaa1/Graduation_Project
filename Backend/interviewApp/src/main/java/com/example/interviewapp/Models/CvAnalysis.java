@@ -60,4 +60,6 @@ public class CvAnalysis {
 
     @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvEducation> education;
+
+
 }

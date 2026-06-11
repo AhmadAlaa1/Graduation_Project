@@ -1,4 +1,10 @@
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
   return (
     <footer>
       <div className="footer-grid" id="footer">
@@ -22,9 +28,9 @@ const Footer = () => {
                 <line x1="12" y1="19" x2="12" y2="23" />
               </svg>
             </div>
-            Speak<span className="hi">2</span>hire
+            <span className="brandp1">{t('navbar.brand.part1')} </span><span className="brandp2">{t('navbar.brand.part2')} </span>{t('navbar.brand.part3')}
           </a>
-          <p>An AI-powered interview platform helping job seekers practice, improve, and land their dream roles through voice-based analysis and CV insights.</p>
+          <p>{t('footer.brand_desc')}</p>
           <div className="footer-socials">
             <a className="social-btn" href="#">f</a>
             <a className="social-btn" href="#">t</a>
@@ -32,41 +38,45 @@ const Footer = () => {
             <a className="social-btn" href="#">yt</a>
           </div>
         </div>
+
         <div className="footer-col">
-          <h4>Quick Links</h4>
+          <h4>{t('footer.quick_links.heading')}</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Our Services</a></li>
-            <li><a href="/our-team">Our Team</a></li>
-            <li><a href="#">Case Study</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Testimonials</a></li>
+            <li><a href="#home" onClick={(e) => e.preventDefault()}>{t('footer.quick_links.home')}</a></li>
+            <li><a href="#features" onClick={(e) => e.preventDefault()}>{t('footer.quick_links.services')}</a></li>
+            <li><a href="/our-team" onClick={(e) => { e.preventDefault(); navigate("/our-team"); }}>{t('footer.quick_links.team')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_links.case_study')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_links.blog')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_links.testimonials')}</a></li>
           </ul>
         </div>
+
         <div className="footer-col">
-          <h4>Quick Store</h4>
+          <h4>{t('footer.quick_store.heading')}</h4>
           <ul>
-            <li><a href="#">Marketplace</a></li>
-            <li><a href="#">License</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Refunds</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_store.marketplace')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_store.license')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_store.support')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_store.refunds')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.quick_store.contact')}</a></li>
           </ul>
         </div>
+
         <div className="footer-col">
-          <h4>Useful Links</h4>
+          <h4>{t('footer.useful_links.heading')}</h4>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Our Projects</a></li>
-            <li><a href="#">Our Office</a></li>
-            <li><a href="#">Newsletter</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.useful_links.about')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.useful_links.projects')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.useful_links.office')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.useful_links.newsletter')}</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.useful_links.privacy')}</a></li>
           </ul>
         </div>
       </div>
+
       <div className="footer-bottom">
-        <span>© 2026 Speak2hire. All rights reserved.</span>
-        <span>Privacy Policy · Terms of Use</span>
+        <span>{t('footer.copyright')}</span>
+        <span>{t('footer.privacy_terms')}</span>
       </div>
     </footer>
   );

@@ -1,62 +1,59 @@
 // data/featuresData.js
+import i18n from "i18next";
 import AIInterviewContent from "../components/features/AIInterviewContent";
 import CVAnalysisContent from "../components/features/CVAnalysisContent";
 import SkillMatchingContent from "../components/features/SkillMatchingContent";
 import ProgressTrackingContent from "../components/features/ProgressTrackingContent";
 import VoicePracticeContent from "../components/features/VoicePracticeContent";
 import PersonalityInsightsContent from "../components/features/PersonalityInsightsContent";
-// import LearningResourcesContent from "../components/features/LearningResourcesContent";
-// import LearningResourcesContent from "../components/features/LearningResourcesContent";
 import QuickRecommendationsContent from "../components/features/QuickRecommendationsContent";
+
+// دالة مساعدة لضمان جلب النص المترجم المحدث دائماً في وقت التشغيل
+const getFeatureTranslation = (key, type) => {
+  return i18n.t(`features_data.${key}.${type}`);
+};
 
 const featuresData = {
   aiInterview: {
-    title: "AI Interview Prep",
-    description:
-      "Practice interviews with real-time AI feedback. Get your answers analyzed instantly.",
+    get title() { return getFeatureTranslation('aiInterview', 'title'); },
+    get description() { return getFeatureTranslation('aiInterview', 'description'); },
     bgClass: "bg-ai",
     content: <AIInterviewContent />,
   },
   cvAnalysis: {
-    title: "Smart CV Analysis",
-    description:
-      "Upload your CV and get instant AI insights to make it perfect.",
+    get title() { return getFeatureTranslation('cvAnalysis', 'title'); },
+    get description() { return getFeatureTranslation('cvAnalysis', 'description'); },
     bgClass: "bg-cv",
     content: <CVAnalysisContent />,
   },
   cvBuilder: {
-    title: "CV Builder",
-    description: "Create a professional CV using customizable templates tailored to your career field.",
-    // content: <CVBuilderContent />,
+    get title() { return getFeatureTranslation('cvBuilder', 'title'); },
+    get description() { return getFeatureTranslation('cvBuilder', 'description'); },
   },
   skillMatching: {
-    title: "Skill Matching",
-    description:
-      "Get AI insights on how well your skills match the job requirements.",
+    get title() { return getFeatureTranslation('skillMatching', 'title'); },
+    get description() { return getFeatureTranslation('skillMatching', 'description'); },
     content: <SkillMatchingContent />,
   },
   progressTracking: {
-    title: "Progress Tracking",
-    description:
-      "Track your interview preparation progress over time. Every time you take a mock interview or study, see your progress improve with smooth animation.",
+    get title() { return getFeatureTranslation('progressTracking', 'title'); },
+    get description() { return getFeatureTranslation('progressTracking', 'description'); },
     content: <ProgressTrackingContent />,
   },
   voicePractice: {
-    title: "Voice Practice",
-    description:
-      "Practice speaking and get AI feedback on your tone and pronunciation.",
+    get title() { return getFeatureTranslation('voicePractice', 'title'); },
+    get description() { return getFeatureTranslation('voicePractice', 'description'); },
     bgClass: "bg-voice",
     content: <VoicePracticeContent />,
   },
   personalityInsights: {
-    title: "Personality Insights",
-    description:
-      "AI evaluates your tone, presence, and personality for interview improvement.",
+    get title() { return getFeatureTranslation('personalityInsights', 'title'); },
+    get description() { return getFeatureTranslation('personalityInsights', 'description'); },
     content: <PersonalityInsightsContent />,
   },
   quickRecommendations: {
-    title: "Quick Recommendations",
-    description: "Instant tips to help you improve before interviews.",
+    get title() { return getFeatureTranslation('quickRecommendations', 'title'); },
+    get description() { return getFeatureTranslation('quickRecommendations', 'description'); },
     content: <QuickRecommendationsContent />,
   },
 };

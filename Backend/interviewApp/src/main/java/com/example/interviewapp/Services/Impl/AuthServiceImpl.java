@@ -4,9 +4,12 @@ import com.example.interviewapp.Dtos.AuthResponseDto;
 import com.example.interviewapp.Dtos.LoginDto;
 import com.example.interviewapp.Dtos.RegisterDto;
 import com.example.interviewapp.Dtos.UserDto;
+import com.example.interviewapp.Exceptions.DuplicateResourceException;
+import com.example.interviewapp.Exceptions.ResourceNotFoundException;
 import com.example.interviewapp.Models.User;
 import com.example.interviewapp.Repositories.UserRepository;
 import com.example.interviewapp.Services.AuthService;
+import com.example.interviewapp.Services.CvService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,15 +29,17 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final JWTServiceImpl jwtService;
     private final PasswordEncoder passwordEncoder;
-    private final CvServiceImpl cvService;
+    private final CvService cvService;
+    private final FileStorageService fileStorageService;
+
 
     @Override
     public AuthResponseDto signUp(RegisterDto registerDto, MultipartFile cvFile){
-        String filePath = saveCv(cvFile);
 
         if(userRepository.findByEmail(registerDto.getEmail()).isPresent()){
-            throw new RuntimeException("Email is already registered");
+            throw new DuplicateResourceException("Email is already registered");
         }
+        String filePath = fileStorageService.saveCv(cvFile);
         User user = new User();
         user.setFirstName((registerDto.getFirstName()).toLowerCase());
         user.setLastName((registerDto.getLastName()).toLowerCase());
@@ -49,55 +54,26 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
         String token = jwtService.generateToken(user);
 
-        UserDto userDto = new UserDto(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getAge(),
-                user.getNationality(),
-                user.getCity(),
-                user.getCvFile());
+        UserDto userDto = UserDto.from(user);
+
         cvService.sendCvToAnalysis(user);
         return new AuthResponseDto("success", userDto,token);
 
     }
-    private String saveCv(MultipartFile file) {
 
-        try {
-            String uploadDir = "uploads/cv/";
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-
-            Path path = Paths.get(uploadDir + fileName);
-
-            Files.createDirectories(path.getParent());
-            Files.write(path, file.getBytes());
-
-            return path.toString();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to upload CV");
-        }
-    }
     public AuthResponseDto signIn(LoginDto loginDto){
         User user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid credentials"));
 
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new ResourceNotFoundException("Invalid credentials");
+
         }
 
         String token = jwtService.generateToken(user);
 
-        UserDto userDto = new UserDto(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getAge(),
-                user.getNationality(),
-                user.getCity(),
-                user.getCvFile());
+        UserDto userDto = UserDto.from(user);
+
         return new AuthResponseDto("success", userDto, token);
 
     }

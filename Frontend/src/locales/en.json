@@ -1,0 +1,595 @@
+{
+  "navbar": {
+    "brand": {
+      "part1": "Speak",
+      "part2": "2",
+      "part3": "hire"
+    },
+    "links": {
+      "home": "Home",
+      "how": "How it Works",
+      "services": "Services",
+      "faq": "FAQ",
+      "team": "Team",
+      "contact": "Contact"
+    },
+    "hi": "Hi,",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "logout_confirm_title": "Are you sure?",
+    "logout_confirm_text": "You will be logged out of your account",
+    "logout_confirm_btn": "Yes, logout",
+    "logout_cancel_btn": "Cancel",
+    "logout_success_title": "Logged out!",
+    "logout_success_text": "See you soon 👋"
+  },
+  "hero": {
+    "eyebrow": "AI-Powered Interview Platform",
+    "heading_line1": "Interview smarter.",
+    "heading_line2": "Get hired",
+    "heading_em": "faster.",
+    "desc": "Upload your CV, record your voice interview, and let our AI analyze your performance — giving you real insights to land your dream job.",
+    "btn_start": "Start Interview",
+    "btn_story": "Read the full story"
+  },
+  "features": {
+    "section_tag": "What We Offer",
+    "section_heading": "Our recent creative projects",
+    "section_desc": "Everything you need to ace your next interview — powered by AI.",
+    "cards": {
+      "aiInterview": {
+        "title": "AI Interview Prep",
+        "desc": "Practice interviews with real AI feedback."
+      },
+      "cvAnalysis": {
+        "title": "Smart CV Analysis",
+        "desc": "Optimize your CV with instant AI insights."
+      },
+      "cvBuilder": {
+        "title": "CV Builder",
+        "desc": "Create a professional CV using customizable templates tailored to your career field."
+      },
+      "skillMatching": {
+        "title": "Skill Matching",
+        "desc": "Match your skills with the right jobs."
+      },
+      "progressTracking": {
+        "title": "Progress Tracking",
+        "desc": "Track your improvement over time."
+      },
+      "voicePractice": {
+        "title": "Voice Practice",
+        "desc": "Improve your speaking confidence with AI voice analysis."
+      },
+      "personalityInsights": {
+        "title": "Personality Insights",
+        "desc": "AI evaluates tone & presence to boost your performance."
+      },
+      "quickRecommendations": {
+        "title": "Quick Recommendations",
+        "desc": "Instant tips to help you improve before interviews."
+      }
+    }
+  },
+  "how_it_works": {
+    "section_tag": "About Our Company",
+    "heading": "Our interview process road",
+    "desc": "Three simple steps to go from applicant to hired. Speak2hire handles the heavy lifting — you focus on showing your best self.",
+    "steps": {
+      "step1": {
+        "num": "01",
+        "title": "Upload Your CV",
+        "desc": "Drop your CV into our platform. Our AI reads it instantly and builds a personalized interview tailored to your background and target role."
+      },
+      "step2": {
+        "num": "02",
+        "title": "Record Your Interview",
+        "desc": "Answer AI-generated questions using your voice. No scheduling, no pressure — practice as many times as you need."
+      },
+      "step3": {
+        "num": "03",
+        "title": "Get Your Analysis",
+        "desc": "Receive a full performance report with scores, feedback, and actionable tips to improve your answers and land the job."
+      }
+    }
+  },
+  "services": {
+    "section_tag": "Our Services",
+    "heading": "We Will Help You Get Hired & Growing",
+    "voice_interview": {
+      "title": "Voice Interview",
+      "desc": "Record your answers via microphone. Our AI captures your voice and analyzes tone, confidence, and clarity in real time."
+    },
+    "cv_analysis": {
+      "title": "CV Analysis",
+      "desc": "Upload your CV and get instant AI-powered feedback matching your experience to job requirements."
+    },
+    "cv_builder": {
+      "title": "CV Builder",
+      "desc": "Create a professional, ATS-friendly CV from scratch using tailored smart templates that highlight your best skills."
+    },
+    "my_reports": {
+      "title": "My Interview Reports",
+      "desc": "Review your past interview sessions, check your performance scores, and see detailed AI evaluations for each one."
+    }
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "section_subtitle": "Find answers to the most frequently asked questions about our AI platform.",
+    "items": {
+      "q1": {
+        "q": "How does the AI analyze my CV?",
+        "a": "Our AI scans your CV for skills, experience, and achievements, then provides personalized suggestions for improvement."
+      },
+      "q2": {
+        "q": "Is my data secure?",
+        "a": "Yes! We use advanced encryption and secure cloud storage to ensure your data is completely safe."
+      },
+      "q3": {
+        "q": "Can I try the platform for free?",
+        "a": "Absolutely! We offer a free trial so you can explore the features before subscribing."
+      },
+      "q4": {
+        "q": "How accurate is the AI interview analysis?",
+        "a": "Our AI uses advanced machine learning models trained on thousands of interview cases to provide highly accurate insights."
+      },
+      "q5": {
+        "q": "Can I share my results with employers?",
+        "a": "Yes! You can export your CV and interview analysis reports to share with potential employers easily."
+      }
+    }
+  },
+  "team_section": {
+    "title": "Meet Our Team",
+    "subtitle": "Meet a team of experts and innovators who are pioneers in their field",
+    "linkedin": "LinkedIn Profile",
+    "members": {
+      "ahmed": {
+        "name": "Ahmed Alaa",
+        "role": "AI / Machine Learning Engineer"
+      },
+      "youssef": {
+        "name": "Youssef Yasser",
+        "role": "DevOps Engineer"
+      },
+      "momen": {
+        "name": "Momen Ahmed",
+        "role": "Backend Developer"
+      },
+      "omnia": {
+        "name": "Omnia Waleed",
+        "role": "Frontend Developer"
+      },
+      "rawan": {
+        "name": "Rawan Gamal",
+        "role": "Frontend Developer"
+      },
+      "nedaa": {
+        "name": "Nedaa Hany",
+        "role": "Backend Developer"
+      }
+    }
+  },
+  "example_cv": {
+    "section_title": "Example CVs",
+    "section_subtitle": "Ready-to-use templates · Organized by popular fields",
+    "preview_btn": "Preview",
+    "download_btn": "Download",
+    "preview_modal_title": "Preview CV",
+    "cards": {
+      "marketing": {
+        "title": "Marketing — Professional CV",
+        "desc": "Clean and minimal layout suitable for marketing and content roles."
+      },
+      "software_engineer": {
+        "title": "Software Engineer CV",
+        "desc": "List-based structure with skills and projects — ideal for developers."
+      },
+      "graphic_designer": {
+        "title": "Creative / Designer CV",
+        "desc": "Modern creative layout perfect for designers and portfolio roles."
+      },
+      "business": {
+        "title": "Business / Management CV",
+        "desc": "Professional layout suitable for leadership and business roles."
+      },
+      "data_analyst": {
+        "title": "Data Analyst CV",
+        "desc": "Analytics-focused layout with charts & metrics sections."
+      },
+      "hr": {
+        "title": "HR / Recruiter CV",
+        "desc": "Simple and clean layout suitable for HR specialists."
+      }
+    }
+  },
+  "cta": {
+    "heading": "Ready? Start your interview now",
+    "desc": "Upload your CV and record your first interview in under 5 minutes.",
+    "btn": "Contact Us Today"
+  },
+  "testimonial": {
+    "section_tag": "Our Testimonials",
+    "heading": "Our happy customers",
+    "desc": "Thousands of job seekers have used Speak2hire to land roles at top companies. Here's what they say.",
+    "quote": "Speak2hire completely changed how I prepared for interviews. The AI analysis pinpointed exactly where I was losing confidence — and after three sessions, I got the offer. Incredible platform.",
+    "author_name": "Sara M.",
+    "author_role": "Software Engineer — hired at a top tech company",
+    "read_more": "Read More Now →"
+  },
+  "footer": {
+    "brand_desc": "An AI-powered interview platform helping job seekers practice, improve, and land their dream roles through voice-based analysis and CV insights.",
+    "quick_links": {
+      "heading": "Quick Links",
+      "home": "Home",
+      "services": "Our Services",
+      "team": "Our Team",
+      "case_study": "Case Study",
+      "blog": "Blog",
+      "testimonials": "Testimonials"
+    },
+    "quick_store": {
+      "heading": "Quick Store",
+      "marketplace": "Marketplace",
+      "license": "License",
+      "support": "Support",
+      "refunds": "Refunds",
+      "contact": "Contact Us"
+    },
+    "useful_links": {
+      "heading": "Useful Links",
+      "about": "About Us",
+      "projects": "Our Projects",
+      "office": "Our Office",
+      "newsletter": "Newsletter",
+      "privacy": "Privacy Policy"
+    },
+    "copyright": "© 2026 Speak2hire. All rights reserved.",
+    "privacy_terms": "Privacy Policy · Terms of Use"
+  },
+  "nav_pills": {
+    "section_title": "Explore More",
+    "tabs": {
+      "how": "How It Works",
+      "testimonials": "Testimonials",
+      "plans": "Plans"
+    },
+    "how_steps": {
+      "upload_cv": {
+        "title": "Upload CV",
+        "text": "Easily upload your CV to get started with AI analysis."
+      },
+      "ai_analysis": {
+        "title": "AI Analysis",
+        "text": "Get detailed insights and improvement suggestions."
+      },
+      "practice": {
+        "title": "Practice Interviews",
+        "text": "Simulate interviews with real-time AI feedback."
+      },
+      "track": {
+        "title": "Track Progress",
+        "text": "Monitor your improvements and achievements over time."
+      }
+    },
+    "plans": {
+      "free": {
+        "title": "Free Plan",
+        "text": "Access basic CV analysis and limited interview simulations."
+      },
+      "pro": {
+        "title": "Pro Plan",
+        "text": "Unlimited CV analysis, interviews, and personalized feedback."
+      },
+      "premium": {
+        "title": "Premium Plan",
+        "text": "Advanced AI insights, coaching, and priority support."
+      }
+    },
+    "modal": {
+      "title": "Upload Your CV",
+      "save_btn": "Save CV",
+      "no_file_alert": "Please select a CV first"
+    }
+  },
+  "login": {
+    "typewriter_text": "Good to See You Again",
+    "email_label": "Email address",
+    "email_placeholder": "name@example.com",
+    "password_label": "Password",
+    "password_placeholder": "********",
+    "remember_me": "Remember Me",
+    "btn_login": "Log In",
+    "btn_loading": "Logging in...",
+    "no_account": "Don't Have An Account?",
+    "register_link": "Register",
+    "success_msg": "Welcome back"
+  },
+  "register": {
+    "steps": {
+      "step0_title": "What's your name?",
+      "step1_title": "Your contact info",
+      "step2_title": "Personal details",
+      "step3_title": "Upload your CV"
+    },
+    "step_counter": "Step {{current}} of {{total}}",
+    "fields": {
+      "first_name": "First Name",
+      "first_name_placeholder": "John",
+      "last_name": "Last Name",
+      "last_name_placeholder": "Doe",
+      "email": "Email",
+      "email_placeholder": "name@example.com",
+      "password": "Password",
+      "password_placeholder": "Min. 8 characters",
+      "phone": "Phone",
+      "phone_placeholder": "+1234567890",
+      "age": "Age",
+      "age_placeholder": "25",
+      "nationality": "Nationality",
+      "nationality_placeholder": "American",
+      "city": "City",
+      "city_placeholder": "New York",
+      "cv_label": "Upload Your CV",
+      "cv_btn": "Choose File",
+      "cv_no_file": "No file chosen"
+    },
+    "btn_next": "Next",
+    "btn_back": "Back",
+    "btn_submit": "Register",
+    "btn_loading": "Registering...",
+    "have_account": "Have an account?",
+    "login_link": "Log In",
+    "success_msg": "Registered Successfully"
+  },
+  "profile": {
+    "page_title": "Your Profile",
+    "delete_account_btn": "Delete Account",
+    "save_changes_btn": "Save Changes",
+    "profile_completeness": "Profile Completeness",
+    "update_cv_label": "Update CV",
+    "cv_btn": "Choose File",
+    "cv_no_file": "No file chosen",
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "age": "Age",
+      "nationality": "Nationality",
+      "city": "City"
+    },
+    "delete_confirm_title": "Are you sure?",
+    "delete_confirm_text": "You want to delete your account? This action cannot be undone.",
+    "delete_confirm_btn": "Yes, delete it",
+    "delete_cancel_btn": "Cancel",
+    "delete_loading_title": "Deleting account...",
+    "delete_loading_text": "Please wait",
+    "delete_success_title": "Deleted!",
+    "delete_success_text": "See you soon 👋",
+    "delete_error_title": "Error!",
+    "delete_error_fallback": "Failed to delete account",
+    "update_success": "Profile Updated Successfully!"
+  },
+  "interview_home": {
+    "badge": "Interview Stage",
+    "title": "Interview Quiz",
+    "subtitle": "Choose how you want to start your interview.",
+    "btn_cv": "Start with My CV",
+    "btn_job": "Choose Role & Level",
+    "custom_badge": "Custom Interview",
+    "custom_title": "Choose Your Role & Level",
+    "role_label": "Job Role",
+    "role_placeholder": "Select a role...",
+    "role_other": "Other (type your own)",
+    "role_custom_placeholder": "e.g. Embedded Systems Engineer",
+    "level_label": "Experience Level",
+    "btn_start": "Start Quiz",
+    "btn_back": "Back",
+    "levels": {
+      "junior": "Junior",
+      "mid": "Mid",
+      "senior": "Senior"
+    },
+    "roles": {
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "fullstack": "Full Stack Developer",
+      "mobile": "Mobile Developer",
+      "devops": "DevOps Engineer",
+      "data": "Data Scientist",
+      "uiux": "UI/UX Designer",
+      "pm": "Project Manager"
+    }
+  },
+  "interview_quiz": {
+    "tag": "Open Ended",
+    "question_counter": "Question {{current}} of {{total}}",
+    "btn_voice": "Voice Answer",
+    "btn_essay": "Written Answer",
+    "btn_next": "Next",
+    "btn_finish": "Finish Quiz",
+    "tts_listen": "Listen",
+    "tts_playing": "Playing...",
+    "tts_loading": "Loading...",
+    "tts_pause_title": "Pause",
+    "tts_listen_title": "Listen to question"
+  },
+  "voice_recorder": {
+    "status_ready": "Ready to record",
+    "status_recording": "Recording... Click to stop",
+    "status_saved": "Recording saved — you can play or delete",
+    "status_denied": "Microphone access denied",
+    "btn_delete": "Delete"
+  },
+  "essay_input": {
+    "placeholder": "Type your answer here..."
+  },
+  "interview_results": {
+    "title": "Interview Results",
+    "subtitle": "Here's a detailed breakdown of your performance",
+    "overall_score_label": "Overall Score",
+    "score_out_of": "/ 10",
+    "score_labels": {
+      "excellent": "Excellent",
+      "very_good": "Very Good",
+      "good": "Good",
+      "fair": "Fair",
+      "needs_improvement": "Needs Improvement"
+    },
+    "feedback_title": "Feedback",
+    "strengths_title": "Strengths",
+    "gaps_title": "Areas to Improve",
+    "better_answer_title": "Better Answer",
+    "followup_title": "Follow-up Question",
+    "no_eval": "No evaluation available for this question",
+    "btn_restart": "Try Again",
+    "btn_home": "Back to Home"
+  },
+  "interview_page": {
+    "loading_text": "Please wait...",
+    "btn_retry": "Try Again"
+  },
+  "my_interviews": {
+    "page_title": "My Interviews",
+    "page_subtitle": "Review your past interview sessions and feedback",
+    "loading_text": "Loading your interviews...",
+    "btn_retry": "Try Again",
+    "empty_msg": "No interviews yet",
+    "btn_start_first": "Start Your First Interview",
+    "questions_count": "{{count}} Questions",
+    "session_label": "Session",
+    "score_out_of": "/10",
+    "score_na": "—"
+  },
+  "interview_details": {
+    "btn_back": "Back to History",
+    "title": "Interview Details",
+    "avg_score_label": "Avg Score",
+    "score_out_of": "/ 10",
+    "your_answer_title": "Your Answer",
+    "feedback_title": "Feedback",
+    "strengths_title": "Strengths",
+    "gaps_title": "Areas to Improve",
+    "better_answer_title": "Better Answer",
+    "followup_title": "Follow-up Question"
+  },
+  "analysis": {
+    "loading_text": "Analyzing your CV...",
+    "btn_retry": "Try Again",
+    "contact_title": "Contact Information",
+    "ats_title": "ATS Score",
+    "ats_labels": {
+      "great": "Great",
+      "average": "Average",
+      "needs_work": "Needs Work"
+    },
+    "skills_overview_title": "Skills Overview",
+    "matched_label": "Matched",
+    "missing_label": "Missing",
+    "skill_chart_title": "Skill Match Chart",
+    "experience_title": "Experience",
+    "education_title": "Education",
+    "projects_title": "Projects",
+    "questions_title": "Suggested Interview Questions",
+    "btn_start_interview": "Start Interview",
+    "btn_download": "Download Report"
+  },
+  "cv_analysis_content": {
+    "title": "Upload & Analyze",
+    "upload_success": "CV uploaded successfully 🚀",
+    "upload_error": "Something went wrong ❌",
+    "select_cv_first": "Please select a CV first 📄",
+    "pdf_only": "Only PDF files are allowed ❌",
+    "upload_btn": "Update CV",
+    "analyze_btn": "Analyze CV",
+    "analyzing": "Analyzing...",
+    "upload_modal_title": "Upload New CV",
+    "save_btn": "Save CV",
+    "uploading": "Uploading...",
+    "accepted_formats": "Accepted formats: PDF (preferred)",
+    "features": {
+      "keyword_matching": "Keyword matching for target jobs",
+      "ats_formatting": "Formatting suggestions for ATS systems",
+      "strengths_weaknesses": "Highlight strengths and weak points",
+      "professional_layout": "Tips for a more professional layout",
+      "readability": "Suggestions for improving readability"
+    }
+  },
+  "dashboard": {
+    "greeting": "Good morning, {{name}} 👋",
+    "subtitle_empty": "You haven't created any CVs yet. Start now!",
+    "subtitle_count_one": "You have {{count}} CV. Keep it updated!",
+    "subtitle_count_many": "You have {{count}} CVs. Keep them updated!",
+    "btn_new_cv": "New CV",
+    "stats": {
+      "total_cvs": "Total CVs",
+      "ats_ready": "ATS Ready",
+      "last_updated": "Last Updated"
+    },
+    "loading": "Loading...",
+    "empty_title": "No CVs yet",
+    "empty_desc": "Create your first professional CV and get noticed by recruiters.",
+    "btn_create_first": "Create my first CV",
+    "no_skills": "No skills",
+    "delete_confirm": "Delete this CV?",
+    "delete_success": "CV deleted",
+    "delete_error": "Failed to delete",
+    "load_error": "Failed to load CVs"
+  },
+  "feature_page": {
+    "not_found_title": "Feature Not Found",
+    "not_found_desc": "Please go back and select a valid feature."
+  },
+  "features_data": {
+    "aiInterview": {
+      "title": "AI Interview Prep",
+      "description": "Practice interviews with real-time AI feedback. Get your answers analyzed instantly."
+    },
+    "cvAnalysis": {
+      "title": "Smart CV Analysis",
+      "description": "Upload your CV and get instant AI insights to make it perfect."
+    },
+    "cvBuilder": {
+      "title": "CV Builder",
+      "description": "Create a professional CV using customizable templates tailored to your career field."
+    },
+    "skillMatching": {
+      "title": "Skill Matching",
+      "description": "Get AI insights on how well your skills match the job requirements."
+    },
+    "progressTracking": {
+      "title": "Progress Tracking",
+      "description": "Track your interview preparation progress over time. Every time you take a mock interview or study, see your progress improve with smooth animation."
+    },
+    "voicePractice": {
+      "title": "Voice Practice",
+      "description": "Practice speaking and get AI feedback on your tone and pronunciation."
+    },
+    "personalityInsights": {
+      "title": "Personality Insights",
+      "description": "AI evaluates your tone, presence, and personality for interview improvement."
+    },
+    "quickRecommendations": {
+      "title": "Quick Recommendations",
+      "description": "Instant tips to help you improve before interviews."
+    }
+  },
+  "ats_panel": {
+    "score_label": "ATS Score",
+    "score_desc_high": "Your CV is highly optimized for ATS systems!",
+    "score_desc_good": "Good CV! A few tweaks will make it excellent.",
+    "score_desc_mid": "Your CV needs some improvements to pass ATS.",
+    "score_desc_low": "Several important sections are missing or incomplete.",
+    "improvements_title": "Improvements",
+    "keywords_title": "Keywords Detected",
+    "keyword_groups": {
+      "action_verbs": "Action Verbs",
+      "tech_keywords": "Tech Keywords",
+      "soft_skills": "Soft Skills"
+    },
+    "no_keywords": "No keywords detected yet. Fill in your CV!",
+    "score_breakdown_title": "Score Breakdown"
+  }
+}

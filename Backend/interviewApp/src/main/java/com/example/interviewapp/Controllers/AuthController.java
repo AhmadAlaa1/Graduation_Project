@@ -3,8 +3,8 @@ package com.example.interviewapp.Controllers;
 import com.example.interviewapp.Dtos.AuthResponseDto;
 import com.example.interviewapp.Dtos.LoginDto;
 import com.example.interviewapp.Dtos.RegisterDto;
-import com.example.interviewapp.Services.Impl.AuthServiceImpl;
-import com.example.interviewapp.Services.Impl.CvServiceImpl;
+import com.example.interviewapp.Services.AuthService;
+import com.example.interviewapp.Services.CvService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -18,8 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class AuthController {
 
-    private final AuthServiceImpl authServiceImpl;
-    private final CvServiceImpl cvService;
+    private final AuthService authServiceImpl;
+    private final CvService cvService;
 
 
 

@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CvAtsScore({ ats }) {
   const barRef = useRef(null);
+  const { t } = useTranslation();
 
   const getColor = (val) => {
     if (val >= 75) return "var(--g1)";
@@ -23,12 +25,16 @@ export default function CvAtsScore({ ats }) {
     return () => clearInterval(interval);
   }, [ats]);
 
-  const label = ats?.percent >= 75 ? "Great" : ats?.percent >= 50 ? "Average" : "Needs Work";
+  const label = ats?.percent >= 75 
+    ? t('ats_panel.score_desc_high') 
+    : ats?.percent >= 50 
+      ? t('ats_panel.score_desc_good') 
+      : t('ats_panel.score_desc_low');
 
   return (
     <div className="an-card mb-4">
       <div className="an-ats-header">
-        <h5 className="an-card-title mb-0">ATS Score</h5>
+        <h5 className="an-card-title mb-0">{t('ats_panel.score_label')}</h5>
         <span className="an-ats-badge" style={{ background: getColor(ats?.percent) }}>
           {label}
         </span>

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   startInterviewApi,
+  startInterviewWithJobApi,
   finishInterviewApi,
   getMyInterviewsApi,
   getInterviewDetailsApi,
@@ -11,6 +12,17 @@ export const startInterview = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       return await startInterviewApi();
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Failed to start interview");
+    }
+  }
+);
+
+export const startInterviewWithJob = createAsyncThunk(
+  "interview/startWithJob",
+  async ({ role, level }, { rejectWithValue }) => {
+    try {
+      return await startInterviewWithJobApi({ role, level });
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to start interview");
     }
@@ -50,6 +62,14 @@ export const getInterviewDetails = createAsyncThunk(
   }
 );
 
+// helper مشترك لمعالجة الـ start response
+const handleStartFulfilled = (state, action) => {
+  state.loading = false;
+  state.interviewId = action.payload.interviewId;
+  const mapped = action.payload.mappedQuestions || [];
+  state.questions = [...mapped].sort((a, b) => a.orderNumber - b.orderNumber);
+};
+
 const interviewSlice = createSlice({
   name: "interview",
   initialState: {
@@ -76,25 +96,31 @@ const interviewSlice = createSlice({
   },
   extraReducers: (builder) => {
 
+    // ===== Start (CV) =====
     builder
       .addCase(startInterview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(startInterview.fulfilled, (state, action) => {
-        state.loading = false;
-        state.interviewId = action.payload.interviewId;
-        // ✅ الأسئلة بتيجي في mappedQuestions مش questions
-        const mapped = action.payload.mappedQuestions || [];
-        state.questions = [...mapped].sort((a, b) => a.orderNumber - b.orderNumber);
-        console.log(mapped);
-        
-      })
+      .addCase(startInterview.fulfilled, handleStartFulfilled)
       .addCase(startInterview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
 
+    // ===== Start (Job) =====
+    builder
+      .addCase(startInterviewWithJob.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(startInterviewWithJob.fulfilled, handleStartFulfilled)
+      .addCase(startInterviewWithJob.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+
+    // ===== Finish =====
     builder
       .addCase(finishInterview.pending, (state) => {
         state.loading = true;
@@ -102,7 +128,6 @@ const interviewSlice = createSlice({
       })
       .addCase(finishInterview.fulfilled, (state, action) => {
         state.loading = false;
-        // ✅ evaluations array جاهز من الـ API
         state.evaluations = action.payload;
         state.isFinished = true;
       })
@@ -111,6 +136,7 @@ const interviewSlice = createSlice({
         state.error = action.payload;
       });
 
+    // ===== History =====
     builder
       .addCase(getMyInterviews.pending, (state) => { state.loading = true; })
       .addCase(getMyInterviews.fulfilled, (state, action) => {
@@ -122,6 +148,7 @@ const interviewSlice = createSlice({
         state.error = action.payload;
       });
 
+    // ===== Details =====
     builder
       .addCase(getInterviewDetails.pending, (state) => { state.loading = true; })
       .addCase(getInterviewDetails.fulfilled, (state, action) => {

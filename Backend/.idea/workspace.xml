@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9458118a-38ff-430d-8e37-decf7a87a135" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ats-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Ats-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ats-Service/src/main/java/CV_Builder/atsservice/controller/ATSController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ats-Service/src/main/java/CV_Builder/atsservice/controller/ATSController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ats-Service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Ats-Service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CV-Service/src/main/java/CV_Builder/cvservice/controller/CVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CV-Service/src/main/java/CV_Builder/cvservice/controller/CVController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CV-Service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/CV-Service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PDF-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PDF-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PDF-Service/src/main/java/CV_Builder/pdfservice/controller/PDFController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PDF-Service/src/main/java/CV_Builder/pdfservice/controller/PDFController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PDF-Service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/PDF-Service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Components/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Components/JwtAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/StaticResourceConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/StaticResourceConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Confgs/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/CvController.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/CvController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/InterviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/InterviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Dtos/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/CvAnalysisClientImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/CvAnalysisClientImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/InterviewClientImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/InterviewClientImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/TtsClientImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/Impl/TtsClientImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/TtsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/External/Ai/TtsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Models/CvAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Models/CvAnalysis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Repositories/InterviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Repositories/InterviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/CvServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/CvServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/InterviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/InterviewServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/java/com/example/interviewapp/Services/Impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/interviewApp/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/uploads/audio/tts_39bd9fbe-bfab-4b09-aefc-6bc96cb6b5f5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/uploads/audio/tts_5fb0070e-9f7e-4753-995b-69a7d7a3776f.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/uploads/audio/tts_869c92de-2ccf-4902-a4ae-da3edfa67dad.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/uploads/audio/tts_8db1a3f9-da5e-49e0-a60f-d034eb59b50f.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewApp/uploads/audio/tts_ea4adc96-d350-4c6d-90be-039162426202.mp3" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3EBVS9HxhO0herULsGdDQuVKOuf" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.AtsserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CvServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.InterviewappApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PdfserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ats-service [clean,install,-DskipTests].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ats-service [clean,package,-DskipTests].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ats-service [clean,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ats-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ats-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/FinalVersion/Graduation_Project/Backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Nedaa\Graduation_Project\Backend" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean package -DskipTests" />
+      <command value="mvn clean install -DskipTests" />
+      <command value="mvn clean package" />
+      <command value="mvn clean" />
+      <command value="mvn package" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.PdfserviceApplication">
+    <configuration name="AtsserviceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="CV_Builder.atsservice.AtsserviceApplication" />
+      <module name="ats-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CV_Builder.atsservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CvServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="CV_Builder.cvservice.CvServiceApplication" />
+      <module name="cvservice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CV_Builder.cvservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InterviewappApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.interviewapp.InterviewappApplication" />
+      <module name="interviewapp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.interviewapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PdfserviceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="CV_Builder.pdfservice.PdfserviceApplication" />
+      <module name="pdf-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CV_Builder.pdfservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.AtsserviceApplication" />
+      <item itemvalue="Application.CvServiceApplication" />
+      <item itemvalue="Application.InterviewappApplication" />
+      <item itemvalue="Application.PdfserviceApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PdfserviceApplication" />
+        <item itemvalue="Application.AtsserviceApplication" />
+        <item itemvalue="Application.CvServiceApplication" />
+        <item itemvalue="Application.InterviewappApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9458118a-38ff-430d-8e37-decf7a87a135" name="Changes" comment="" />
+      <created>1779651949293</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779651949293</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -206,7 +206,7 @@ const Navbar = () => {
                       aria-label="Toggle Dark Mode"
                     >
                       {isDarkMode ? (
-                        <i className="fa-solid fa-sun fs-5 text-warning"></i>
+                        <i className="fa-solid fa-sun fs-5"></i>
                       ) : (
                         <i className="fa-solid fa-moon fs-5 text-secondary"></i>
                       )}
@@ -247,7 +247,7 @@ const Navbar = () => {
                   aria-label="Toggle Dark Mode"
                 >
                   {isDarkMode ? (
-                    <i className="fa-solid fa-sun fs-5 text-warning"></i>
+                    <i className="fa-solid fa-sun fs-5 "></i>
                   ) : (
                     <i className="fa-solid fa-moon fs-5 text-secondary"></i>
                   )}

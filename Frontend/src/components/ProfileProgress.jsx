@@ -1,8 +1,12 @@
+import { useTranslation } from "react-i18next";
+
 export default function ProfileProgress({ percent }) {
+  const { t } = useTranslation();
+
   return (
     <div className="w-100 mt-4 px-3 text-center">
       <label className="fw-semibold text-secondary small mb-2 d-block">
-        Profile Completeness <span className="text-dark">({percent}%)</span>
+        {t('profile.profile_completeness')} <span className="text-dark">({percent}%)</span>
       </label>
       <div className="progress progress-custom">
         <div

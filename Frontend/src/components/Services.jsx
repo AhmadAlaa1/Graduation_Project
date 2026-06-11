@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
+  const { t } = useTranslation();
+
   return (
-    <section className="services-band">
+    <section className="services-band" id="services">
       <div className="services-grid">
         <div className="service-header">
-          <div className="tag">Our Services</div>
-          <h2>We Will Help You Get Hired &amp; Growing</h2>
+          <div className="tag">{t('services.section_tag')}</div>
+          <h2>{t('services.heading')}</h2>
         </div>
 
         {/* Card 1: Voice Interview */}
@@ -18,8 +21,8 @@ const Services = () => {
               <line x1="12" y1="19" x2="12" y2="23" />
             </svg>
           </div>
-          <h3>Voice Interview</h3>
-          <p>Record your answers via microphone. Our AI captures your voice and analyzes tone, confidence, and clarity in real time.</p>
+          <h3>{t('services.voice_interview.title')}</h3>
+          <p>{t('services.voice_interview.desc')}</p>
         </Link>
 
         {/* Card 2: CV Analysis */}
@@ -32,19 +35,31 @@ const Services = () => {
               <line x1="16" y1="17" x2="8" y2="17" />
             </svg>
           </div>
-          <h3>CV Analysis</h3>
-          <p>Upload your CV and get instant AI-powered feedback matching your experience to job requirements.</p>
+          <h3>{t('services.cv_analysis.title')}</h3>
+          <p>{t('services.cv_analysis.desc')}</p>
         </Link>
 
-        {/* Card 3: My Interview Reports */}
+        {/* Card 3: CV Builder */}
+        <Link to="/cv-builder" className="service-card">
+          <div className="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+          </div>
+          <h3>{t('services.cv_builder.title')}</h3>
+          <p>{t('services.cv_builder.desc')}</p>
+        </Link>
+
+        {/* Card 4: My Interview Reports */}
         <Link to="/my-interviews" className="service-card">
           <div className="svc-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
           </div>
-          <h3>My Interview Reports</h3>
-          <p>Review your past interview sessions, check your performance scores, and see detailed AI evaluations for each one.</p>
+          <h3>{t('services.my_reports.title')}</h3>
+          <p>{t('services.my_reports.desc')}</p>
         </Link>
 
       </div>

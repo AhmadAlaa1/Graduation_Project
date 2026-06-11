@@ -1,10 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 export default function CvExperience({ experience }) {
+  const { t } = useTranslation();
   if (!experience?.length) return null;
 
   return (
     <div className="an-card mb-4">
       <h5 className="an-card-title">
-        <i className="fas fa-briefcase me-2"></i>Experience
+        <i className="fas fa-briefcase me-2"></i>{t('how_it_works.section_tag')}
       </h5>
       <div className="an-timeline">
         {experience.map((exp, i) => (

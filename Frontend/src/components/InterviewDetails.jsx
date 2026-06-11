@@ -1,16 +1,19 @@
+import { useTranslation } from "react-i18next";
+
 export default function InterviewDetails({ details, onBack }) {
+  const { t } = useTranslation();
   if (!details) return null;
 
   const questions = details.questions || [];
 
-const getScoreColor = (score) => {
-  if (!score && score !== 0) return "#aaa";
-  if (score >= 9) return "#2E8B73";   // Excellent
-  if (score >= 7.5) return "#4CAF50"; // Very Good
-  if (score >= 6) return "#F4D03F";   // Good
-  if (score >= 4) return "#F28C28";   // Fair
-  return "#e05c5c";                   // Needs Improvement
-};
+  const getScoreColor = (score) => {
+    if (!score && score !== 0) return "#aaa";
+    if (score >= 9) return "#2E8B73";   // Excellent
+    if (score >= 7.5) return "#4CAF50"; // Very Good
+    if (score >= 6) return "#F4D03F";   // Good
+    if (score >= 4) return "#F28C28";   // Fair
+    return "#e05c5c";                   // Needs Improvement
+  };
 
   const avgScore = questions.length > 0
     ? (questions.reduce((sum, q) => sum + (q.evaluationDto?.score || 0), 0) / questions.length).toFixed(1)
@@ -21,17 +24,17 @@ const getScoreColor = (score) => {
 
       {/* Back */}
       <button className="mid-back-btn" onClick={onBack}>
-        <i className="fa-solid fa-arrow-left me-2"></i>Back to History
+        <i className="fa-solid fa-arrow-left me-2"></i>{t('interview_details.btn_back')}
       </button>
 
       {/* Header */}
       <div className="mid-header">
-        <h2 className="mid-title">Interview Details</h2>
+        <h2 className="mid-title">{t('interview_details.title')}</h2>
         {avgScore && (
           <div className="mid-avg-score" style={{ borderColor: getScoreColor(avgScore) }}>
-            <span className="mid-avg-label">Avg Score</span>
+            <span className="mid-avg-label">{t('interview_details.avg_score_label')}</span>
             <span className="mid-avg-val" style={{ color: getScoreColor(avgScore) }}>
-              {avgScore} / 10
+              {avgScore} {t('interview_details.score_out_of')}
             </span>
           </div>
         )}
@@ -60,7 +63,7 @@ const getScoreColor = (score) => {
                       border: `1px solid ${getScoreColor(score)}40`,
                     }}
                   >
-                    {score} / 10
+                    {score} {t('interview_details.score_out_of')}
                   </div>
                 )}
               </div>
@@ -71,7 +74,7 @@ const getScoreColor = (score) => {
                 {(q.answerText || q.answerAudio) && (
                   <div className="mid-block mid-block-answer">
                     <div className="mid-block-title">
-                      <i className="fa-solid fa-user me-1"></i> Your Answer
+                      <i className="fa-solid fa-user me-1"></i> {t('interview_details.your_answer_title')}
                     </div>
                     {q.answerText && <p>{q.answerText}</p>}
                     {q.answerAudio && (
@@ -86,7 +89,7 @@ const getScoreColor = (score) => {
                     {eval_.feedback && (
                       <div className="mid-block mid-block-feedback">
                         <div className="mid-block-title mid-teal">
-                          <i className="fa-solid fa-comment-dots me-1"></i> Feedback
+                          <i className="fa-solid fa-comment-dots me-1"></i> {t('interview_details.feedback_title')}
                         </div>
                         <p>{eval_.feedback}</p>
                       </div>
@@ -97,7 +100,7 @@ const getScoreColor = (score) => {
                       {eval_.strengths?.length > 0 && (
                         <div className="mid-block mid-block-strengths">
                           <div className="mid-block-title mid-green">
-                            <i className="fa-solid fa-circle-check me-1"></i> Strengths
+                            <i className="fa-solid fa-circle-check me-1"></i> {t('interview_details.strengths_title')}
                           </div>
                           <ul>
                             {eval_.strengths.map((s, j) => <li key={j}>{s}</li>)}
@@ -109,7 +112,7 @@ const getScoreColor = (score) => {
                       {eval_.gaps?.length > 0 && (
                         <div className="mid-block mid-block-gaps">
                           <div className="mid-block-title mid-orange">
-                            <i className="fa-solid fa-triangle-exclamation me-1"></i> Areas to Improve
+                            <i className="fa-solid fa-triangle-exclamation me-1"></i> {t('interview_details.gaps_title')}
                           </div>
                           <ul>
                             {eval_.gaps.map((g, j) => <li key={j}>{g}</li>)}
@@ -122,7 +125,7 @@ const getScoreColor = (score) => {
                     {eval_.better_answer && (
                       <div className="mid-block mid-block-better">
                         <div className="mid-block-title mid-blue">
-                          <i className="fa-solid fa-lightbulb me-1"></i> Better Answer
+                          <i className="fa-solid fa-lightbulb me-1"></i> {t('interview_details.better_answer_title')}
                         </div>
                         <p>{eval_.better_answer}</p>
                       </div>
@@ -132,7 +135,7 @@ const getScoreColor = (score) => {
                     {eval_.followup_question && (
                       <div className="mid-block mid-block-followup">
                         <div className="mid-block-title mid-purple">
-                          <i className="fa-solid fa-rotate-right me-1"></i> Follow-up Question
+                          <i className="fa-solid fa-rotate-right me-1"></i> {t('interview_details.followup_title')}
                         </div>
                         <p>{eval_.followup_question}</p>
                       </div>

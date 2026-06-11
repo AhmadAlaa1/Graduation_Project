@@ -1,18 +1,25 @@
 import axiosInstance from "./axiosInstance";
 
-// ===== 1. Start Interview =====
+// ===== 1. Start Interview (CV-based) =====
 export const startInterviewApi = async () => {
   const response = await axiosInstance.get("/inter/start");
   return response.data;
-  // بيرجع: { interviewId, mappedQuestions: [{ questionID, questionText, questionAudio, orderNumber }] }
 };
 
-// ===== 2. Finish & Evaluate Interview =====
+export const startInterviewWithJobApi = async ({ role, level }) => {
+  const response = await axiosInstance.post(
+    "/inter/startWithJob",
+    { role, level }
+  );
+
+  return response.data;
+};
+
+// ===== 3. Finish & Evaluate Interview =====
 export const finishInterviewApi = async (interviewId, answers) => {
   const formData = new FormData();
 
   answers.forEach((answer, index) => {
-    // ✅ questionId بتاع كل سؤال
     formData.append(`answers[${index}].questionId`, answer.questionId);
 
     if (answer.type === "essay") {
@@ -28,17 +35,16 @@ export const finishInterviewApi = async (interviewId, answers) => {
     { headers: { "Content-Type": "multipart/form-data" } }
   );
 
-  // ✅ بيرجع { evaluations: [...] } مش array مباشرة
   return response.data.evaluations;
 };
 
-// ===== 3. My Interviews History =====
+// ===== 4. My Interviews History =====
 export const getMyInterviewsApi = async () => {
   const response = await axiosInstance.get("/user/my-interviews");
   return response.data;
 };
 
-// ===== 4. Interview Details =====
+// ===== 5. Interview Details =====
 export const getInterviewDetailsApi = async (interviewId) => {
   const response = await axiosInstance.get(`/user/${interviewId}/interview-details`);
   return response.data;

@@ -1,5 +1,3 @@
-// components/Modal.jsx
-
 export default function Modal({ show, onClose, title, children, footer }) {
   if (!show) return null;
 
@@ -18,7 +16,7 @@ export default function Modal({ show, onClose, title, children, footer }) {
             <h5 className="modal-title">{title}</h5>
             <button type="button" className="btn-close" onClick={onClose} />
           </div>
-          <div className="modal-body">{children}</div>
+          <div className="modal-content-body p-3">{children}</div>
           {footer && <div className="modal-footer">{footer}</div>}
         </div>
       </div>

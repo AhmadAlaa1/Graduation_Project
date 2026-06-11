@@ -1,11 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 export default function CvProjects({ projects }) {
+  const { t } = useTranslation();
   const filtered = projects?.filter(p => p.name && p.name !== "& EXPERIENCE");
   if (!filtered?.length) return null;
 
   return (
     <div className="an-card mb-4">
       <h5 className="an-card-title">
-        <i className="fas fa-folder-open me-2"></i>Projects
+        <i className="fas fa-folder-open me-2"></i>{t('features.section_heading')}
       </h5>
       <div className="an-timeline">
         {filtered.map((p, i) => (

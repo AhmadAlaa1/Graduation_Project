@@ -16,10 +16,22 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  mvc:
+    static-path-pattern: /uploads/**
+
 server:
   tomcat:
     max-swallow-size: 20MB
   port: 6060
+
 jwt:
   secret: yourSecretKeyForJWTMustBeAtLeast32Chars!
   expirationMs: 86400000
+
+app:
+  cors:
+    allowed-origin: "http://localhost:5173"
+
+ai:
+  service:
+    base-url: "https://ahmadalaa1-speech-llm-api.hf.space/api"

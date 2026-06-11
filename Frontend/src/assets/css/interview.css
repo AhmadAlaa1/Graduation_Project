@@ -97,6 +97,8 @@
   color: var(--text-color);
   text-align: center;
   margin-bottom: 2.5rem;
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 .quiz-int-toggle-group {
@@ -172,9 +174,17 @@
 }
 
 @keyframes quiz-int-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
-  70%  { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(231, 76, 60, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
 }
 
 .quiz-int-audio-row {
@@ -336,4 +346,243 @@
   color: var(--text-white-color);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-int-question-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  direction: ltr;
+
+}
+
+.quiz-int-tts-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.quiz-int-tts-btn-playing {
+  background: var(--primary);
+  color: white;
+}
+
+.quiz-int-tts-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quiz-intro-btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.quiz-intro-btn-outline:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ══════════════════════════════════════════
+   WhatsApp-style Answer Input Bar
+   ══════════════════════════════════════════ */
+
+.ai-input-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ── Voice preview row (after stop) ── */
+.ai-voice-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 0.6rem 1rem;
+}
+
+.ai-voice-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-red);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.ai-voice-delete:hover {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.ai-audio-player {
+  flex: 1;
+  height: 36px;
+  min-width: 0;
+}
+
+/* ── Live recording bar ── */
+.ai-recording-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 0.6rem 1rem;
+}
+
+.ai-rec-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-red);
+  flex-shrink: 0;
+  animation: ai-blink 1s infinite;
+}
+
+@keyframes ai-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.ai-rec-timer {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-red);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+.ai-waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  height: 36px;
+}
+
+.ai-wave-bar {
+  display: block;
+  width: 3px;
+  background: var(--g2);
+  border-radius: 2px;
+  transition: height 0.08s ease;
+  min-height: 4px;
+}
+
+/* ── Main input row ── */
+.ai-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ai-input-row:focus-within {
+  border-color: var(--g2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--g2) 12%, transparent);
+}
+
+.ai-textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  resize: none;
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  padding: 6px 0;
+  min-height: 36px;
+  max-height: 160px;
+  overflow-y: auto;
+  transition: opacity 0.2s;
+}
+
+.ai-textarea::placeholder {
+  color: var(--muted);
+}
+
+.ai-textarea-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Action button (shared base) ── */
+.ai-action-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.ai-action-btn:hover {
+  transform: scale(1.08);
+  filter: brightness(0.9);
+}
+
+.ai-action-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mic = brand gradient */
+.ai-mic-btn {
+  background: var(--gradient);
+  color: var(--white-color);
+}
+
+/* Stop = red */
+.ai-stop-btn {
+  background: var(--color-red);
+  color: var(--white-color);
+  animation: ai-stop-pulse 1.5s infinite;
+}
+
+@keyframes ai-stop-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
 }

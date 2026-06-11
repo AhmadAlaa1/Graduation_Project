@@ -4,13 +4,13 @@ import InterviewHome from "../components/interview/InterviewHome";
 import InterviewQuiz from "../components/interview/InterviewQuiz";
 import InterviewResults from "../components/interview/InterviewResults";
 import { useInterview } from "../hooks/useInterview";
+import { useTranslation } from "react-i18next";
 
 export default function InterviewPage() {
   const [page, setPage] = useState("home");
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
-  // ✅ بنخزن الإجابات في useRef عشان مش serializable في Redux
   const answersRef = useRef([]);
+  const { t } = useTranslation();
 
   const {
     questions,
@@ -18,12 +18,14 @@ export default function InterviewPage() {
     loading,
     error,
     start,
+    startWithJob,
     finish,
     reset,
+    clearErr,
   } = useInterview();
 
-  // ===== Start =====
   const handleStart = async () => {
+    clearErr();
     answersRef.current = [];
     const success = await start();
     if (success) {
@@ -32,21 +34,27 @@ export default function InterviewPage() {
     }
   };
 
-  // ===== Next Question =====
+  const handleStartWithJob = async ({ role, level }) => {
+    clearErr();
+    answersRef.current = [];
+    const success = await startWithJob({ role, level });
+    if (success) {
+      setPage("quiz");
+      setCurrentQuestion(0);
+    }
+  };
+
   const handleNext = async (answer) => {
-    // بنحفظ الإجابة في الـ ref مش في Redux
     answersRef.current[currentQuestion] = answer;
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((q) => q + 1);
     } else {
-      // آخر سؤال → بنبعت للـ API
       const success = await finish(answersRef.current);
       if (success) setPage("results");
     }
   };
 
-  // ===== Restart =====
   const handleRestart = () => {
     reset();
     answersRef.current = [];
@@ -58,43 +66,27 @@ export default function InterviewPage() {
     <>
       <Navbar />
       <div className="interview-container min-vh-100 d-flex align-items-center justify-content-center">
-
         {loading && (
           <div className="text-center">
             <div className="spinner-border" style={{ color: "var(--primary)" }} />
-            <p className="mt-3">Please wait...</p>
+            <p className="mt-3">{t('interview_page.loading_text')}</p>
           </div>
         )}
 
         {error && !loading && (
           <div className="text-center">
             <p className="text-danger">{error}</p>
-            <button className="btn mt-2" onClick={handleRestart}>Try Again</button>
+            <button className="btn quiz-intro-btn-brand rounded-pill px-5 py-3 fw-bold fs-5 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm " onClick={handleRestart}>{t('interview_page.btn_retry')}</button>
           </div>
         )}
 
         {!loading && !error && (
           <>
-            {page === "home" && (
-              <InterviewHome onStart={handleStart} />
-            )}
-            {page === "quiz" && questions.length > 0 && (
-              <InterviewQuiz
-                quizData={questions}
-                currentQuestion={currentQuestion}
-                onNext={handleNext}
-              />
-            )}
-            {page === "results" && (
-              <InterviewResults
-                quizData={questions}
-                evaluations={evaluations}
-                onRestart={handleRestart}
-              />
-            )}
+            {page === "home" && <InterviewHome onStart={handleStart} onStartWithJob={handleStartWithJob} />}
+            {page === "quiz" && questions.length > 0 && <InterviewQuiz quizData={questions} currentQuestion={currentQuestion} onNext={handleNext} />}
+            {page === "results" && <InterviewResults quizData={questions} evaluations={evaluations} onRestart={handleRestart} />}
           </>
         )}
-
       </div>
     </>
   );

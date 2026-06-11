@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function CvSummary({ data }) {
+  const { t } = useTranslation();
+  
   // الـ name بتاع الـ API فيه GitHub وLinkedIn جوا
   // بناخد أول جزء قبل |
   const cleanName = data.title?.split("|")[0]?.trim() || data.name;

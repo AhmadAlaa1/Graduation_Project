@@ -1,38 +1,34 @@
 package com.example.interviewapp.Services.Impl;
 
 import com.example.interviewapp.Dtos.*;
-import com.example.interviewapp.External.Ai.Impl.CvAnalysisClientImpl;
+import com.example.interviewapp.Exceptions.ResourceNotFoundException;
+import com.example.interviewapp.External.Ai.CvAnalysisClient;
 import com.example.interviewapp.Models.*;
 import com.example.interviewapp.Repositories.*;
 import com.example.interviewapp.Services.CvService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-
 public class CvServiceImpl implements CvService {
     private final UserRepository userRepository;
-    private final CvAnalysisClientImpl cvAnalysisClientImpl;
+    private final CvAnalysisClient cvAnalysisClientImpl;
     private final CvAnalysisRepository cvAnalysisRepository;
     private final ProjectRepository projectRepository;
     private final ExperienceRepository experienceRepository;
     private final EducationRepository educationRepository;
-    private final JWTServiceImpl jwtService;
+    private final FileStorageService fileStorageService;
+
 
 
     private User getCurrentUser() {
@@ -43,13 +39,13 @@ public class CvServiceImpl implements CvService {
         String email = authentication.getName();
 
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override
     public void sendCvToAnalysis(User dto) {
         var user = userRepository.findByEmail(dto.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         // Delete old analysis
         Optional<CvAnalysis> existing = cvAnalysisRepository.findByUser(user);
@@ -151,11 +147,9 @@ public class CvServiceImpl implements CvService {
     }
     @Override
     public CvAnalysisResponseDto returnCvAnalysis() {
-        User currentUser = getCurrentUser();
-        var user = userRepository.findByEmail(currentUser.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = getCurrentUser();
         CvAnalysis cv = cvAnalysisRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Analysis not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("CV analysis not found. Please upload your CV first."));
 
         CvAnalysisResponseDto response = new CvAnalysisResponseDto();
 
@@ -256,13 +250,9 @@ public class CvServiceImpl implements CvService {
     public CvAnalysisResponseDto reUploadCv(MultipartFile file) {
 
         // 1. get user
-        User currentUser = getCurrentUser();
-
-        User user = userRepository.findByEmail(currentUser.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = getCurrentUser();
         // 2. save new cv
-        String filePath = saveCv(file);
+        String filePath = fileStorageService.saveCv(file);
         user.setCvFile(filePath);
         userRepository.save(user);
 
@@ -272,6 +262,7 @@ public class CvServiceImpl implements CvService {
         existing.ifPresent(oldCv -> {
             projectRepository.deleteAll(oldCv.getProjects());
             experienceRepository.deleteAll(oldCv.getExperiences());
+            educationRepository.deleteAll(oldCv.getEducation());
             cvAnalysisRepository.delete(oldCv);
         });
 
@@ -357,21 +348,5 @@ public class CvServiceImpl implements CvService {
         return response;
     }
 
-    private String saveCv(MultipartFile file) {
 
-        try {
-            String uploadDir = "uploads/cv/";
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-
-            Path path = Paths.get(uploadDir + fileName);
-
-            Files.createDirectories(path.getParent());
-            Files.write(path, file.getBytes());
-
-            return path.toString();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to upload CV");
-        }
-    }
 }

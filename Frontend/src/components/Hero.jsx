@@ -1,22 +1,28 @@
+import { useTranslation } from "react-i18next";
+
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="hero" id="home">
       <div className="blob-bg"></div>
       <div className="hero-text">
-        <div className="eyebrow">AI-Powered Interview Platform</div>
-        <h1>Interview smarter.<br />Get hired <em>faster.</em></h1>
+        <div className="eyebrow">{t('hero.eyebrow')}</div>
+        <h1>
+          {t('hero.heading_line1')}<br />
+          {t('hero.heading_line2')} <em>{t('hero.heading_em')}</em>
+        </h1>
         <p className="hero-desc">
-          Upload your CV, record your voice interview, and let our AI analyze your performance —
-          giving you real insights to land your dream job.
+          {t('hero.desc')}
         </p>
         <div className="hero-btns">
           <a className="btn btn-grad" href="/interview">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="white" stroke="none">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            Start Interview
+            {t('hero.btn_start')}
           </a>
-          <a className="btn btn-outline" href="#">Read the full story</a>
+          <a className="btn btn-outline" href="#">{t('hero.btn_story')}</a>
         </div>
       </div>
       <div className="hero-img-area">

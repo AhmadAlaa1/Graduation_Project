@@ -54,6 +54,7 @@
   --muted: #6b7280;
   --light-black: #8b857b;
   --white-text: #ffffff;
+  --cvb-suggestion: ; 
 
   /* Borders */
   --border: #e5e7eb;
@@ -129,7 +130,7 @@
   --dark-surface: #121212;
   --dark-surface-deep: #121212;
   --myi-card-bg: #1e1e1e;
-  
+
   /* Text */
   --text: #f0faf5;
   --text-color: #daf0e6;
@@ -200,8 +201,10 @@ body {
   line-height: 1.7;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 /* NAV */
+.logo-brand-name{
+  direction: rtl;
+}
 nav {
   position: fixed;
   top: 14px;
@@ -329,9 +332,11 @@ nav ul a.active {
 .navbar .hi-user-text {
   color: var(--text-color);
 }
- .navbar-expand-lg .navbar-collapse {
-  flex: inherit ;
-}       
+
+.navbar-expand-lg .navbar-collapse {
+  flex: inherit;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -393,6 +398,16 @@ nav ul a.active {
   color: var(--white-color) !important;
 }
 
+.btn-profile {
+  background-color: transparent;
+  color: var(--text-color) !important;
+  border-color: var(--border) !important;
+}
+
+.btn-profile:hover {
+  background-color: var(--border);
+}
+
 @media (max-width: 1400px) {
   nav ul {
     gap: 5px;
@@ -419,25 +434,45 @@ nav ul a.active {
   }
 }
 
+/* التعديلات الجديدة الخاصة بشاشات الموبايل لمنع النزول وتحسين الشكل */
 @media (max-width: 991.98px) {
+  nav .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    height: 100%;
+  }
+
   .mobile-menu-dropdown {
-    background-color: var(--white-color);
-    padding: 1rem 1.25rem;
-    border-radius: 1rem;
-    margin-top: 0.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
+    position: absolute;
+    top: 72px; /* تظهر أسفل الناف بار مباشرة دون دفعه */
+    right: 0;
+    width: 260px; /* تحديد عرض مناسب وشيك بدلاً من العرض الكامل */
+    background-color: var(--background) !important;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border) !important;
+    z-index: 1050;
   }
 
   .mobile-nav-link {
-    padding: 0.75rem 0 !important;
+    padding: 0.6rem 0 !important;
+    color: var(--text-color) !important;
+    display: block;
+    text-align: center;
+  }
+  
+  .mobile-nav-link.active {
+    color: var(--g2) !important;
   }
 
   .nav-item:last-child .mobile-nav-link {
     border-bottom: none;
   }
 }
-
 /* HERO */
 .hero {
   min-height: 92vh;
@@ -639,11 +674,17 @@ h1 em {
   padding: 80px 5%;
   background: var(--white-color);
 }
-
 .services-grid {
   display: grid;
-  grid-template-columns: 260px 1fr 1fr 1fr;
+  /* الهيدر الأخضر 280px والكروت تفرش بالتساوي في باقي المساحة */
+  grid-template-columns: 280px repeat(2, 1fr);
+  
+  /* تكنيك الفواصل الذكي عن طريق الـ Gap والخلفية */
+  background-color: var(--border); 
+  gap: 1px; 
+  
   border: 1px solid var(--border);
+  align-items: stretch;
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-card);
@@ -652,11 +693,13 @@ h1 em {
 
 .service-header {
   background: var(--gradient);
+  grid-row: span 2; /* يمتد بالطول ليغطي صفين */
   color: var(--text-white-color);
-  padding: 44px 32px;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .service-header .tag {
@@ -664,7 +707,6 @@ h1 em {
   letter-spacing: 2.5px;
   text-transform: uppercase;
   opacity: .75;
-  margin-bottom: 16px;
 }
 
 .service-header h2 {
@@ -675,12 +717,19 @@ h1 em {
 
 .service-card {
   padding: 38px 26px;
-  border-left: 1px solid var(--border);
-  transition: background .2s;
-  background-color: var(--);
   text-decoration: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
   color: inherit;
+  
+  /* مهم جداً: لون خلفية ثابت للكروت عشان يغطي لون الـ Grid اللي وراه */
+  background-color: #ffffff; /* استبدله بـ var(--card-bg) لو شغال بـ Dark/Light mode */
+  
+  /* إلغاء البوردرز القديمة تماماً لعدم التداخل */
+  border: none; 
+  
+  transition: background .2s;
+  box-sizing: border-box;
 }
 
 .service-card:hover {
@@ -779,7 +828,7 @@ h1 em {
   text-transform: uppercase;
   color: var(--g2);
   font-weight: 700;
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
 }
 
 .section-heading {
@@ -1349,5 +1398,20 @@ footer {
 
   nav {
     margin: 10px 14px 0;
+  }
+}
+
+/* عشان الريسبونسيف والشاشات الصغيرة */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* ينزلوا صفين كل صف فيه كارتين */
+  }
+}
+
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    /* صف واحد لكل الكروت */
   }
 }

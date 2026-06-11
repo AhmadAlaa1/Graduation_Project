@@ -1,29 +1,29 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Chart, DoughnutController, ArcElement, Tooltip, Legend } from "chart.js";
 
 export default function CvSkills({ skills, ats }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
+  const { t } = useTranslation();
   
   const matched = ats?.matched_skills || [];
   const missing = ats?.missing_skills || [];
   
-  // كل السكيلز من الـ API
   const allSkills = Object.entries(skills || {})
-  .filter(([, vals]) => vals?.length > 0);
+    .filter(([, vals]) => vals?.length > 0);
   
   useEffect(() => {
     if (!chartRef.current) return;
     if (chartInstance.current) chartInstance.current.destroy();
     
-    // const Chart = window.Chart;
     Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
     if (!Chart) return;
     
     chartInstance.current = new Chart(chartRef.current.getContext("2d"), {
       type: "doughnut",
       data: {
-        labels: ["Matched", "Missing"],
+        labels: [t('interview_results.strengths_title'), t('interview_results.gaps_title')],
         datasets: [{
           data: [matched.length, missing.length],
           backgroundColor: ["#3dbf8a", "#e05c5c"],
@@ -41,20 +41,18 @@ export default function CvSkills({ skills, ats }) {
     });
 
     return () => chartInstance.current?.destroy();
-  }, [matched, missing]);
+  }, [matched, missing, t]);
 
   return (
     <div className="row g-4 mb-4">
-
-      {/* Skills List */}
       <div className="col-md-6">
         <div className="an-card h-100">
-          <h5 className="an-card-title">Skills Overview</h5>
+          <h5 className="an-card-title">{t('analysis.skills_overview_title')}</h5>
 
           {/* Matched */}
           <div className="an-skills-row mb-3">
             <span className="an-skills-label an-green">
-              <i className="fas fa-check-circle me-1"></i> Matched
+              <i className="fas fa-check-circle me-1"></i> {t('interview_results.strengths_title')}
             </span>
             <div className="an-badges">
               {matched.map((s, i) => (
@@ -66,7 +64,7 @@ export default function CvSkills({ skills, ats }) {
           {/* Missing */}
           <div className="an-skills-row mb-3">
             <span className="an-skills-label an-red">
-              <i className="fas fa-times-circle me-1"></i> Missing
+              <i className="fas fa-times-circle me-1"></i> {t('interview_results.gaps_title')}
             </span>
             <div className="an-badges">
               {missing.map((s, i) => (
@@ -94,11 +92,10 @@ export default function CvSkills({ skills, ats }) {
       {/* Chart */}
       <div className="col-md-6">
         <div className="an-card h-100 d-flex flex-column align-items-center justify-content-center">
-          <h5 className="an-card-title">Skill Match Chart</h5>
+          <h5 className="an-card-title">{t('analysis.skills_match_chart')}</h5>
           <canvas ref={chartRef} style={{ maxWidth: 250, maxHeight: 250 }} />
         </div>
       </div>
-
     </div>
   );
 }

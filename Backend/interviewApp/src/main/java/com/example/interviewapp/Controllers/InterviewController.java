@@ -2,17 +2,13 @@ package com.example.interviewapp.Controllers;
 
 import com.example.interviewapp.Dtos.EvaluationResponseDto;
 import com.example.interviewapp.Dtos.InterviewQuestionsResponseDto;
+import com.example.interviewapp.Dtos.StartInterviewDto;
 import com.example.interviewapp.Dtos.SubmitAnswersDto;
-import com.example.interviewapp.Models.Interview;
 import com.example.interviewapp.Services.InterviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -27,6 +23,11 @@ public class InterviewController {
 
         return interviewService.generateInterviewQuestions();
     }
+    @PostMapping("/startWithJob")
+    public InterviewQuestionsResponseDto generateJobQuestion(@RequestBody StartInterviewDto startInterviewDto) {
+
+        return interviewService.generateInterviewJobQuestions(startInterviewDto);
+    }
 
     @PostMapping(value = "/{id}/finish", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public EvaluationResponseDto submitAnswers(
@@ -36,5 +37,6 @@ public class InterviewController {
         interviewService.submitAnswers(id, dto);
         return interviewService.finishInterview(id);
     }
+
 
 }

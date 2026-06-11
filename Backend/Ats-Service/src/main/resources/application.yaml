@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: atsservice
+    
+server:
+  port: 8083
+
+auth:
+  service:
+    url: http://localhost:8081
+
+jwt:
+  secret: yourSecretKeyForJWTMustBeAtLeast32Chars!

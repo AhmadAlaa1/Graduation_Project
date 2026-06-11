@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../assets/css/register.css";
 import Navbar from "../components/Navbar";
 import { Player } from "@lottiefiles/react-lottie-player";
@@ -8,35 +9,27 @@ import toast from "react-hot-toast";
 import { validateRegisterStep } from "../utils/registerValidation";
 import { useAuth } from "../hooks/useAuth";
 
-const STEPS = [
-  { title: "What's your name?", fields: ["firstName", "lastName"] },
-  { title: "Your contact info", fields: ["email", "password"] },
-  { title: "Personal details", fields: ["phone", "age", "nationality", "city"] },
-  { title: "Upload your CV", fields: ["cv"] },
-];
-
-const initialForm = {
-  firstName: "", lastName: "", email: "", password: "",
-  phone: "", age: "", nationality: "", city: "", cv: null,
-};
-
 export default function Register() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  // ── useAuth instead of redux direct ──
-  const {
-    register,
-    loading,
-    error,
-    success,
-    clearState,
-  } = useAuth();
+  const STEPS = [
+    { title: t('register.steps.step0_title'), fields: ["firstName", "lastName"] },
+    { title: t('register.steps.step1_title'), fields: ["email", "password"] },
+    { title: t('register.steps.step2_title'), fields: ["phone", "age", "nationality", "city"] },
+    { title: t('register.steps.step3_title'), fields: ["cv"] },
+  ];
 
+  const initialForm = {
+    firstName: "", lastName: "", email: "", password: "",
+    phone: "", age: "", nationality: "", city: "", cv: null,
+  };
+
+  const { register, loading, error, success, clearState } = useAuth();
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
-  // ── error handling ─────────────────────
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -44,40 +37,23 @@ export default function Register() {
     }
   }, [error]);
 
-  // ── success handling ───────────────────
   useEffect(() => {
     if (success) {
-      toast.success("Registered Successfully ");
+      toast.success(t('register.success_msg'));
       clearState();
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-
-      // return () => clearTimeout(timer);const timer = 
+      setTimeout(() => { navigate("/login"); }, 1500);
     }
   }, [success]);
 
-  // ── handle input ───────────────────────
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    setFormData((prev) => ({ ...prev, [name]: files ? files[0] : value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // ── validation ─────────────────────────
   const validateStep = () => {
     const newErrors = validateRegisterStep(step, formData);
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) {
       Object.values(newErrors).forEach((msg) => toast.error(msg));
       return false;
@@ -85,7 +61,6 @@ export default function Register() {
     return true;
   };
 
-  // ── navigation ─────────────────────────
   const handleNext = () => {
     if (loading) return;
     if (validateStep()) setStep((s) => s + 1);
@@ -96,7 +71,6 @@ export default function Register() {
     setStep((s) => s - 1);
   };
 
-  // ── submit ─────────────────────────────
   const handleSubmit = () => {
     if (loading) return;
     if (!validateStep()) return;
@@ -115,60 +89,36 @@ export default function Register() {
     const body = new FormData();
     body.append("data", JSON.stringify(data));
     body.append("cv", formData.cv);
-
     register(body);
   };
 
   return (
     <div className="register-page">
       <Navbar />
-
       <div className="register-container">
         <div className="register-left d-none d-md-block">
           <Player autoplay loop src={animationData} className="lottie-player" />
         </div>
-
         <div className="register-right">
           <div className="register-section">
-
             <div className="step-dots">
               {STEPS.map((_, i) => (
-                <span
-                  key={i}
-                  className={`dot ${i === step ? "active" : i < step ? "done" : ""}`}
-                />
+                <span key={i} className={`dot ${i === step ? "active" : i < step ? "done" : ""}`} />
               ))}
             </div>
-
-            <h2 className="register-title">{STEPS[step].title}</h2>
-            <p className="step-counter">Step {step + 1} of {STEPS.length}</p>
+            <h2 className="register-title">{STEPS[step]?.title}</h2>
+            <p className="step-counter">{t('register.step_counter', { current: step + 1, total: STEPS.length })}</p>
 
             <div className="register-form">
-
               {step === 0 && (
                 <div className="form-row">
                   <div className="form-group">
-                    <label>First Name</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="John"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className={errors.firstName ? "error" : ""}
-                    />
+                    <label>{t('register.fields.first_name')}</label>
+                    <input type="text" name="firstName" placeholder={t('register.fields.first_name_placeholder')} value={formData.firstName} onChange={handleChange} className={errors.firstName ? "error" : ""} />
                   </div>
-
                   <div className="form-group">
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      placeholder="Doe"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className={errors.lastName ? "error" : ""}
-                    />
+                    <label>{t('register.fields.last_name')}</label>
+                    <input type="text" name="lastName" placeholder={t('register.fields.last_name_placeholder')} value={formData.lastName} onChange={handleChange} className={errors.lastName ? "error" : ""} />
                   </div>
                 </div>
               )}
@@ -176,27 +126,12 @@ export default function Register() {
               {step === 1 && (
                 <>
                   <div className="form-group">
-                    <label>Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="name@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={errors.email ? "error" : ""}
-                    />
+                    <label>{t('register.fields.email')}</label>
+                    <input type="email" name="email" placeholder={t('register.fields.email_placeholder')} value={formData.email} onChange={handleChange} className={errors.email ? "error" : ""} />
                   </div>
-
                   <div className="form-group">
-                    <label>Password</label>
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Min. 8 characters"
-                      value={formData.password}
-                      onChange={handleChange}
-                      className={errors.password ? "error" : ""}
-                    />
+                    <label>{t('register.fields.password')}</label>
+                    <input type="password" name="password" placeholder={t('register.fields.password_placeholder')} value={formData.password} onChange={handleChange} className={errors.password ? "error" : ""} />
                   </div>
                 </>
               )}
@@ -205,54 +140,22 @@ export default function Register() {
                 <>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Phone</label>
-                      <input
-                        type="text"
-                        name="phone"
-                        placeholder="+1234567890"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className={errors.phone ? "error" : ""}
-                      />
+                      <label>{t('register.fields.phone')}</label>
+                      <input type="text" name="phone" placeholder={t('register.fields.phone_placeholder')} value={formData.phone} onChange={handleChange} className={errors.phone ? "error" : ""} />
                     </div>
-
                     <div className="form-group">
-                      <label>Age</label>
-                      <input
-                        type="number"
-                        name="age"
-                        placeholder="25"
-                        min="0"
-                        value={formData.age}
-                        onChange={handleChange}
-                        className={errors.age ? "error" : ""}
-                      />
+                      <label>{t('register.fields.age')}</label>
+                      <input type="number" name="age" placeholder={t('register.fields.age_placeholder')} min="0" value={formData.age} onChange={handleChange} className={errors.age ? "error" : ""} />
                     </div>
                   </div>
-
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Nationality</label>
-                      <input
-                        type="text"
-                        name="nationality"
-                        placeholder="American"
-                        value={formData.nationality}
-                        onChange={handleChange}
-                        className={errors.nationality ? "error" : ""}
-                      />
+                      <label>{t('register.fields.nationality')}</label>
+                      <input type="text" name="nationality" placeholder={t('register.fields.nationality_placeholder')} value={formData.nationality} onChange={handleChange} className={errors.nationality ? "error" : ""} />
                     </div>
-
                     <div className="form-group">
-                      <label>City</label>
-                      <input
-                        type="text"
-                        name="city"
-                        placeholder="New York"
-                        value={formData.city}
-                        onChange={handleChange}
-                        className={errors.city ? "error" : ""}
-                      />
+                      <label>{t('register.fields.city')}</label>
+                      <input type="text" name="city" placeholder={t('register.fields.city_placeholder')} value={formData.city} onChange={handleChange} className={errors.city ? "error" : ""} />
                     </div>
                   </div>
                 </>
@@ -260,64 +163,25 @@ export default function Register() {
 
               {step === 3 && (
                 <div className="form-group">
-                  <label>Upload Your CV</label>
-
+                  <label>{t('register.fields.cv_label')}</label>
                   <div className="file-upload">
-                    <input
-                      type="file"
-                      id="cvUpload"
-                      name="cv"
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleChange}
-                      className="file-input"
-                    />
-
-                    <label htmlFor="cvUpload" className="file-btn">
-                      Choose File
-                    </label>
-
-                    <span className="file-name">
-                      {formData.cv ? formData.cv.name : "No file chosen"}
-                    </span>
+                    <input type="file" id="cvUpload" name="cv" accept=".pdf,.doc,.docx" onChange={handleChange} className="file-input" />
+                    <label htmlFor="cvUpload" className="file-btn">{t('register.fields.cv_btn')}</label>
+                    <span className="file-name">{formData.cv ? formData.cv.name : t('register.fields.cv_no_file')}</span>
                   </div>
                 </div>
               )}
 
               <div className="form-actions">
-                {step > 0 && (
-                  <button
-                    className="btn-back"
-                    onClick={handleBack}
-                    disabled={loading}
-                  >
-                    Back
-                  </button>
-                )}
-
+                {step > 0 && <button className="btn-back" onClick={handleBack} disabled={loading}>{t('register.btn_back')}</button>}
                 {step < STEPS.length - 1 ? (
-                  <button
-                    className="btn-next"
-                    onClick={handleNext}
-                    disabled={loading}
-                  >
-                    Next
-                  </button>
+                  <button className="btn-next" onClick={handleNext} disabled={loading}>{t('register.btn_next')}</button>
                 ) : (
-                  <button
-                    className="btn-submit"
-                    onClick={handleSubmit}
-                    disabled={loading}
-                  >
-                    {loading ? "Registering..." : "Register"}
-                  </button>
+                  <button className="btn-submit" onClick={handleSubmit} disabled={loading}>{loading ? t('register.btn_loading') : t('register.btn_submit')}</button>
                 )}
               </div>
             </div>
-
-            <p className="login-link">
-              Have an account? <a href="/login">Log In</a>
-            </p>
-
+            <p className="login-link">{t('register.have_account')} <a href="/login">{t('register.login_link')}</a></p>
           </div>
         </div>
       </div>

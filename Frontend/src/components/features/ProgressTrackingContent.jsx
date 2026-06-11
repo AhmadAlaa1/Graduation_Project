@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ProgressTrackingContent() {
   const [progress, setProgress] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const target = 90;
@@ -34,7 +36,7 @@ export default function ProgressTrackingContent() {
             <div className="d-flex align-items-center justify-content-center rounded-circle me-3 feature-icon-wrapper">
               <i className="fa-solid fa-chart-line feature-icon" />
             </div>
-            <h3 className="mb-0 fw-bold feature-subtitle">Track & Improve</h3>
+            <h3 className="mb-0 fw-bold feature-subtitle">{t('features_data.progressTracking.title')}</h3>
           </div>
 
           <div className="progress mb-4 animate__animated animate__fadeInUp animate__delay-1s progress-container-custom">
@@ -50,19 +52,19 @@ export default function ProgressTrackingContent() {
           <ul className="list-unstyled d-flex flex-column gap-3 mb-0 animate__animated animate__fadeInUp animate__delay-1s">
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Track score trends</span>
+              <span className="text-secondary">{t('my_interviews.page_subtitle')}</span>
             </li>
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Identify weak areas</span>
+              <span className="text-secondary">{t('interview_results.gaps_title')}</span>
             </li>
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Set personal goals</span>
+              <span className="text-secondary">{t('dashboard.stats.total_cvs')}</span>
             </li>
             <li className="d-flex align-items-start">
               <i className="fa-solid fa-circle-check mt-1 me-3 list-check-icon"></i>
-              <span className="text-secondary">Update progress every time you study or take a mock interview</span>
+              <span className="text-secondary">{t('features_data.progressTracking.description')}</span>
             </li>
           </ul>
 

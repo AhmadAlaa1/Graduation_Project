@@ -1,10 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 export default function CvEducation({ education }) {
+  const { t } = useTranslation();
   if (!education?.length) return null;
 
   return (
     <div className="an-card mb-4">
       <h5 className="an-card-title">
-        <i className="fas fa-graduation-cap me-2"></i>Education
+        <i className="fas fa-graduation-cap me-2"></i>{t('navbar.links.services')}
       </h5>
       <div className="an-timeline">
         {education.map((edu, i) => (
